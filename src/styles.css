@@ -1,1 +1,106 @@
 /* You can add global styles to this file, and also import other style files */
+/* General Footer Styling */
+.footer {
+    background-color: #222;
+    padding: 50px 0;
+    color: #eee;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;  /* Căn giữa các phần theo chiều ngang */
+    flex-wrap: wrap;
+    gap: 30px;
+    text-align: center;  /* Căn giữa nội dung văn bản */
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-logo img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.footer-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.footer-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+/* Links Section */
+.footer-link-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer-link-list li {
+    margin-bottom: 10px;
+}
+
+.footer-link-list a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.footer-link-list a:hover {
+    color: #ffcc00;
+}
+
+/* Contact Section */
+.footer-section.contact p {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #ccc;
+}
+
+.footer-section.contact i {
+    margin-right: 8px;
+}
+
+.footer-socials {
+    margin-top: 20px;
+}
+
+.social-icon {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 18px;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #ffcc00;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;  /* Căn giữa nội dung ở phần dưới */
+    padding-top: 30px;
+    border-top: 1px solid #444;
+    margin-top: 50px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    color: #999;
+}

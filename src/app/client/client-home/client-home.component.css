@@ -1,0 +1,328 @@
+
+.card-all{
+    border-radius: 10px; /* Bo tròn viền cho mô tả */
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    overflow: hidden;
+}
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.card-item {
+    position: relative;
+    width: 100%; /* Full width */
+    height: 350px;
+    overflow: hidden;
+    text-decoration: none; /* Remove underline */
+    margin-bottom: 0; /* Remove margin bottom */
+}
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease; /* Transition for zoom effect */
+}
+
+.card-img.front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.card-img.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Start with back image hidden */
+    transition: all 0.6s ease; /* Increase the transition time for the back image */
+}
+
+.card-item:hover .card-img.back {
+    opacity: 1; /* Show back image on hover */
+}
+
+.card-item:hover .card-img.front {
+    opacity: 0; /* Hide front image on hover */
+}
+
+/* Zoom effect on hover for images */
+.card-item:hover .card-img {
+    transform: scale(1.1); /* Zoom image on hover */
+}
+
+.card-content {
+    position: absolute;
+    top: 20px; /* Set content near the top */
+    left: 20px; /* Set content near the left */
+    z-index: 2; /* Ensure content is above images */
+    color: #000;
+}
+
+.card-content .price {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.card-content .title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    color: #000; /* Ensure text color is black */
+}
+
+.card-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #ffcc00;
+    margin-bottom: 10px;
+}
+.banner {
+    background-color: #f8f9fa; /* Màu nền nhẹ cho banner */
+    padding: 50px 20px; /* Padding cho banner */
+    text-align: center; /* Căn giữa nội dung */
+    position: relative;
+    border-radius: 10px; /* Bo tròn viền cho mô tả */
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.banner h1 {
+    font-size: 36px; /* Kích thước chữ cho tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách giữa tiêu đề và đoạn mô tả */
+    color: #333; /* Màu chữ tối cho tiêu đề */
+}
+
+.banner p {
+    font-size: 18px; /* Kích thước chữ cho đoạn mô tả */
+    color: #555; /* Màu chữ nhạt hơn cho đoạn mô tả */
+}
+
+.banner-button {
+    background-color: #ffcc00; /* Màu nền cho nút */
+    color: #000; /* Màu chữ cho nút */
+    padding: 10px 20px; /* Padding cho nút */
+    text-decoration: none; /* Xóa gạch chân */
+    border-radius: 5px; /* Bo góc cho nút */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
+}
+
+.banner-button:hover {
+    background-color: #e6b800; /* Thay đổi màu nền khi hover */
+}
+
+.favorite-products {
+    text-align: center; /* Căn giữa tiêu đề */
+    margin: 50px 0; /* Khoảng cách phía trên và dưới */
+}
+
+.favorite-products h2 {
+    font-size: 28px; /* Kích thước chữ cho tiêu đề */
+    margin-bottom: 30px; /* Khoảng cách giữa tiêu đề và sản phẩm */
+}
+
+.favorite-container {
+    display: flex; /* Sử dụng flexbox để căn giữa */
+    justify-content: center; /* Căn giữa các phần tử trong container */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    position: relative; /* Để sản phẩm lớn có thể nằm giữa */
+}
+
+.small-products {
+    display: flex; /* Sử dụng flexbox cho các sản phẩm nhỏ */
+    flex-direction: row; /* Sắp xếp theo hàng */
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+    margin: 0 20px; /* Khoảng cách giữa sản phẩm nhỏ và sản phẩm lớn */
+}
+
+.small-product {
+    flex: 0 0 200px; /* Chiều rộng cố định cho sản phẩm nhỏ */
+    text-align: center; /* Căn giữa nội dung của sản phẩm nhỏ */
+    margin: 0; /* Không có khoảng cách giữa các sản phẩm nhỏ */
+}
+
+.large-product {
+    flex: 0 0 400px; /* Chiều rộng cố định cho sản phẩm lớn */
+    position: absolute; /* Vị trí tuyệt đối để có thể căn giữa */
+    top: 50%; /* Đặt sản phẩm lớn giữa theo chiều dọc */
+    left: 50%; /* Đặt sản phẩm lớn giữa theo chiều ngang */
+    transform: translate(-50%, -50%); /* Đẩy sản phẩm lớn lên giữa */
+}
+
+.large-card {
+    display: block; /* Thẻ a là khối */
+    position: relative; /* Vị trí tương đối cho nội dung */
+    overflow: hidden; /* Ẩn phần bên ngoài của ảnh */
+}
+
+.large-img {
+    width: 100%; /* Đặt chiều rộng là 100% để hình ảnh tự động vừa với container */
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    border-radius: 10px; /* Bo góc cho ảnh lớn */
+    transition: transform 0.5s ease; /* Hiệu ứng khi hover */
+}
+
+.large-card:hover .large-img {
+    transform: scale(1.1); /* Tăng kích thước ảnh lớn khi hover */
+}
+
+.large-content {
+    position: absolute; /* Đặt vị trí tuyệt đối để căn chỉnh nội dung */
+    bottom: 20px; /* Cách dưới 20px */
+    left: 20px; /* Cách trái 20px */
+    color: #fff; /* Màu chữ trắng cho nội dung */
+}
+
+.small-card {
+    display: block; /* Thẻ a là khối */
+    position: relative; /* Vị trí tương đối cho nội dung */
+    overflow: hidden; /* Ẩn phần bên ngoài của ảnh */
+    margin: 5px; /* Khoảng cách giữa các sản phẩm nhỏ */
+}
+
+.small-img {
+    width: 100%; /* Đặt chiều rộng là 100% để hình ảnh tự động vừa với container */
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    border-radius: 5px; /* Bo góc cho ảnh nhỏ */
+    transition: transform 0.5s ease; /* Hiệu ứng khi hover */
+}
+
+.small-card:hover .small-img {
+    transform: scale(1.1); /* Tăng kích thước ảnh nhỏ khi hover */
+}
+
+.small-product .price, .small-product .title {
+    margin: 5px 0; /* Khoảng cách giữa giá và tiêu đề */
+    font-size: 14px; /* Kích thước chữ cho giá và tiêu đề */
+}
+.title {
+    text-align: center; /* Căn giữa */
+    font-size: 2rem; /* Kích thước chữ */
+    color: white; /* Màu chữ */
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+    font-weight: bold; /* Chữ đậm */
+    position: relative; /* Để tạo hiệu ứng dưới tiêu đề */
+    margin-top: 6rem;
+}
+
+.title::after {
+    content: ''; /* Tạo đường gạch dưới */
+    display: block; /* Hiển thị như một block */
+    width: 50%; /* Chiều rộng của đường gạch dưới */
+    height: 4px; /* Độ dày của đường gạch dưới */
+    background-color: #ffcc00; /* Màu đường gạch dưới */
+    margin: 10px auto 0; /* Căn giữa */
+}
+.product-types {
+    text-align: center; /* Căn giữa nội dung */
+    margin-top: 40px; /* Khoảng cách phía trên */
+}
+
+.product-type-container {
+    display: flex; /* Sử dụng flexbox để sắp xếp các biểu tượng */
+    justify-content: center; /* Căn giữa các biểu tượng */
+    flex-wrap: wrap; /* Đảm bảo các biểu tượng xuống dòng nếu không đủ chỗ */
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    overflow: hidden;
+}
+
+.product-type {
+    margin: 10px; /* Khoảng cách giữa các biểu tượng */
+}
+
+.product-type-card {
+    display: flex; /* Căn giữa biểu tượng và tên sản phẩm */
+    flex-direction: column; /* Sắp xếp theo cột */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    text-decoration: none; /* Bỏ gạch chân */
+}
+
+.product-type-icon {
+    width: 100px; /* Kích thước biểu tượng */
+    height: 100px; /* Kích thước biểu tượng */
+    border-radius: 50%; /* Bo tròn biểu tượng */
+    border: 2px solid #ffcc00; /* Đường viền cho biểu tượng */
+    object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+    transition: transform 0.3s; /* Hiệu ứng khi hover */
+}
+
+.product-type-card:hover .product-type-icon {
+    transform: scale(1.1); /* Phóng to biểu tượng khi hover */
+}
+
+.product-type-name {
+    margin-top: 10px; /* Khoảng cách giữa biểu tượng và tên sản phẩm */
+    color: #333; /* Màu chữ */
+    font-size: 1.2rem; /* Kích thước chữ */
+}
+.store-introduction {
+    text-align: center;
+    margin: 50px 0; /* Khoảng cách trên và dưới */
+    padding: 30px;
+    background-color: #ffffff; /* Màu nền trắng */
+    border-radius: 15px; /* Bo tròn viền */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Đổ bóng cho phần giới thiệu */
+}
+
+.store-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #444; /* Màu chữ tối */
+    margin-bottom: 30px; /* Khoảng cách phía dưới */
+}
+
+.store-content {
+    display: flex;
+    align-items: flex-start; /* Căn đều theo chiều dọc */
+    justify-content: space-between; /* Khoảng cách đều giữa các phần */
+    gap: 30px; /* Khoảng cách giữa các phần */
+}
+
+.store-description {
+    max-width: 600px; /* Độ rộng tối đa của mô tả */
+    font-size: 1.2rem; /* Kích thước chữ */
+    color: #666; /* Màu chữ tối */
+    position: relative; /* Để đặt bóng cho phần mô tả */
+    padding: 20px; /* Padding cho mô tả */
+    background: #f8f9fa; /* Nền nhạt cho mô tả */
+    border-radius: 10px; /* Bo tròn viền cho mô tả */
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng cho mô tả */
+}
+
+.store-images {
+    display: flex; /* Hiển thị hình ảnh theo hàng */
+    position: relative; /* Để kiểm soát vị trí hình ảnh */
+    gap: 20px; /* Khoảng cách giữa các hình ảnh */
+}
+
+.image-wrapper {
+    position: relative; /* Để kiểm soát vị trí hình ảnh */
+    overflow: hidden; /* Ẩn phần thừa ra ngoài */
+    border-radius: 10px; /* Bo tròn viền cho hình ảnh */
+}
+
+.store-image {
+    width: 100%; /* Đặt kích thước 100% */
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    transition: transform 0.3s, box-shadow 0.3s; /* Hiệu ứng khi hover */
+}
+
+.image-wrapper:hover .store-image {
+    transform: scale(1.05); /* Phóng to hình ảnh khi hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng khi hover */
+}
+.card-content {
+    color: #fff; /* Đặt màu chữ thành trắng cho toàn bộ nội dung trong card */
+}
+.card-content,
+.card-content .price,
+.card-content .title {
+    color: #fff; /* Đặt màu chữ cho giá và tiêu đề thành trắng */
+}

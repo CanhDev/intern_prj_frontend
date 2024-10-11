@@ -1,0 +1,78 @@
+<div class="banner mb-5">
+    <div class="banner-content">
+        <h1>Chào mừng đến với cửa hàng của chúng tôi!</h1>
+        <p>Khám phá những sản phẩm mới nhất và nổi bật nhất.</p>
+    </div>
+</div>
+<div class="container-fluid mt-5 mb-5">
+    <h2 style="color: #444;" class="title">Những Sản Phẩm Mới Nhất</h2>
+    <div class="card-all">
+        <div class="row g-0"> 
+            <div *ngFor="let item of productList$ | async" class="col-12 col-md-6 col-lg-4">
+                <div  class="card-container">
+                    <a href="#" class="card-item">
+                        <img [src]="item.images[0]?.imageUrl" alt="{{item.description}}" class="card-img front">
+                        <img [src]="item.images[1]?.imageUrl" alt="{{item.description}}" class="card-img back">
+                        <div class="card-content">
+                            <p class="price">{{item.price | currency}}</p>
+                            <h3 class="title">{{item.name}}</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product-types mt-4">
+    <h2 style="color: #444;" class="title">Danh Sách Các Loại Sản Phẩm</h2>
+    <div class="product-type-container">
+        <div class="product-type">
+            <a href="#" class="product-type-card">
+                <img src="https://via.placeholder.com/100" alt="Chair" class="product-type-icon">
+                <p class="product-type-name">Ghế</p>
+            </a>
+        </div>
+        <div class="product-type">
+            <a href="#" class="product-type-card">
+                <img src="https://via.placeholder.com/100" alt="Table" class="product-type-icon">
+                <p class="product-type-name">Bàn</p>
+            </a>
+        </div>
+        <div class="product-type">
+            <a href="#" class="product-type-card">
+                <img src="https://via.placeholder.com/100" alt="Sofa" class="product-type-icon">
+                <p class="product-type-name">Sofa</p>
+            </a>
+        </div>
+        <div class="product-type">
+            <a href="#" class="product-type-card">
+                <img src="https://via.placeholder.com/100" alt="Desk" class="product-type-icon">
+                <p class="product-type-name">Bàn làm việc</p>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="store-introduction">
+    <h2 class="store-title">Khám Phá Cửa Hàng Của Chúng Tôi</h2>
+    <div class="store-content">
+        <div class="store-images">
+            <div class="image-wrapper">
+                <img src="https://via.placeholder.com/300x200" alt="Product 1" class="store-image">
+            </div>
+            <div class="image-wrapper">
+                <img src="https://via.placeholder.com/300x200" alt="Product 2" class="store-image">
+            </div>
+            <div class="image-wrapper">
+                <img src="https://via.placeholder.com/300x200" alt="Product 3" class="store-image">
+            </div>
+            <div class="image-wrapper">
+                <img src="https://via.placeholder.com/300x200" alt="Product 4" class="store-image">
+            </div>
+        </div>
+        <div class="store-description">
+            <p>Chúng tôi tự hào là một trong những cửa hàng hàng đầu cung cấp các sản phẩm nội thất chất lượng cao. Với một bộ sưu tập đa dạng, từ ghế sofa hiện đại đến bàn ăn truyền thống, chúng tôi cam kết mang đến cho khách hàng những trải nghiệm mua sắm tuyệt vời nhất.</p>
+            <p>Đội ngũ của chúng tôi luôn sẵn sàng hỗ trợ và tư vấn cho bạn để tìm được sản phẩm phù hợp nhất với không gian sống của bạn.</p>
+        </div>
+    </div>
+</div>

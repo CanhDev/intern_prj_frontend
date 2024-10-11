@@ -1,0 +1,83 @@
+import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store';
+import { OrderGet } from 'src/shared/data-get/OrderGet';
+import { OrderSend } from 'src/shared/data-send/OrderSend';
+
+//
+export const GetOrdersByUser =
+ createAction('[Order/API] get Orders',
+  props<{userId : string}>()
+ );
+
+ export const GetOrdersByUserSuccess =
+ createAction('[Order/API] get Orders success',
+  props<{orders : OrderGet[]}>()
+ );
+
+ export const GetOrdersByUserFailure =
+ createAction('[Order/API] get Orders failure',
+  props<{error : string, statusCode : number}>()
+ );
+//
+ export const GetOrder =
+ createAction('[Order/API] get Order',
+  props<{orderId : number}>()
+ );
+
+ export const GetOrderSuccess =
+ createAction('[Order/API] get Order success',
+  props<{item : OrderGet}>()
+ );
+
+ export const GetOrderFailure =
+ createAction('[Order/API] get Order failure',
+  props<{error : string, statusCode : number}>()
+ );
+
+ //
+
+ export const CreateOrder =
+ createAction('[Order/API] CreateOrder',
+  props<{item : OrderSend}>()
+ );
+
+ export const CreateOrderSuccess =
+ createAction('[Order/API] CreateOrder success',
+  props<{item : OrderGet}>()
+ );
+
+ export const CreateOrderFailure =
+ createAction('[Order/API] CreateOrder failure',
+  props<{error : string, statusCode : number}>()
+ );
+ //
+
+ export const DeleteOrder =
+ createAction('[Order/API] DeleteOrder',
+  props<{id : number}>()
+ );
+
+ export const DeleteOrderSuccess =
+ createAction('[Order/API] DeleteOrder success',
+  props<{id : number}>()
+ );
+
+ export const DeleteOrderFailure =
+ createAction('[Order/API] DeleteOrder failure',
+  props<{error : string, statusCode : number}>()
+ );
+ //
+
+ export const UpdateOrderStatus =
+ createAction('[Order/API] UpdateOrderStatus',
+  props<{id : number, status : string}>()
+ );
+
+ export const UpdateOrderStatusSuccess =
+ createAction('[Order/API] UpdateOrderStatus success',
+  props<{item : OrderGet}>()
+ );
+
+ export const UpdateOrderStatusFailure =
+ createAction('[Order/API] UpdateOrderStatus failure',
+  props<{error : string, statusCode : number}>()
+ );
