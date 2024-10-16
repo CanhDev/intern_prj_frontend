@@ -1,0 +1,64 @@
+<div #scrollToTop></div>
+<div class="container mt-4">
+    <h2 class="main-header">Quản lý Sản phẩm</h2>
+  
+    <button (click)="moveToAddForm()" class="btn btn-primary mb-3">Thêm Sản phẩm</button>
+    <div class="input-group mb-3">
+        <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Tìm kiếm sản phẩm..." 
+                    [(ngModel)]="filterString" 
+                    (input)="onSearch()"
+                />
+                <button class="btn btn-primary" type="button" (click)="onSearch()">
+                    <i class="fa fa-search"></i>
+                </button>
+    </div>
+  
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Tên sản phẩm</th>
+          <th>Loại sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Giá gốc</th>
+          <th>Giá bán</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of productList$ | async">
+          <td>
+            <img [src]="item.images[0]?.imageUrl" alt="{{item.description}}" width="100px" class=".img-thumbnail" />
+          </td>
+          <td>{{item.name}}</td>
+          <td>{{item.category?.name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.originalPrice}}</td>
+          <td>{{item.price}}</td>
+          <td>
+            <button (click)="moveToEditForm(item.id)" class="btn btn-warning btn-sm">Sửa</button>
+            <button (click)="handleRemove(item.id)" class="btn btn-danger btn-sm">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-4 my-4">
+        <ul class="pagination justify-content-end">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" href="#" (click)="previousPage(); $event.preventDefault()">Trước</a>
+            </li>
+            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index">
+                <a class="page-link" href="#" [class.active]="currentPage === (i + 1)" (click)="goToPage(i + 1); $event.preventDefault()">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" href="#" (click)="nextPage(); $event.preventDefault()">Sau</a>
+            </li>
+        </ul>
+    </nav>
+  </div>
+  <div class="spinner-overlay" *ngIf="isLoadingProductList$ | async">
+    <mat-spinner></mat-spinner>
+</div>

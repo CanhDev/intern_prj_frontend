@@ -1,0 +1,71 @@
+/* Sidebar Styles */
+#sidebar {
+  background-color: #f1f1f1; /* Màu nền sidebar nhạt hơn */
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding-top: 20px;
+  border-right: 1px solid #ddd; /* Đường viền nhẹ chia cách giữa sidebar và nội dung chính */
+  transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu nền */
+}
+
+#sidebar .nav-link {
+  color: #555; /* Màu chữ đậm hơn */
+  font-weight: 500;
+  padding: 12px 15px; /* Tăng padding để có không gian cho link */
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Thêm hiệu ứng chuyển màu chữ */
+}
+
+#sidebar .nav-link.active {
+  background-color: #007bff; /* Màu xanh dương cho active */
+  color: #fff; /* Chữ trắng khi active */
+  font-weight: bold;
+}
+
+#sidebar .nav-link:hover {
+  background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+  color: #fff; /* Chữ trắng khi hover */
+}
+
+#sidebar .nav-link i {
+  margin-right: 10px;
+  font-size: 1.2rem; /* Tăng kích thước icon */
+}
+
+/* Main Content Styles */
+main {
+  background-color: #fafafa; /* Nền chính dịu nhẹ */
+  padding: 20px;
+  min-height: 100vh; /* Đảm bảo nội dung chính chiếm toàn bộ chiều cao */
+  transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu nền */
+}
+
+.main-header {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #444;
+  border-bottom: 2px solid #007bff; /* Đường viền màu xanh dương nhẹ nhàng */
+  margin-bottom: 20px;
+}
+
+/* Button and Link Styles */
+.btn-custom {
+  background-color: #007bff; /* Màu xanh dương cho button */
+  border-color: #007bff;
+  color: #fff;
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Thêm hiệu ứng cho button */
+}
+
+.btn-custom:hover {
+  background-color: #0056b3; /* Màu tối hơn khi hover */
+  border-color: #004085; /* Màu tối hơn cho border khi hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #sidebar {
+    position: relative;
+    height: auto; /* Cho phép chiều cao tự động khi ở chế độ mobile */
+  }
+}

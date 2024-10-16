@@ -1,5 +1,8 @@
 export class ImageSend{
-    id : number = 0;
     productId : number = 0;
     imageUrl : string = "";
+    constructor(productId: number, imageUrl: string) {
+        this.productId = productId;
+        this.imageUrl = imageUrl;
+    }
 }

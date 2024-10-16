@@ -25,13 +25,13 @@ export class CategoryService {
       return this.http.get<ApiResponse>(urlGet)
       .pipe(catchError(this.http_options.handleError))
     }
-    addCategory(item : CategorySend) : Observable<ApiResponse>{
+    addCategory(item : FormData) : Observable<ApiResponse>{
       console.log('Adding type: ', item);
       return this.http.post<ApiResponse>(this.url, item).pipe(
         catchError(this.http_options.handleError)
       );
     }
-    editCategory(item : CategorySend, id : number) : Observable<ApiResponse>{
+    editCategory(item : FormData, id : number) : Observable<ApiResponse>{
       const urlPut = `${this.url}/${id}`;
       return this.http.put<ApiResponse>(urlPut, item)
       .pipe(catchError(this.http_options.handleError));

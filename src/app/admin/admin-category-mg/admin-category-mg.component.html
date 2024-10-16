@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h2 class="main-header">Quản lý Danh mục</h2>
+  
+    <button (click)="moveToAddForm()" class="btn btn-primary mb-3">Tạo danh mục</button>
+        <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Danh mục</th>
+          <th>Tên danh mục</th>
+          <th>Mô tả</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of Categories$ | async">
+            <td>
+                <img [src]="item.imageUrl" alt="{{item.description}}" width="150px" class=".img-thumbnail" />
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>
+                <button (click)="moveToEditform(item.id)"  class="btn btn-warning btn-sm">Sửa</button>
+              </td>
+              <td>
+                <button (click)="handleRemove(item.id)" class="btn btn-danger btn-sm">Xóa</button>
+              </td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+  <div class="spinner-overlay" *ngIf="isloading$ | async">
+    <mat-spinner></mat-spinner>
+</div>

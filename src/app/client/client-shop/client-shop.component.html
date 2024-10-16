@@ -1,0 +1,99 @@
+<div class="spinner-overlay" *ngIf="isLoading$ | async">
+    <mat-spinner></mat-spinner>
+</div>
+<div #scrollToTop></div>
+<div class="container-fluid mt-5">
+    <div class="row">
+        <!-- Sidebar Area -->
+        <div class="col-md-3">
+            <div class="shop_sidebar_area">
+                <!-- Filter Section -->
+                <div class="widget filter mb-4">
+                    <h5 class="widget-title">Loại sản phẩm</h5>
+                    <div class="filter-links">
+                        <a routerLink="/shop" class="filter-link"
+                         [ngClass]="{'active': activeFilter === 'all'}"
+                         (click)="onFilterClick('all', null, $event)"
+                         >Tất cả</a>
+                        <a *ngFor="let item of categories$ | async" href="#" class="filter-link"
+                        [ngClass]="{'active': activeFilter === item.name}" 
+                         (click) = "$event.preventDefault(); filterByType(item.id); onFilterClick(item.name, item.id, $event)" >{{item.name}}</a>
+                    </div>
+                </div>
+                <!-- Sort Section -->
+                <div class="widget sort mb-4">
+                    <h5 class="widget-title">Sắp xếp theo</h5>
+                    <select class="form-control"
+                    [(ngModel)]="sortString"
+                    (change)="onSortChange($event)" id="sortBy">
+                        <option value="date_desc">Ngày</option>
+                        <option value="price_asc">Giá: Thấp đến Cao</option>
+                        <option value="price_desc">Giá: Cao đến Thấp</option>
+                    </select>
+                </div>
+                <div class="widget banner mb-4">
+            <a (click)="$event.preventDefault()" href="#">
+                <img src="https://kimfurniture.com/wp-content/uploads/2022/02/decor-la-gi-4-1.jpg" alt="Banner Khuyến mãi" class="img-fluid">
+            </a>
+        </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-9">
+            <!-- Search Bar -->
+            <div class="search-container mb-4">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Tìm kiếm sản phẩm..." 
+                    [(ngModel)]="filterString" 
+                    (input)="onSearch()"
+                />
+                <button class="btn btn-search" type="button" (click)="onSearch()">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Product List -->
+            <div class="row">
+                <div *ngFor="let item of productList$ | async" class="col-12 col-md-8 col-lg-6 col-xl-4 mb-4">
+                    <div class="product-card">
+                        <a [routerLink]="['/shop/products', item.id]" class="product-link">
+                            <div class="image-container">
+                                <img [src]="item.images[0]?.imageUrl" alt="{{item.description}}" class="main-image" />
+                                <img [src]="item.images[1]?.imageUrl" alt="{{item.description}}" class="hover-image" />
+                            </div>
+                            <h3>{{item.name}}</h3>
+                            <p class="product-description">{{item.description}}</p>
+                            <p class="price">{{item.price | currency}}</p>
+                        </a>
+                        <a (click)="addItemCart(item.id, cartId, 1, item.price)" class="add-to-cart btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" class="mt-4 my-4">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                        <a class="page-link" href="#" (click)="previousPage(); $event.preventDefault()">Trước</a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index">
+                        <a class="page-link" href="#" [class.active]="currentPage === (i + 1)" (click)="goToPage(i + 1); $event.preventDefault()">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === totalPages">
+                        <a class="page-link" href="#" (click)="nextPage(); $event.preventDefault()">Sau</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

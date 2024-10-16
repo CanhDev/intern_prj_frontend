@@ -1,0 +1,56 @@
+.container {
+    max-width: 1000px;
+}
+.profile-section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+}
+.profile-section:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+.profile-picture {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(251, 182, 16, 0.3);
+}
+h1, h3 {
+    color: #0056b3;
+    font-weight: 600;
+}
+.form-control {
+    border-radius: 20px;
+    border: 1px solid #007bff;
+    padding: 10px 15px;
+}
+.form-control:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 0 2px rgba(251, 182, 16, 0.2);
+}
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    color: whitesmoke;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+.user-info {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.user-info i {
+    width: 25px;
+    color: #007bff;
+}

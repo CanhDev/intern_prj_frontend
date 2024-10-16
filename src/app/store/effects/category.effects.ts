@@ -17,15 +17,21 @@ export class CategoryEffects {
     private toastr : ToastrService
   ){}  
 
-  loadCategories = createEffect(() => {
+  // get list category
+  loadCategories$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CategoryActions.getCategories),
       switchMap(action => {
         return this.categoryService.getCategories()
           .pipe(
             map((res : ApiResponse) => {
-              console.log(res);
-              return CategoryActions.getCategoriesSuccess({categories : res.data})
+              if(res.success){
+                console.log(res);
+                return CategoryActions.getCategoriesSuccess({categories : res.data});
+              }
+              else{
+                return CategoryActions.getCategoriesFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
             }),
             catchError((error) => {
               return of(CategoryActions.getCategoriesFailure({
@@ -46,15 +52,20 @@ export class CategoryEffects {
     ),
     {dispatch: false}
   );
-
+  //get single category
   getSingleCategory$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CategoryActions.getCategory),
       switchMap(action => {
         return this.categoryService.getCategory(action.id).pipe(
           map((res : ApiResponse) => {
-              console.log(res);
-              return CategoryActions.getCategorySuccess({item : res.data})
+              if(res.success){
+                console.log(res);
+                return CategoryActions.getCategorySuccess({item : res.data});
+              }
+              else{
+                return CategoryActions.getCategoryFailure({error : res.message || "Sản phẩm không tồn tại", statusCode : 404})
+              }
           }),
           catchError((error) => {
             return of(CategoryActions.getCategoryFailure({ 
@@ -77,6 +88,7 @@ export class CategoryEffects {
     {dispatch: false}
   );
 
+  // add category item
   addCategory$ = createEffect(()=>
     this.actions$.pipe(
       ofType(CategoryActions.addCategory),
@@ -84,7 +96,12 @@ export class CategoryEffects {
         {
           return this.categoryService.addCategory(action.item).pipe(
             map((res : ApiResponse) => {
-                return CategoryActions.addCategorySuccess({item : res.data});
+                if(res.success){
+                  return CategoryActions.addCategorySuccess({item : res.data});
+                }
+                else{
+                  return CategoryActions.addCategoryFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500})
+                }
             }),
             catchError((error) => {
               return of(CategoryActions.addCategoryFailure({ 
@@ -118,7 +135,7 @@ export class CategoryEffects {
     {dispatch : false}
   );
 
-  //edit
+  //edit category item
   editCategory$ = createEffect(()=>
     this.actions$.pipe(
       ofType(CategoryActions.editCategory),
@@ -126,7 +143,12 @@ export class CategoryEffects {
         {
           return this.categoryService.editCategory(action.item, action.id).pipe(
             map((res : ApiResponse) => {
-                return CategoryActions.editCategorySuccess({item : res.data});
+                if(res.success){
+                  return CategoryActions.editCategorySuccess({item : res.data});
+                }
+                else{
+                  return CategoryActions.editCategoryFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(CategoryActions.editCategoryFailure({ 
@@ -160,7 +182,7 @@ export class CategoryEffects {
     {dispatch : false}
   );
 
-  //delete
+  //delete category item
   deleteCategory$ = createEffect(()=>
     this.actions$.pipe(
       ofType(CategoryActions.deleteCategory),
@@ -169,7 +191,12 @@ export class CategoryEffects {
           return this.categoryService.deleteCategory
           (action.id).pipe(
             map((res : ApiResponse) => {
-                return CategoryActions.deleteCategorySuccess({id : res.data});
+                if(res.success){
+                  return CategoryActions.deleteCategorySuccess({id : res.data});
+                }
+                else{
+                  return CategoryActions.deleteCategoryFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(CategoryActions.deleteCategoryFailure({ 

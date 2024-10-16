@@ -17,17 +17,17 @@ export class ProductServiceService {
   ) { }
 
 
-  getProducts(typeId?: number, sortString?: string,
+  getProducts(typeId?: number | null, sortString?: string,
     filterString?: string, pageNumber:  number  = 1, pageSize: number = 9) : Observable<ApiResponse> {
       let params = new HttpParams();
       if (typeId) {
         params = params.set('typeId', typeId.toString());
       }
       if (sortString) {
-        params = params.set('sort', sortString);
+        params = params.set('sortString', sortString);
       }
       if (filterString) {
-        params = params.set('filter', filterString);
+        params = params.set('filterString', filterString);
       }
       params = params.set('pageNumber', pageNumber.toString())
                      .set('pageSize', pageSize.toString());
@@ -45,14 +45,14 @@ export class ProductServiceService {
           catchError(this.http_options.handleError)
         )
   }
-  addProduct(item : ProductSend) : Observable<ApiResponse>{
+  addProduct(item : FormData) : Observable<ApiResponse>{
     console.log('Adding product: ', item);
 
     return this.http.post<ApiResponse>(this.url, item).pipe(
       catchError(this.http_options.handleError)
     );
   }
-  editProduct(item : ProductSend, id: number) : Observable<ApiResponse>{
+  editProduct(item : FormData, id: number) : Observable<ApiResponse>{
     const urlPut = `${this.url}/${id}`;
     return this.http.put<ApiResponse>(urlPut, item)
       .pipe(catchError(this.http_options.handleError));

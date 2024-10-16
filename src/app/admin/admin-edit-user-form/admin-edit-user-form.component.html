@@ -1,0 +1,73 @@
+<div class="container py-5">
+    <h2 class="text-center mb-4">Sửa thông tin khách hàng</h2>
+    <form (ngSubmit)="submitForm()" [formGroup]="userForm">
+        <div class="row g-3">
+            <div class="col-12">
+                <label  class="form-label">Họ</label>
+                <input formControlName="firstName" type="text" class="form-control"  required>
+                <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+                    <small *ngIf="firstName?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label  class="form-label">Tên</label>
+                <input formControlName="lastName" type="text" class="form-control"  required>
+                <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+                    <small *ngIf="lastName?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label  class="form-label">Email</label>
+                <input formControlName="email" type="email" class="form-control"  required>
+                <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                    <small *ngIf="email?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này
+                    </small>
+                    <small *ngIf="email?.hasError('email')" class="text-danger">
+                        Email không hợp lệ!
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label  class="form-label">Số điện thoại</label>
+                <input formControlName="phoneNum" type="text" class="form-control"  required>
+                <div *ngIf="phoneNum?.invalid && (phoneNum?.dirty || phoneNum?.touched)">
+                    <small *ngIf="phoneNum?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này
+                    </small>
+                    <small *ngIf="phoneNum?.hasError('pattern')" class="text-danger">
+                        Số điện thoại không hợp lệ!
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label  class="form-label">Địa chỉ</label>
+                <input formControlName="address" type="text" class="form-control"  required>
+                <div *ngIf="address?.invalid && (address?.dirty || address?.touched)">
+                    <small *ngIf="address?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Hình ảnh: </label>
+                <p>
+                    <label class="btn btn-outline-primary" for="image">Chọn ảnh</label>
+                </p>
+                <input  type="file" id="image" (change)="onFileSelected($event)" style="visibility: hidden;" accept="image/*">
+                <div *ngIf="imagePreview">
+                    <img [src]="imagePreview" alt="Image preview" style="max-width: 200px; max-height: 200px;">
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <button [disabled]="userForm.invalid" class="w-100 btn btn-primary btn-lg" type="submit">Lưu</button>
+    </form>
+</div>
+
+
+

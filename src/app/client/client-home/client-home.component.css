@@ -78,7 +78,7 @@
 .card-content::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: -8px;
     left: 0;
     width: 50px;
     height: 2px;
@@ -207,9 +207,9 @@
     font-size: 2rem; /* Kích thước chữ */
     color: white; /* Màu chữ */
     margin: 20px 0; /* Khoảng cách trên và dưới */
-    font-weight: bold; /* Chữ đậm */
     position: relative; /* Để tạo hiệu ứng dưới tiêu đề */
     margin-top: 6rem;
+    font-weight: 400;
 }
 
 .title::after {
@@ -273,11 +273,18 @@
 
 .store-title {
     font-size: 2.5rem;
-    font-weight: bold;
     color: #444; /* Màu chữ tối */
     margin-bottom: 30px; /* Khoảng cách phía dưới */
+    font-weight: 400;
 }
-
+.store-title::after {
+    content: ''; /* Tạo đường gạch dưới */
+    display: block; /* Hiển thị như một block */
+    width: 80%; /* Chiều rộng của đường gạch dưới */
+    height: 4px; /* Độ dày của đường gạch dưới */
+    background-color: #ffcc00; /* Màu đường gạch dưới */
+    margin: 10px auto 0; /* Căn giữa */
+}
 .store-content {
     display: flex;
     align-items: flex-start; /* Căn đều theo chiều dọc */
@@ -300,19 +307,58 @@
     display: flex; /* Hiển thị hình ảnh theo hàng */
     position: relative; /* Để kiểm soát vị trí hình ảnh */
     gap: 20px; /* Khoảng cách giữa các hình ảnh */
+    flex-wrap: wrap;
 }
 
 .image-wrapper {
     position: relative; /* Để kiểm soát vị trí hình ảnh */
     overflow: hidden; /* Ẩn phần thừa ra ngoài */
     border-radius: 10px; /* Bo tròn viền cho hình ảnh */
+    width: 100%; /* Đảm bảo chiếm hết chiều rộng có sẵn */
+    max-width: 180px; /* Giới hạn chiều rộng tối đa cho các màn hình lớn */
+    max-height: 80px; /* Giới hạn chiều cao tối đa cho các màn hình lớn */
+    margin: 10px; /* Khoảng cách giữa các hình ảnh */
+}
+
+.store-images {
+    display: flex; /* Hiển thị hình ảnh theo hàng */
+    flex-wrap: wrap; /* Cho phép hình ảnh xuống dòng nếu cần */
+    justify-content: center; /* Căn giữa các hình ảnh */
 }
 
 .store-image {
-    width: 100%; /* Đặt kích thước 100% */
-    height: auto; /* Tự động điều chỉnh chiều cao */
+    width: 100%; /* Hình ảnh chiếm 100% chiều rộng của .image-wrapper */
+    height: auto; /* Tự điều chỉnh chiều cao giữ tỉ lệ ảnh */
     transition: transform 0.3s, box-shadow 0.3s; /* Hiệu ứng khi hover */
 }
+
+/* Media Query cho màn hình từ 769px trở lên */
+@media (min-width: 769px) {
+    .image-wrapper {
+        width: 180px; /* Giới hạn chiều rộng tối đa cho màn hình lớn */
+        height: 120px; /* Giới hạn chiều cao tối đa cho màn hình lớn */
+    }
+}
+
+/* Media Query cho màn hình tablet */
+@media (max-width: 768px) {
+    .image-wrapper {
+        width: 100px; /* Giới hạn chiều rộng tối đa cho màn hình tablet */
+        height: 70px; /* Giới hạn chiều cao tối đa cho màn hình tablet */
+    }
+}
+
+/* Media Query cho màn hình điện thoại nhỏ hơn 480px */
+@media (max-width: 480px) {
+    .image-wrapper {
+        max-width: 100%; /* Chiếm 100% chiều rộng trên điện thoại */
+        margin: 5px; /* Khoảng cách giữa các hình ảnh */
+        border-radius: 5px; /* Giảm bo tròn viền cho kích thước nhỏ */
+    }
+}
+
+
+
 
 .image-wrapper:hover .store-image {
     transform: scale(1.05); /* Phóng to hình ảnh khi hover */
@@ -324,5 +370,18 @@
 .card-content,
 .card-content .price,
 .card-content .title {
-    color: #fff; /* Đặt màu chữ cho giá và tiêu đề thành trắng */
+    color: #444; /* Đặt màu chữ cho giá và tiêu đề thành trắng */
+    text-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+.spinner-overlay {
+	position: fixed; /* Đặt vị trí cố định */
+	top: 0; /* Đỉnh màn hình */
+	left: 0; /* Bên trái màn hình */
+	width: 100%; /* Chiều rộng 100% */
+	height: 100%; /* Chiều cao 100% */
+	background-color: rgba(255, 255, 255, 0.8); /* Nền trắng với độ mờ */
+	display: flex; /* Sử dụng flexbox */
+	justify-content: center; /* Căn giữa theo chiều ngang */
+	align-items: center; /* Căn giữa theo chiều dọc */
+	z-index: 1000; /* Đặt z-index cao để hiển thị trên tất cả các phần tử khác */
+  }

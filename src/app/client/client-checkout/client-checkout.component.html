@@ -1,0 +1,81 @@
+<div class="container py-5">
+    <div class="row">
+        <!-- Form section -->
+        <div class="col-12 col-lg-6 mb-4">
+            <div class="checkout-form p-4">
+                <h2 class="mb-4 text-center">Thông tin giao hàng</h2>
+                <form (ngSubmit)="$event.preventDefault(); submitForm()" [formGroup]="CheckOutForm">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="firstName" class="form-label">Họ và tên</label>
+                            <input formControlName="recipientName" type="text" class="form-control" id="firstName" required>
+                            <div *ngIf="recipientName?.invalid && (recipientName?.dirty || recipientName?.touched)">
+                                <small *ngIf="recipientName?.hasError('required')" class="text-danger">
+                                    Không được bỏ trống trường này!
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input formControlName="recipientEmail" type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                            <div *ngIf="recipientEmail?.invalid && (recipientEmail?.dirty || recipientEmail?.touched)">
+                                <small *ngIf="recipientEmail?.hasError('required')" class="text-danger">
+                                    Không được bỏ trống trường này!
+                                </small>
+                                <small *ngIf="recipientEmail?.hasError('email')" class="text-danger">
+                                    Email không hợp lệ!
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="address" class="form-label">Địa chỉ</label>
+                            <input formControlName="shippingAddress" type="text" class="form-control" id="address" placeholder="123 Đường ABC" required>
+                            <div *ngIf="shippingAddress?.invalid && (shippingAddress?.dirty || shippingAddress?.touched)">
+                                <small *ngIf="shippingAddress?.hasError('required')" class="text-danger">
+                                    Không được bỏ trống trường này!
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input formControlName="recipientPhone" placeholder="(+84)" class="form-control" type="text" id="phone" required>
+                            <div *ngIf="recipientPhone?.invalid && (recipientPhone?.dirty || recipientPhone?.touched)">
+                                <small *ngIf="recipientPhone?.hasError('required')" class="text-danger">
+                                    Không được bỏ trống trường này!
+                                </small>
+                                <small *ngIf="recipientPhone?.hasError('pattern')" class="text-danger">
+                                    Số điện thoại không hợp lệ!
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <button [disabled]="CheckOutForm.invalid" class="w-100 btn btn-primary btn-lg" type="submit">Đặt hàng</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Cart section -->
+        <div class="col-12 col-lg-6 mb-4">
+            <div class="product-list">
+                <h4 class="mb-4">Giỏ hàng của bạn</h4>
+                <div *ngFor="let item of CartItems$ | async" class="product-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="my-0 product-name">{{item.product?.name}}</h6>
+                            <small class="text-muted product-description">Số lượng: {{item.quantity}}</small>
+                        </div>
+                        <span class="product-price">&dollar;{{item.product?.price}}</span>
+                    </div>
+                </div>
+                <div class="total-row d-flex justify-content-between align-items-center">
+                    <span>Tổng cộng</span>
+                    <strong>&dollar;{{TotalAmount$ | async}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="spinner-overlay" *ngIf="isLoadingCart$ | async">
+    <mat-spinner></mat-spinner>
+</div>

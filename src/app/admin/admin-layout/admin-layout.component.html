@@ -1,1 +1,46 @@
-<p>admin-layout works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active" aria-current="page">
+              <i class="fa fa-home"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="productManagement" routerLinkActive="active" >
+              <i class="fa fa-box"></i> Quản lý sản phẩm
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="categoryManagement" routerLinkActive="active" >
+              <i class="fa fa-tags"></i> Quản lý danh mục
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="userManagement" routerLinkActive="active">
+              <i class="fa fa-users"></i> Quản lý tài khoản khách hàng
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="infoManagement" routerLinkActive="active">
+              <i class="fa fa-user"></i> Thông tin admin
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/" >
+              <i class="fa-solid fa-house-circle-check"></i> Trang chủ
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

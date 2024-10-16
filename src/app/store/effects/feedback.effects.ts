@@ -18,16 +18,21 @@ export class FeedbackEffects {
     private toastr : ToastrService
   ) { }
 
-  getfeedBacks = createEffect(() => {
+  //get feedback
+  getfeedBacks$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FeedbackActions.getFeedBacks),
       switchMap(action => {
         return this.feedbackService.GetFeedBacks(action.orderId)
           .pipe(
             map((res : ApiResponse) => {
-              console.log(res);
-              return FeedbackActions.getFeedBacksSuccess
-                    ({feedBacks : res.data})
+              if(res.success){
+                console.log(res);
+                return FeedbackActions.getFeedBacksSuccess({feedBacks : res.data})
+              }
+              else{
+                return FeedbackActions.getFeedBacksFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
             }),
             catchError((error) => {
               return of(FeedbackActions.getFeedBacksFailure({
@@ -48,7 +53,7 @@ export class FeedbackEffects {
     ),
     {dispatch: false}
   );
-  //
+  // add feedback item
   sendFeedback = createEffect(() => {
     return this.actions$.pipe(
       ofType(FeedbackActions.SendFeedBack),
@@ -56,9 +61,13 @@ export class FeedbackEffects {
         return this.feedbackService.SendFeedBack(action.item)
           .pipe(
             map((res : ApiResponse) => {
-              console.log(res);
-              return FeedbackActions.SendFeedBackSuccess
-                    ({item : res.data})
+              if(res.success){
+                console.log(res);
+                return FeedbackActions.SendFeedBackSuccess({item : res.data})
+              }
+              else{
+                return FeedbackActions.SendFeedBackFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
             }),
             catchError((error) => {
               return of(FeedbackActions.SendFeedBackFailure({
@@ -88,7 +97,7 @@ export class FeedbackEffects {
     ),
     {dispatch: false}
   );
-  //
+  // delete feedback
   deleteFeedBack = createEffect(() => {
     return this.actions$.pipe(
       ofType(FeedbackActions.DeleteFeedBack),
@@ -96,9 +105,13 @@ export class FeedbackEffects {
         return this.feedbackService.DeleteFeedBack(action.id)
           .pipe(
             map((res : ApiResponse) => {
-              console.log(res);
-              return FeedbackActions.DeleteFeedBackSuccess
-                    ({id : res.data})
+              if(res.success){
+                console.log(res);
+                return FeedbackActions.DeleteFeedBackSuccess({id : res.data})
+              }
+              else{
+                return FeedbackActions.DeleteFeedBackFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
             }),
             catchError((error) => {
               return of(FeedbackActions.DeleteFeedBackFailure({

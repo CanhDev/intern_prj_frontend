@@ -27,7 +27,7 @@ export const getCategoryFailure = createAction(
 )
 
 export const addCategory = createAction(
-  '[Category/API] add category', props<{item : CategorySend}>()
+  '[Category/API] add category', props<{item : FormData}>()
 )
 export const addCategorySuccess = createAction(
   '[Category/API] add category success', props<{item: CategoryGet}>()
@@ -38,7 +38,7 @@ export const addCategoryFailure = createAction(
 )
 
 export const editCategory = createAction(
-  '[Category/API] edit category', props<{item : CategorySend, id: number}>()
+  '[Category/API] edit category', props<{item : FormData, id: number}>()
 )
 export const editCategorySuccess = createAction(
   '[Category/API] edit category success', props<{item: CategoryGet}>()
@@ -52,9 +52,9 @@ export const deleteCategory = createAction(
   '[Category/API] delete category', props<{id : number}>()
 )
 export const deleteCategorySuccess = createAction(
-  '[Category/API] edit category success', props<{id : number}>()
+  '[Category/API] delete category success', props<{id : number}>()
 )
 export const deleteCategoryFailure = createAction(
-  '[Category/API] edit category failure',
+  '[Category/API] delete category failure',
   props<{ error: string; statusCode: number }>()
 )

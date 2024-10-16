@@ -18,17 +18,21 @@ export class ItemcartEffects {
     private toastr : ToastrService
   ) { }
 
-
+ //GetItemsCartByCartId
   GetItemsCartByCartId$ = createEffect(()=>
     this.actions$.pipe(
       ofType(ItemcartActions.GetItemsCartByCartId),
       switchMap(action =>
         {
           return this.itemcartService.GetItemsCartByCartId
-          (action.cartId).pipe(
+          (action.id).pipe(
             map((res : ApiResponse) => {
-                return ItemcartActions.GetItemsCartByCartIdSuccess
-                ({ItemsCart : res.data});
+                if(res.success){
+                  return ItemcartActions.GetItemsCartByCartIdSuccess({ItemsCart : res.data});
+                }
+                else{
+                  return ItemcartActions.GetItemsCartByCartIdFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(ItemcartActions.GetItemsCartByCartIdFailure({ 
@@ -51,7 +55,7 @@ export class ItemcartEffects {
     ),
     {dispatch : false}
   );
-  //
+  // add item cart item
 
   AddItemCart$ = createEffect(()=>
     this.actions$.pipe(
@@ -61,8 +65,12 @@ export class ItemcartEffects {
           return this.itemcartService.AddItemCart
           (action.item).pipe(
             map((res : ApiResponse) => {
-                return ItemcartActions.AddItemCartSuccess
-                ({item : res.data});
+                if(res.success){
+                  return ItemcartActions.AddItemCartSuccess({item : res.data});
+                }
+                else{
+                  return ItemcartActions.AddItemCartFailure({error : res.message || "Có lỗi xảy ra",  statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(ItemcartActions.AddItemCartFailure({ 
@@ -90,13 +98,14 @@ export class ItemcartEffects {
     this.actions$.pipe(
       ofType(ItemcartActions.AddItemCartFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
+        this.router.navigate(['/Login']);
       })
     ),
     {dispatch : false}
   );
 
-  //
+  // edit itemcart 
   EditItemCart$ = createEffect(()=>
     this.actions$.pipe(
       ofType(ItemcartActions.EditItemCart),
@@ -105,8 +114,12 @@ export class ItemcartEffects {
           return this.itemcartService.EditItemCart
           (action.item, action.id).pipe(
             map((res : ApiResponse) => {
-                return ItemcartActions.EditItemCartSuccess
-                ({item : res.data});
+                if(res.success){
+                  return ItemcartActions.EditItemCartSuccess({item : res.data});
+                }
+                else{
+                  return ItemcartActions.EditItemCartFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(ItemcartActions.EditItemCartFailure({ 
@@ -139,7 +152,7 @@ export class ItemcartEffects {
     ),
     {dispatch : false}
   );
-  //
+  //delete item cart
   DeleteItemCart$ = createEffect(()=>
     this.actions$.pipe(
       ofType(ItemcartActions.DeleteItemCart),
@@ -148,8 +161,12 @@ export class ItemcartEffects {
           return this.itemcartService.DeleteItemCart
           (action.id).pipe(
             map((res : ApiResponse) => {
-                return ItemcartActions.DeleteItemCartSuccess
-                ({id : res.data});
+                if(res.success){
+                  return ItemcartActions.DeleteItemCartSuccess({id : res.data});
+                }
+                else{
+                  return ItemcartActions.DeleteItemCartFailure({error: res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(ItemcartActions.DeleteItemCartFailure({ 

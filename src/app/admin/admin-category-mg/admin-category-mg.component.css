@@ -1,0 +1,67 @@
+.container {
+  max-width: 1200px; /* Đặt chiều rộng tối đa cho container */
+  margin: 0 auto; /* Giữa container */
+}
+
+.main-header {
+  text-align: center; /* Căn giữa tiêu đề */
+  font-size: 2rem; /* Tăng kích thước phông chữ */
+  margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+  color: #343a40; /* Màu sắc tiêu đề */
+}
+
+.table {
+  width: 100%; /* Chiều rộng 100% */
+  margin: 20px 0; /* Khoảng cách trên và dưới bảng */
+  border-radius: 0.5rem; /* Bo góc cho bảng */
+  overflow: hidden; /* Ẩn phần thừa */
+}
+
+.table thead {
+  background-color: #007bff; /* Màu nền cho phần tiêu đề */
+  color: white; /* Màu chữ cho phần tiêu đề */
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1; /* Màu nền khi di chuột vào hàng */
+}
+
+.table td th{
+  vertical-align: middle; /* Căn giữa nội dung ô */
+  text-align: center; /* Căn giữa nội dung ô */
+}
+
+.table img {
+  border-radius: 0.25rem; /* Bo góc cho ảnh */
+}
+
+.btn {
+  margin: 0 5px; /* Khoảng cách giữa các nút */
+}
+
+.btn-warning {
+  background-color: #ffc107; /* Màu nền cho nút sửa */
+  border: none; /* Bỏ viền */
+}
+
+.btn-danger {
+  background-color: #dc3545; /* Màu nền cho nút xóa */
+  border: none; /* Bỏ viền */
+}
+
+.btn-warning:hover,
+.btn-danger:hover {
+  opacity: 0.8; /* Tăng độ trong suốt khi di chuột */
+}
+.spinner-overlay {
+	position: fixed; /* Đặt vị trí cố định */
+	top: 0; /* Đỉnh màn hình */
+	left: 0; /* Bên trái màn hình */
+	width: 100%; /* Chiều rộng 100% */
+	height: 100%; /* Chiều cao 100% */
+	background-color: rgba(255, 255, 255, 0.8); /* Nền trắng với độ mờ */
+	display: flex; /* Sử dụng flexbox */
+	justify-content: center; /* Căn giữa theo chiều ngang */
+	align-items: center; /* Căn giữa theo chiều dọc */
+	z-index: 1000; /* Đặt z-index cao để hiển thị trên tất cả các phần tử khác */
+  }

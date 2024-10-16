@@ -1,0 +1,53 @@
+<div class="spinner-overlay" *ngIf="isLoadingStatistics$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="container">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="main-header">Thống kê doanh thu</h1>
+    </div>
+  
+    <form [formGroup]="filterForm" (ngSubmit)="$event.preventDefault(); submitForm()" id="dateForm" class="mb-4">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label for="startDate" class="form-label">Ngày bắt đầu:</label>
+          <input formControlName="startDate" type="date" id="startDate" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label for="endDate" class="form-label">Ngày kết thúc:</label>
+          <input formControlName="endDate" type="date" id="endDate" class="form-control" required>
+        </div>
+      </div>
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+      </div>
+    </form>
+  
+    <div class="mb-4" style="position: relative; height: 40vh; width: 100%;">
+      <canvas id="barChart"></canvas>
+    </div>
+  
+    <div class="top-products">
+      <h2>Top sản phẩm bán chạy</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Số lượng bán</th>
+            <th scope="col">Doanh thu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of TopProducts$ | async">
+            <th >
+              <img [src]="item.images[0]?.imageUrl" alt="{{item.description}}" width="100px" class=".img-thumbnail" />
+            </th>
+            <td>{{item.name}}</td>
+            <td>{{item.soldedCount}}</td>
+            <td>&dollar;{{ (item.soldedCount ?? 0) * (item.price ?? 0) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

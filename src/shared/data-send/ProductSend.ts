@@ -11,6 +11,6 @@ export class ProductSend{
     categoryId?: number | null; 
     size?: string | null; 
     soldedCount?: number | null; 
-    images: ImageSend[] | any;
+    ImageUrls: string[] = [];
     imgs?: File[]; 
 }

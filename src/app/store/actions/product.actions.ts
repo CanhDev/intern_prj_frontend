@@ -7,13 +7,13 @@ import { ProductSend } from 'src/shared/data-send/ProductSend';
 
 export const loadProducts = createAction(
   '[Product/API] Load Products',
-   props<{typeId? : number, sortString?: string, filterString? : string,
+   props<{typeId? : number | null, sortString?: string, filterString? : string,
      pageNumber? : number, pageSize? : number}>()
 );
 
 export const loadProductsSuccess = createAction(
   '[Product/API] Load Products Success',
-  props<{ products: ProductGet[] }>() 
+  props<{ products: ProductGet[], totalProduct: number }>() 
 );
 
 export const loadProductsFailure = createAction(
@@ -35,7 +35,7 @@ export const getSingleProductFailure = createAction(
 
 export const addProduct = createAction(
   '[Product/API] Add Product',
-  props<{ product: ProductSend }>() 
+  props<{ product: FormData }>() 
 );
 
 export const addProductSuccess = createAction(
@@ -49,7 +49,7 @@ export const addProductFailure = createAction(
 
 export const editProduct = createAction(
   '[Product/API] Edit Product',
-  props<{ product: ProductSend, id : number }>() 
+  props<{ product: FormData, id : number }>() 
 );
 
 export const editProductSuccess = createAction(

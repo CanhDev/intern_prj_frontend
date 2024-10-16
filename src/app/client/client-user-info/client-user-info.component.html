@@ -1,0 +1,122 @@
+<div *ngIf="user$ | async as user" class="container mt-5">
+    <h1 class="mb-4 text-center">Thông tin cá nhân</h1>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-section text-center">
+                <img [src]="user.avatarUrl" alt="Ảnh đại diện" class="profile-picture mb-3">
+                <h3>{{user.firstName}} {{user.lastName}}</h3>
+                <p class="user-info"><i class="fas fa-envelope"></i> {{user.email}}</p>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="profile-section">
+                <h3 class="mb-4"><i class="fas fa-user-edit"></i> Thông tin chi tiết</h3>
+                <form [formGroup]="userForm" (ngSubmit)="$event.preventDefault(); submitUserForm()"
+                >
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Họ</label>
+                        <input formControlName = "firstName" type="text" class="form-control" [value]="user.firstName">
+                        <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+                            <small *ngIf="firstName?.hasError('required')" class="text-danger">
+                                Không được bỏ trống trường này
+                            </small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Tên</label>
+                        <input formControlName = "lastName" type="text" class="form-control" [value]="user.lastName">
+                        <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+                            <small *ngIf="lastName?.hasError('required')" class="text-danger">
+                                Không được bỏ trống trường này
+                            </small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input formControlName = "email" type="email" class="form-control" [value]="user.email">
+                        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                            <small *ngIf="email?.hasError('required')" class="text-danger">
+                                Không được bỏ trống trường này
+                            </small>
+                            <small *ngIf="email?.hasError('email')" class="text-danger">
+                                Email không hợp lệ
+                            </small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Số điện thoại</label>
+                        <input formControlName = "phoneNum"  class="form-control" >
+                        <div *ngIf="phoneNum?.invalid && (phoneNum?.dirty || phoneNum?.touched)">
+                            <small *ngIf="phoneNum?.hasError('required')" class="text-danger">
+                                Không được bỏ trống trường này
+                            </small>
+                            <small *ngIf="phoneNum?.hasError('pattern')" class="text-danger">
+                                Số điện thoại không hợp lệ
+                            </small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Địa chỉ</label>
+                        <input formControlName = "address"  class="form-control" >
+                        <div *ngIf="address?.invalid && (address?.dirty || address?.touched)">
+                            <small *ngIf="address?.hasError('required')" class="text-danger">
+                                Không được bỏ trống trường này
+                            </small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hình ảnh: </label>
+                        <p>
+                            <label class="btn btn-outline-primary" for="image">Chọn ảnh</label>
+                        </p>
+                        <input type="file" id="image" (change)="onFileSelected($event)" style="visibility: hidden;" accept="image/*">
+                        <div *ngIf="imagePreview">
+                            <img [src]="imagePreview" alt="Image preview" style="max-width: 200px; max-height: 200px;">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Cập nhật thông tin</button>
+                </form>
+            </div>
+            
+            <div class="profile-section">
+                <h3 class="mb-4"><i class="fas fa-lock"></i> Đổi mật khẩu</h3>
+                <form [formGroup]="PasswordForm" (ngSubmit)="$event.preventDefault(); submitPasswordForm()"
+                >
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
+                        <input formControlName="oldPassword" type="password" class="form-control" id="currentPassword">
+                        <div *ngIf="oldPassword?.invalid && (oldPassword?.dirty || oldPassword?.touched)">
+                            <small *ngIf="oldPassword?.hasError('required')" class="text-danger">
+                                Không được bỏ trống trường này
+                            </small>
+                          </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                        <input formControlName="newPassword" type="password" class="form-control" id="newPassword">
+                        <div *ngIf="newPassword?.invalid && (newPassword?.dirty || newPassword?.touched)">
+                            <small *ngIf="newPassword?.hasError('required')" class="text-danger">
+                                Không được bỏ trống trường này
+                            </small>
+                          </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                        <input  formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword">
+                        <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)">
+                            <small *ngIf="confirmPassword?.hasError('required')" class="text-danger">
+                                Không được bỏ trống trường này
+                            </small>
+                            <small *ngIf="confirmPassword?.hasError('passwordMismatch')" class="text-danger">
+                              Mật khẩu không trùng khớp
+                            </small>
+                          </div>
+                    </div>
+                    <button [disabled]="PasswordForm.invalid" type="submit" class="btn btn-primary"><i class="fas fa-key"></i> Đổi mật khẩu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

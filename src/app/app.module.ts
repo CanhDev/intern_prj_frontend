@@ -23,8 +23,20 @@ import { ItemcartEffects } from './store/effects/itemcart.effects';
 import { OrderEffects } from './store/effects/order.effects';
 
 import * as fromProduct from './store/reducers/product.reducer';
-import { HttpClientModule } from '@angular/common/http';
+import * as fromUser from './store/reducers/user.reducer';
+import * as fromCategory from './store/reducers/category.reducer';
+import * as fromAccount from './store/reducers/account.reducer';
+import * as fromDashboard from './store/reducers/dashboard.reducer';
+import * as fromFeedback from './store/reducers/feedback.reducer';
+import * as fromItemcart from './store/reducers/itemcart.reducer';
+import * as fromOrder from './store/reducers/order.reducer';
+import * as fromCart from './store/reducers/cart.reducer';
+
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpOptionsService } from 'src/shared/services/generals/http-options.service';
+import { AuthInterceptor } from 'src/shared/services/generals/auth.interceptor';
+import { CartEffects } from './store/effects/cart.effects';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -34,6 +46,7 @@ import { HttpOptionsService } from 'src/shared/services/generals/http-options.se
     UnauthorizedComponent,
   ],
   imports: [
+    MatProgressSpinnerModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -49,18 +62,44 @@ import { HttpOptionsService } from 'src/shared/services/generals/http-options.se
       tapToDismiss: true
     }),
     StoreModule.forRoot({
-      product : fromProduct.reducer
+      product : fromProduct.reducer,
+      account : fromAccount.reducer,
+      category : fromCategory.reducer,
+      dashboard : fromDashboard.reducer,
+      feedback : fromFeedback.reducer,
+      itemcart : fromItemcart.reducer,
+      order : fromOrder.reducer,
+      user : fromUser.reducer,
+      cart : fromCart.reducer
     }),
     EffectsModule.forRoot([
-      ProductEffects
+      ProductEffects,
+      AccountEffects,
+      CategoryEffects,
+      DashboardEffects,
+      FeedbackEffects,
+      ItemcartEffects,
+      OrderEffects,
+      UserEffects,
+      CartEffects
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     StoreModule,
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forFeature('product', fromProduct.reducer),
-    EffectsModule.forFeature([ProductEffects, UserEffects, CategoryEffects, AccountEffects, DashboardEffects, FeedbackEffects, ItemcartEffects, OrderEffects]),
+    StoreModule.forFeature('account', fromAccount.reducer),
+    StoreModule.forFeature('category', fromCategory.reducer),
+    StoreModule.forFeature('dashboard', fromDashboard.reducer),
+    StoreModule.forFeature('feedback', fromFeedback.reducer),
+    StoreModule.forFeature('itemcart', fromItemcart.reducer),
+    StoreModule.forFeature('order', fromOrder.reducer),
+    StoreModule.forFeature('user', fromUser.reducer),
+    StoreModule.forFeature('cart', fromCart.reducer),
+    EffectsModule.forFeature([ProductEffects, UserEffects, CategoryEffects, AccountEffects, DashboardEffects, FeedbackEffects, ItemcartEffects, OrderEffects, CartEffects]),
   ],
-  providers: [HttpOptionsService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

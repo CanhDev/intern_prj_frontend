@@ -1,4 +1,5 @@
 import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store';
+import { OrderDetailGet } from 'src/shared/data-get/OderDetailGet';
 import { OrderGet } from 'src/shared/data-get/OrderGet';
 import { OrderSend } from 'src/shared/data-send/OrderSend';
 
@@ -69,7 +70,7 @@ export const GetOrdersByUser =
 
  export const UpdateOrderStatus =
  createAction('[Order/API] UpdateOrderStatus',
-  props<{id : number, status : string}>()
+  props<{id : number, statusPayment : string, statusShipping : string}>()
  );
 
  export const UpdateOrderStatusSuccess =
@@ -79,5 +80,19 @@ export const GetOrdersByUser =
 
  export const UpdateOrderStatusFailure =
  createAction('[Order/API] UpdateOrderStatus failure',
+  props<{error : string, statusCode : number}>()
+ );
+
+ //order detail
+ export const GetOrdersDetail_client =
+ createAction('[Order/API] GetOrdersDetail_client',
+  props<{orderId : number}>()
+ );
+ export const GetOrdersDetail_clientSuccess =
+ createAction('[Order/API] GetOrdersDetail_clientSuccess',
+  props<{ordersDetail : OrderDetailGet[]}>()
+ );
+ export const GetOrdersDetail_clientFailure =
+ createAction('[Order/API] GetOrdersDetail_clientFailure',
   props<{error : string, statusCode : number}>()
  );

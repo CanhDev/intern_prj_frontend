@@ -1,0 +1,166 @@
+
+.card{
+  border-radius: 10px; /* Bo tròn viền cho mô tả */
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    overflow: hidden;
+}
+.product-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-img {
+  position: relative;
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  height: 300px; /* Chiều cao tối thiểu */
+  overflow: hidden; /* Ẩn phần hình ảnh tràn ra ngoài */
+  border-radius: 10px;
+  object-fit: cover; /* Giữ tỷ lệ khung hình và không bị méo */
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.main-image {
+  width: 100%; /* Hình ảnh chính chiếm toàn bộ chiều rộng */
+  height: 100%; /* Đặt chiều cao cho hình ảnh chính */
+  object-fit: cover; /* Giữ tỷ lệ khung hình và không bị méo */
+  transition: opacity 0.5s ease-in-out; /* Hiệu ứng chuyển tiếp mượt mà cho opacity */
+}
+
+.thumb-img {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép hình ảnh thu nhỏ xuống dòng */
+  justify-content: flex-start; /* Canh trái */
+  margin-top: 10px; /* Khoảng cách trên cho hình ảnh thu nhỏ */
+}
+
+.thumbnail-image {
+  width: 100px; /* Kích thước cố định cho hình ảnh thu nhỏ */
+  height: 100px; /* Kích thước cố định cho hình ảnh thu nhỏ */
+  object-fit: cover; /* Giữ tỷ lệ khung hình */
+  cursor: pointer; /* Hiệu ứng con trỏ chuột */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Hiệu ứng chuyển tiếp cho phóng to và bóng */
+  margin-right: 10px; /* Khoảng cách bên phải giữa các hình ảnh thu nhỏ */
+  flex-shrink: 0; /* Ngăn không cho hình ảnh thu nhỏ co lại */
+}
+
+/* Hiệu ứng hover cho hình ảnh thu nhỏ */
+.thumbnail-image:hover {
+  transform: scale(1.1); /* Phóng to khi di chuột */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm bóng khi hover */
+}
+
+/* Viền cho hình ảnh đang chọn */
+.thumbnail-image.active {
+  border: 2px solid #fbb610; /* Viền cho hình ảnh đang chọn */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-img {
+    height: 200px; /* Điều chỉnh chiều cao cho màn hình nhỏ hơn */
+  }
+
+  .thumbnail-image {
+    width: 70px; /* Kích thước thu nhỏ hơn cho màn hình nhỏ */
+    height: 70px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-img {
+    height: 150px; /* Chiều cao tối thiểu cho màn hình rất nhỏ */
+  }
+
+  .thumbnail-image {
+    width: 50px; /* Kích thước thu nhỏ cho màn hình rất nhỏ */
+    height: 50px;
+  }
+}
+
+
+.product-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 15px 0;
+  color: #333;
+}
+.product-description{
+  font-size: 16px;
+}
+.soldedCount{
+  font-size: 14px;
+}
+.sizes{
+  font-size: 14px;
+}
+.price {
+  font-size: 26px;
+  font-weight: bold;
+  color: #fbb610;
+}
+.quantity{
+  margin-bottom: 6px;
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.quantity-controls button {
+  background-color: #fbb610;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.quantity-controls button:hover {
+  opacity: 0.8;
+}
+
+.quantity-controls span {
+  margin: 0 10px;
+  font-size: 18px;
+}
+
+.btn-primary {
+  background-color: #fbb610;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+}
+.breadcrumb {
+  background-color: #f8f9fa; /* Màu nền nhẹ cho breadcrumb */
+  border-radius: 0.25rem; /* Viền tròn nhẹ */
+  padding: 0.8rem 1rem; /* Khoảng cách nội dung */
+  margin-bottom: 1.5rem; /* Khoảng cách dưới breadcrumb */
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    overflow: hidden;
+}
+
+.breadcrumb-item a {
+  color: #fbb610; /* Màu liên kết */
+  text-decoration: none; /* Bỏ gạch chân */
+}
+
+.breadcrumb-item.active {
+  color: #6c757d; /* Màu cho phần tử active */
+}

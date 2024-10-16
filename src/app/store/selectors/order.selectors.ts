@@ -12,6 +12,13 @@ export const selectOrders = createSelector(
 export const selectOrder = createSelector(
   selectOrderState,
   (state : fromOrder.State) => state.order);
+export const selectOrdersDetail = createSelector(
+  selectOrderState,
+  (state : fromOrder.State) => state.ordersDetail);
+
+export const selectIsLoadingOrdersDetail = createSelector(
+  selectOrderState,
+  (state : fromOrder.State) => state.isLoadingOrdersDetail);
 
 export const selectisLoadingOrders = createSelector(
   selectOrderState,

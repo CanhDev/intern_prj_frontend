@@ -1,0 +1,38 @@
+<div class="container py-5">
+    <h2 class="text-center mb-4">Tạo danh mục</h2>
+    <form (ngSubmit)="submitForm()" [formGroup]="CategoryForm">
+        <div class="row g-3">
+            <div class="col-12">
+                <label  class="form-label">Tên danh mục</label>
+                <input formControlName="name" type="text" class="form-control"  required>
+                <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                    <small *ngIf="name?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="productDescription" class="form-label">Mô tả</label>
+                <textarea formControlName="description" class="form-control" id="productDescription" rows="3" required></textarea>
+                <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                    <small *ngIf="description?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Hình ảnh: </label>
+                <p>
+                    <label class="btn btn-outline-primary" for="image">Chọn ảnh</label>
+                </p>
+                <input formControlName="image" type="file" id="image" (change)="onFileSelected($event)" style="visibility: hidden;" accept="image/*">
+                <div *ngIf="imagePreview">
+                    <img [src]="imagePreview" alt="Image preview" style="max-width: 200px; max-height: 200px;">
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <button [disabled]="CategoryForm.invalid" class="w-100 btn btn-primary btn-lg" type="submit">Tạo</button>
+    </form>
+</div>
+

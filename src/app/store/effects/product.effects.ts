@@ -19,6 +19,7 @@ export class ProductEffects {
     private toastr : ToastrService
   ){}
   
+  //load product list
   loadProducts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductActions.loadProducts),
@@ -27,8 +28,13 @@ export class ProductEffects {
           , action.filterString, action.pageNumber, action.pageSize
         ).pipe(
           map((res : ApiResponse) => {
-              console.log(res);
-              return ProductActions.loadProductsSuccess({products : res.data})
+              if(res.success){
+                console.log(res);
+                return ProductActions.loadProductsSuccess({products : res.data.products,  totalProduct : res.data.totalProduct});
+              }
+              else{
+                return ProductActions.loadProductsFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
           }),
           catchError((error) => {
             return of(ProductActions.loadProductsFailure({ 
@@ -51,14 +57,20 @@ export class ProductEffects {
     {dispatch: false}
   );
 
+  //get single product
   getSingleProduct$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductActions.getSingleProduct),
       switchMap(action => {
         return this.productService.getProduct(action.id).pipe(
           map((res : ApiResponse) => {
-              console.log(res);
-              return ProductActions.getSingleProductSuccess({product : res.data})
+              if(res.success){
+                console.log(res);
+                return ProductActions.getSingleProductSuccess({product : res.data})
+              }
+              else{
+                return ProductActions.getSingleProductFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
           }),
           catchError((error) => {
             return of(ProductActions.getSingleProductFailure({ 
@@ -81,6 +93,7 @@ export class ProductEffects {
     {dispatch: false}
   );
 
+  //add product item
   addProduct$ = createEffect(()=>
     this.actions$.pipe(
       ofType(ProductActions.addProduct),
@@ -88,7 +101,12 @@ export class ProductEffects {
         {
           return this.productService.addProduct(action.product).pipe(
             map((res : ApiResponse) => {
-                return ProductActions.addProductSuccess({product : res.data});
+                if(res.success){
+                  return ProductActions.addProductSuccess({product : res.data});
+                }
+                else{
+                  return ProductActions.addProductFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(ProductActions.addProductFailure({ 
@@ -122,7 +140,7 @@ export class ProductEffects {
     {dispatch : false}
   );
 
-  //edit
+  //edit product item
   editProduct$ = createEffect(()=>
     this.actions$.pipe(
       ofType(ProductActions.editProduct),
@@ -130,7 +148,12 @@ export class ProductEffects {
         {
           return this.productService.editProduct(action.product, action.id).pipe(
             map((res : ApiResponse) => {
-                return ProductActions.editProductSuccess({product : res.data});
+                if(res.success){
+                  return ProductActions.editProductSuccess({product : res.data});
+                }
+                else{
+                  return ProductActions.editProductFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(ProductActions.editProductFailure({ 
@@ -164,7 +187,7 @@ export class ProductEffects {
     {dispatch : false}
   );
 
-  //delete
+  //delete product item
   deleteProduct$ = createEffect(()=>
     this.actions$.pipe(
       ofType(ProductActions.deleteProduct),
@@ -173,7 +196,12 @@ export class ProductEffects {
           return this.productService.deleteProduct
           (action.id).pipe(
             map((res : ApiResponse) => {
-                return ProductActions.deleteProductSuccess({id : res.data});
+                if(res.success){
+                  return ProductActions.deleteProductSuccess({id : res.data});
+                }
+                else{
+                  return ProductActions.deleteProductFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
             }),
             catchError((error) => {
               return of(ProductActions.deleteProductFailure({ 

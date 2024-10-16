@@ -1,0 +1,91 @@
+<div class="container py-5">
+    <h2 class="text-center mb-4">Thêm Sản Phẩm</h2>
+    <form (ngSubmit)="submitForm()" [formGroup]="productForm">
+        <div class="row g-3">
+            <div class="col-12">
+                <label for="productName" class="form-label">Tên sản phẩm</label>
+                <input formControlName="name" type="text" class="form-control" id="productName" required>
+                <div *ngIf="productForm.get('name')?.invalid && (productForm.get('name')?.dirty || productForm.get('name')?.touched)">
+                    <small *ngIf="productForm.get('name')?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này!
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="productDescription" class="form-label">Mô tả sản phẩm</label>
+                <textarea formControlName="description" class="form-control" id="productDescription" rows="3" required></textarea>
+                <div *ngIf="productForm.get('description')?.invalid && (productForm.get('description')?.dirty || productForm.get('description')?.touched)">
+                    <small *ngIf="productForm.get('description')?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này!
+                    </small>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <label for="quantity" class="form-label">Số lượng</label>
+                <input formControlName="quantity" type="number" class="form-control" id="quantity" required>
+                <div *ngIf="productForm.get('quantity')?.invalid && (productForm.get('quantity')?.dirty || productForm.get('quantity')?.touched)">
+                    <small *ngIf="productForm.get('quantity')?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này!
+                    </small>
+                    <small *ngIf="productForm.get('quantity')?.hasError('min')" class="text-danger">
+                        Số lượng phải lớn hơn hoặc bằng 0!
+                    </small>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <label for="originalPrice" class="form-label">Giá gốc</label>
+                <input formControlName="originalPrice" type="number" class="form-control" id="originalPrice" required>
+                <div *ngIf="productForm.get('originalPrice')?.invalid && (productForm.get('originalPrice')?.dirty || productForm.get('originalPrice')?.touched)">
+                    <small *ngIf="productForm.get('originalPrice')?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này!
+                    </small>
+                    <small *ngIf="productForm.get('originalPrice')?.hasError('min')" class="text-danger">
+                        Giá gốc phải lớn hơn hoặc bằng 0!
+                    </small>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <label for="price" class="form-label">Giá bán</label>
+                <input formControlName="price" type="number" class="form-control" id="price" required>
+                <div *ngIf="productForm.get('price')?.invalid && (productForm.get('price')?.dirty || productForm.get('price')?.touched)">
+                    <small *ngIf="productForm.get('price')?.hasError('required')" class="text-danger">
+                        Không được bỏ trống trường này!
+                    </small>
+                    <small *ngIf="productForm.get('price')?.hasError('min')" class="text-danger">
+                        Giá bán phải lớn hơn hoặc bằng 0!
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="category" class="form-label">Danh mục</label>
+                <select formControlName="categoryId" class="form-select" id="category" required>
+                    <option value="" disabled selected>Chọn danh mục...</option>
+                    <option *ngFor="let category of Categories$ | async" [value]="category.id">{{ category.name }}</option>
+                </select>
+                <div *ngIf="productForm.get('categoryId')?.invalid && (productForm.get('categoryId')?.dirty || productForm.get('categoryId')?.touched)">
+                    <small *ngIf="productForm.get('categoryId')?.hasError('required')" class="text-danger">
+                        Bạn cần chọn danh mục!
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="size" class="form-label">Kích thước</label>
+                <input formControlName="size" type="text" class="form-control" id="size" placeholder="Nhập kích thước">
+            </div>
+            <div class="col-12">
+                <label for="images" class="form-label">Hình ảnh</label>
+                <input type="file" class="form-control" id="images" (change)="onFileSelected($event)" multiple>
+                <div *ngIf="imagePreviews.length > 0" class="mt-3">
+                    <div class="d-flex flex-wrap">
+                        <div *ngFor="let preview of imagePreviews; let i = index" class="position-relative me-2 mb-2">
+                            <img [src]="preview" alt="Preview" style="width: 100px; height: 100px; object-fit: cover;">
+                            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeImage(i)">&times;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <button [disabled]="productForm.invalid" class="w-100 btn btn-primary btn-lg" type="submit">Thêm sản phẩm</button>
+    </form>
+</div>

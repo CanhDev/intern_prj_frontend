@@ -10,13 +10,13 @@ import { ApiResponse } from 'src/shared/data-general/ApiResponse';
 })
 export class DashboardService {
 
-  url: string = environment.apiBaseUrl + '/Dashboard';
+  url: string = environment.apiBaseUrl + 'Dashboard';
   constructor(private http: HttpClient, 
     private http_options : HttpOptionsService
   ) { }
 
   GetStatistic(startDate?: string, endDate?: string):Observable<ApiResponse>{
-    const urlGet = `${this.url}/Statistic}`;
+    const urlGet = `${this.url}/Statistic`;
     let params = new HttpParams();
     if(startDate) params = params.set('startDate', startDate.toString());
     if(endDate) params = params.set('endDate', endDate.toString());
@@ -24,7 +24,7 @@ export class DashboardService {
       .pipe(catchError(this.http_options.handleError))
   }
   GetTopSelling(count? : number) : Observable<ApiResponse>{
-    const urlGet = `${this.url}/TopSelling}`;
+    const urlGet = `${this.url}/TopSelling`;
     let params = new HttpParams();
     if(count) params = params.set('count',  count.toString());
     return this.http.get<ApiResponse>(urlGet, {params})

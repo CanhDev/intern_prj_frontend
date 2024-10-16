@@ -5,6 +5,7 @@ export const productFeatureKey = 'product';
 
 export interface State{
   products: ProductGet[];
+  totalProduct : number;
   product : ProductGet | null;
   isLoadingProducts : boolean;
   isLoadingProduct : boolean;
@@ -12,6 +13,7 @@ export interface State{
 
 export const initialState: State = {
   products : [],
+  totalProduct : 0,
   product: null,
   isLoadingProducts: false,
   isLoadingProduct : false
@@ -22,14 +24,16 @@ export const reducer = createReducer(
       ...state,
       isLoadingProducts: true
   })),
-  on(ProductActions.loadProductsSuccess, (state, {products}) =>({
+  on(ProductActions.loadProductsSuccess, (state, {products, totalProduct}) =>({
       ...state,
       products: products,
+      totalProduct : totalProduct,
       isLoadingProducts: false
   })),
   on(ProductActions.loadProductsFailure, state =>({
       ...state,
       products : [],
+      totalProduct : 0,
       isLoadingProducts: false
   })),
   on(ProductActions.getSingleProduct, (state) =>({

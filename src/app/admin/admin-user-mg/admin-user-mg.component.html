@@ -1,0 +1,41 @@
+<div class="container mt-4">
+    <h2 class="main-header">Quản lý danh sách khách hàng</h2>
+  
+    <button (click)="moveToAddForm()" class="btn btn-primary mb-3">Tạo mới tài khoản</button>
+        <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Khách hàng</th>
+          <th>Tên khách hàng</th>
+          <th>Email</th>
+          <th>Số điện thoại</th>
+          <th>Địa chỉ</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of Users$ | async">
+          <tr *ngIf="item.email.toLowerCase() !== 'admin@gmail.com'">
+            <td>
+                <img [src]="item.avatarUrl" width="150px" class=".img-thumbnail" />
+            </td>
+            <td>{{item.firstName}} {{item.lastName}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phoneNum}}</td>
+            <td>{{item.address}}</td>
+            <td>
+                <button (click)="moveToEditform(item.id)" class="btn btn-warning btn-sm">Sửa</button>
+            </td>
+            <td>
+                <button (click)="handleRemove(item.id)" class="btn btn-danger btn-sm">Xóa</button>
+            </td>
+          </tr>
+        </ng-container>
+        
+      </tbody>
+    </table>
+    
+  </div>
+  <div class="spinner-overlay" *ngIf="isLoadingUsers$ | async">
+    <mat-spinner></mat-spinner>
+</div>

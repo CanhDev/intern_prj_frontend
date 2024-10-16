@@ -11,7 +11,7 @@ import { OrderSend } from 'src/shared/data-send/OrderSend';
 })
 export class OrderService {
 
-  url: string = environment.apiBaseUrl + '/Order';
+  url: string = environment.apiBaseUrl + 'Order';
   constructor(private http: HttpClient, 
     private http_options : HttpOptionsService
   ) { }
@@ -30,6 +30,13 @@ export class OrderService {
           catchError(this.http_options.handleError)
         )
   }
+  GetOrdersDetails(orderId: number) : Observable<ApiResponse>{
+    const urlGet = `${this.url}/GetOrderDetail/${orderId}`;
+    return this.http.get<ApiResponse>(urlGet)
+        .pipe(
+          catchError(this.http_options.handleError)
+        )
+  }
   CreateOrder(item : OrderSend) : Observable<ApiResponse>{
     return this.http.post<ApiResponse>(this.url, item).pipe(
       catchError(this.http_options.handleError)
@@ -41,9 +48,11 @@ export class OrderService {
       catchError(this.http_options.handleError) 
     );
   }
-  UpdateStatus(id: number, status : string = "pending") : Observable<ApiResponse>{
+  UpdateStatus(id: number, statusPayment : string = "Chưa thanh toán",
+    statusShipping : string = "Đang chuẩn bị"
+  ) : Observable<ApiResponse>{
     const urlPut = `${this.url}/${id}`;
-    const payload = { status };
+    const payload = { statusPayment, statusShipping };
     return this.http.put<ApiResponse>(urlPut, payload)
       .pipe(catchError(this.http_options.handleError));
   }

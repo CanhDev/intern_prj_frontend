@@ -1,6 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as OrderActions from '../actions/order.actions';
 import { OrderGet } from 'src/shared/data-get/OrderGet';
+import { OrderDetailGet } from 'src/shared/data-get/OderDetailGet';
 
 
 export const orderFeatureKey = 'order';
@@ -8,15 +9,19 @@ export const orderFeatureKey = 'order';
 export interface State {
   orders : OrderGet[];
   order : OrderGet | null;
+  ordersDetail : OrderDetailGet[];
   isLoadingOrders : boolean;
   isLoadingOrder : boolean;
+  isLoadingOrdersDetail : boolean;
 }
 
 export const initialState: State = {
   orders : [],
   order : null,
+  ordersDetail : [],
   isLoadingOrders : false,
-  isLoadingOrder : false
+  isLoadingOrder : false,
+  isLoadingOrdersDetail : false
 };
 
 export const reducer = createReducer(
@@ -97,5 +102,19 @@ export const reducer = createReducer(
   on(OrderActions.UpdateOrderStatusFailure, (state) =>({
     ...state,
     isLoadingOrder: false
+  })),
+  on(OrderActions.GetOrdersDetail_client, (state) =>({
+    ...state,
+    isLoadingOrdersDetail: true
+  })),
+  on(OrderActions.GetOrdersDetail_clientSuccess, (state, {ordersDetail}) =>({
+    ...state,
+    ordersDetail : ordersDetail,
+    isLoadingOrdersDetail: false
+  })),
+  on(OrderActions.GetOrdersDetail_clientFailure, (state) =>({
+    ...state,
+    ordersDetail : [],
+    isLoadingOrdersDetail: false
   })),
 );

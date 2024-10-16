@@ -1,0 +1,61 @@
+<div class="container mt-5" *ngIf="productItem$ | async as product">
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Trang Chủ</a></li>
+      <li class="breadcrumb-item"><a routerLink="/shop">Sản Phẩm</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+    </ol>
+  </nav>
+    <div class="card" >
+      <div class="row g-0">
+        <!-- Image Section -->
+        <div class="col-md-6">
+          <div class="p-4">
+            <div class="main-img mb-3">
+              <img [src]="selectedImage" alt="Main Product Image" class="img-fluid main-image">
+            </div>
+            <div class="thumb-img d-flex flex-wrap">
+              <img *ngFor="let img of product.images" 
+                   [src]="img.imageUrl" 
+                   [class.active]="img.imageUrl === selectedImage" 
+                   class="img-thumbnail me-2 thumbnail-image" 
+                   (click)="changeImage(img.imageUrl)">
+            </div>
+          </div>
+        </div>
+        <!-- Details Section -->
+        <div class="col-md-6">
+          <div class="p-4">
+            <h1 class="product-title">{{ product.name }}</h1>
+            <p class="product-description">{{ product.description }}</p>
+            <h4 class="price">{{ product.price | currency }} 
+            </h4>
+            <h5 class="soldedCount">Đã bán:
+                {{product.soldedCount}}
+              </h5>
+            <h5 class="sizes">Sizes:
+              {{product.size}}
+            </h5>
+            
+            <!-- Quantity Section -->
+            <div class="quantity mt-3">
+              <label class="quantity" for="quantity">Quantity:</label>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-outline-secondary me-2" (click)="decreaseQuantity()">-</button>
+                <input type="number" id="quantity" [(ngModel)]="quantity" min="1" class="form-control w-25" />
+                <button class="btn btn-outline-secondary ms-2" (click)="increaseQuantity()">+</button>
+              </div>
+            </div>
+  
+            <div class="action mt-3">
+              <button class="btn btn-primary me-2" (click)="addToCart(product.id, cartId, quantity, quantity * product.price)">
+                <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

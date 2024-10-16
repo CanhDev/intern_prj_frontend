@@ -5,16 +5,18 @@ import { HttpOptionsService } from '../generals/http-options.service';
 import { ApiResponse } from 'src/shared/data-general/ApiResponse';
 import { catchError, Observable } from 'rxjs';
 import { UserSend } from 'src/shared/data-send/UserSend';
+import { changePasswordSend } from 'src/shared/data-send/changepasswordsend';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  url: string = environment.apiBaseUrl + '/User';
+  url: string = environment.apiBaseUrl + 'User';
   constructor(private http: HttpClient, 
     private http_options : HttpOptionsService
   ) { }
+  //admin field
 
   GetUsers_Admin() : Observable<ApiResponse>{
     const urlGet = `${this.url}/Admin/User`;
@@ -32,30 +34,27 @@ export class UserService {
         )
   }
 
-  CreateUserAsync_Admin(item : UserSend) : Observable<ApiResponse>{
+  CreateUserAsync_Admin(item : FormData) : Observable<ApiResponse>{
     const  urlPost = `${this.url}/Admin/User`;
     return this.http.post<ApiResponse>(urlPost, item).pipe(
       catchError(this.http_options.handleError)
     );
   }
 
-  UpdateUserAsync_Admin(item: UserSend, userId : string, newPassword: string) : Observable<ApiResponse>{
+  UpdateUserAsync_Admin(item: FormData, userId : string) : Observable<ApiResponse>{
     const urlPut = `${this.url}/Admin/User/${userId}`;
-    const payload = {
-      ...item,
-      newPassword: newPassword
-    };
-    return this.http.put<ApiResponse>(urlPut, payload)
+    return this.http.put<ApiResponse>(urlPut, item)
       .pipe(catchError(this.http_options.handleError));
   }
 
-  DeleteUserAsync_Admin(id : number) : Observable<ApiResponse>{
+  DeleteUserAsync_Admin(id : string) : Observable<ApiResponse>{
     const deleteUrl = `${this.url}/Admin/User/${id}`;
     return this.http.delete<ApiResponse>(deleteUrl).pipe(
       catchError(this.http_options.handleError) 
     );
   }
 
+  //client field
   GetUserAsync_Client() : Observable<ApiResponse>{
     const urlGet = `${this.url}/Client/User`;
     return this.http.get<ApiResponse>(urlGet)
@@ -63,22 +62,18 @@ export class UserService {
           catchError(this.http_options.handleError)
         )
   }
-  UpdateUserAsync_Client(item: UserSend) : Observable<ApiResponse>{
+  UpdateUserAsync_Client(item: FormData) : Observable<ApiResponse>{
     const urlPut = `${this.url}/Client/User`;
-    const payload = {
-      ...item,
-    };
-    return this.http.put<ApiResponse>(urlPut, payload)
+    return this.http.put<ApiResponse>(urlPut, item)
       .pipe(catchError(this.http_options.handleError));
   }
   
-  ChangePassword_Client(oldPassword : string, newPassword: string) : Observable<ApiResponse>{
+  ChangePassword_Client(changePasswordSend : changePasswordSend): Observable<ApiResponse> {
     const urlPut = `${this.url}/Client/User/ChangePassword`;
-    const payload = {
-      oldPassword, newPassword
-    };
-    return this.http.put<ApiResponse>(urlPut, payload)
+    return this.http.put<ApiResponse>(urlPut, changePasswordSend) 
       .pipe(catchError(this.http_options.handleError));
   }
+  
+  
 }
 

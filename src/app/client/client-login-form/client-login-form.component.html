@@ -1,0 +1,33 @@
+<div  class="form-container">
+    <h2>Đăng nhập</h2>
+    <form 
+     [formGroup]="LoginForm"
+    (ngSubmit)="$event.preventDefault(); submitForm()"
+    >
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input formControlName="email" type="email" id="email"  class="form-control" required>
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+          <small *ngIf="email?.hasError('required')" class="text-danger">
+              Không được bỏ trống trường này
+          </small>
+          <small *ngIf="email?.hasError('email')" class="text-danger">
+            Email không hợp lệ!
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <input formControlName="password" type="password" id="password" class="form-control" required>
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+          <small *ngIf="password?.hasError('required')" class="text-danger">
+              Không được bỏ trống trường này
+          </small>
+        </div>
+      </div>
+      <button [disabled]="LoginForm.invalid" type="submit" class="btn btn-primary">Đăng nhập</button>
+    </form>
+    <div class="spinner-overlay" *ngIf="isLoadingLogin$ | async">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>

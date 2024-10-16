@@ -18,15 +18,21 @@ export class DashboardEffects {
     private toastr : ToastrService
   ) {}
 
-  GetRevenueStatistics = createEffect(() => {
+  // RevenueStatistics
+  GetRevenueStatistics$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DashboardActions.GetStatistic),
       switchMap(action => {
         return this.dashboardService.GetStatistic(action.startDate, action.endDate)
           .pipe(
             map((res : ApiResponse) => {
-              console.log(res);
-              return DashboardActions.GetStatisticSuccess({RevenueStatistics : res.data})
+              if(res.success){
+                console.log(res);
+                return DashboardActions.GetStatisticSuccess({RevenueStatistics : res.data});
+              }
+              else{
+                return DashboardActions.GetStatisticFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
             }),
             catchError((error) => {
               return of(DashboardActions.GetStatisticFailure({
@@ -47,7 +53,7 @@ export class DashboardEffects {
     ),
     {dispatch: false}
   );
-  //
+  // GetTopProducts
   GetTopProducts = createEffect(() => {
     return this.actions$.pipe(
       ofType(DashboardActions.GetTopSelling),
@@ -55,8 +61,13 @@ export class DashboardEffects {
         return this.dashboardService.GetTopSelling(action.count)
           .pipe(
             map((res : ApiResponse) => {
-              console.log(res);
-              return DashboardActions.GetTopSellingSuccess({products : res.data})
+              if(res.success){
+                console.log(res);
+                return DashboardActions.GetTopSellingSuccess({products : res.data})
+              }
+              else{
+                return DashboardActions.GetTopSellingFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
             }),
             catchError((error) => {
               return of(DashboardActions.GetTopSellingFailure({

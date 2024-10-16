@@ -1,0 +1,76 @@
+<section class="py-5">
+  <div *ngIf="(Cart$ | async) as cart; else nothing" class="container">
+    <h3 class="display-5 mb-3 text-center">Giỏ hàng</h3>
+    <p class="text-center">
+      <i class="text-info font-weight-bold">{{itemCartCount$ | async}}</i> sản phẩm
+    </p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:30%">Sản phẩm</th>
+            <th style="width:10%">Giá</th>
+            <th style="width:20%">Size</th>
+            <th style="width:15%">Tổng tiền</th>
+            <th style="width:15%">Số lượng</th>
+            <th style="width:20%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ItemsCart$ | async">
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="me-3">
+                  <img *ngIf="item.product?.images?.length > 0"
+                   [src]="item.product?.images[0].imageUrl" alt="Product Image" class="img-fluid rounded shadow-sm" style="width: 100px;">
+                </div>
+                <div>
+                  <h5>{{item.product?.name}}</h5>
+                </div>
+              </div>
+            </td>
+            <td class="align-middle">
+              &dollar; {{item.product?.price}} 
+            </td>
+            <td class="align-middle">
+               {{item.product?.size}} 
+            </td>
+            <td class="align-middle">
+              &dollar; {{item.price}} 
+            </td>
+            <td class="align-middle">
+              <input type="number" class="form-control text-center" [ngModel]="item.quantity"
+               (ngModelChange)="updateQuantity($event, item)" min="1" >
+            </td>
+            <td class="align-middle text-end">
+              <button class="btn btn-outline-danger btn-sm btn-remove" (click)="removeItem(item.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+      <a routerLink="/shop" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i> Quay về
+      </a>
+      <div class="ms-auto me-3 text-end">
+        <h4 class="mb-3">Tổng số tiền:</h4>
+        <h1>&dollar;{{itemCartTotal$ | async}}</h1>
+        <button (click)="moveCheckout()"
+      [disabled]="(itemCartCount$ | async) === 0" 
+      class="btn btn-primary btn-lg">
+      Đặt hàng
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #nothing>
+  <div class="container">
+    <h2>Bạn chưa có sản phẩm nào</h2>
+  </div>
+</ng-template>

@@ -11,12 +11,12 @@ import { ItemCartSend } from 'src/shared/data-send/ItemCartSend';
 })
 export class ItemcartService {
 
-  url: string = environment.apiBaseUrl + '/ItemCart';
+  url: string = environment.apiBaseUrl + 'ItemCart';
   constructor(private http : HttpClient,
     private http_options : HttpOptionsService) { }
 
-    GetItemsCartByCartId(cartId : number) : Observable<ApiResponse>{
-      const urlGet= `${this.url}/GetByCart/${cartId}`;
+    GetItemsCartByCartId(id : number) : Observable<ApiResponse>{
+      const urlGet= `${this.url}/GetByCart/${id}`;
       return this.http.get<ApiResponse>(urlGet)
         .pipe(catchError(this.http_options.handleError))
     }
@@ -27,8 +27,11 @@ export class ItemcartService {
     }
     EditItemCart(item : ItemCartSend, id: number)
      : Observable<ApiResponse>{
+      let payload = {
+        ...item
+      }
       const urlPut = `${this.url}/${id}`;
-      return this.http.put<ApiResponse>(urlPut, item)
+      return this.http.put<ApiResponse>(urlPut, payload)
         .pipe(catchError(this.http_options.handleError));
     }
     DeleteItemCart(id : number) : Observable<ApiResponse>{

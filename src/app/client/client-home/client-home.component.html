@@ -10,7 +10,7 @@
         <div class="row g-0"> 
             <div *ngFor="let item of productList$ | async" class="col-12 col-md-6 col-lg-4">
                 <div  class="card-container">
-                    <a href="#" class="card-item">
+                    <a [routerLink]="['/shop/products/', item.id]" class="card-item">
                         <img [src]="item.images[0]?.imageUrl" alt="{{item.description}}" class="card-img front">
                         <img [src]="item.images[1]?.imageUrl" alt="{{item.description}}" class="card-img back">
                         <div class="card-content">
@@ -25,30 +25,12 @@
 </div>
 
 <div class="product-types mt-4">
-    <h2 style="color: #444;" class="title">Danh Sách Các Loại Sản Phẩm</h2>
+    <h2 style="color: #444;" class="title">Đa dạng các Loại Sản Phẩm</h2>
     <div class="product-type-container">
-        <div class="product-type">
-            <a href="#" class="product-type-card">
-                <img src="https://via.placeholder.com/100" alt="Chair" class="product-type-icon">
-                <p class="product-type-name">Ghế</p>
-            </a>
-        </div>
-        <div class="product-type">
-            <a href="#" class="product-type-card">
-                <img src="https://via.placeholder.com/100" alt="Table" class="product-type-icon">
-                <p class="product-type-name">Bàn</p>
-            </a>
-        </div>
-        <div class="product-type">
-            <a href="#" class="product-type-card">
-                <img src="https://via.placeholder.com/100" alt="Sofa" class="product-type-icon">
-                <p class="product-type-name">Sofa</p>
-            </a>
-        </div>
-        <div class="product-type">
-            <a href="#" class="product-type-card">
-                <img src="https://via.placeholder.com/100" alt="Desk" class="product-type-icon">
-                <p class="product-type-name">Bàn làm việc</p>
+        <div *ngFor="let item of categories$ | async" class="product-type">
+            <a href="#" (click)="$event.preventDefault()" style="cursor: default;" class="product-type-card">
+                <img [src]="item.imageUrl" alt="{{item.description}}" class="product-type-icon">
+                <p class="product-type-name">{{item.name}}</p>
             </a>
         </div>
     </div>
@@ -57,17 +39,8 @@
     <h2 class="store-title">Khám Phá Cửa Hàng Của Chúng Tôi</h2>
     <div class="store-content">
         <div class="store-images">
-            <div class="image-wrapper">
-                <img src="https://via.placeholder.com/300x200" alt="Product 1" class="store-image">
-            </div>
-            <div class="image-wrapper">
-                <img src="https://via.placeholder.com/300x200" alt="Product 2" class="store-image">
-            </div>
-            <div class="image-wrapper">
-                <img src="https://via.placeholder.com/300x200" alt="Product 3" class="store-image">
-            </div>
-            <div class="image-wrapper">
-                <img src="https://via.placeholder.com/300x200" alt="Product 4" class="store-image">
+            <div *ngFor="let item of productList$ | async" class="image-wrapper">
+                <img [src]="item.images[1]?.imageUrl" alt="Product 1" class="store-image">
             </div>
         </div>
         <div class="store-description">
@@ -75,4 +48,7 @@
             <p>Đội ngũ của chúng tôi luôn sẵn sàng hỗ trợ và tư vấn cho bạn để tìm được sản phẩm phù hợp nhất với không gian sống của bạn.</p>
         </div>
     </div>
+</div>
+<div class="spinner-overlay" *ngIf="isLoading$ | async">
+    <mat-spinner></mat-spinner>
 </div>

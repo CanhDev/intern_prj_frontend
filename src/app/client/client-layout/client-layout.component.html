@@ -2,7 +2,7 @@
     <div class="mobile-nav">
         <!-- Navbar Brand -->
         <div class="amado-navbar-brand">
-            <a href="index.html"><img src="assets/client/img/core-img/logo.png" alt=""></a>
+            <a routerLink=""><img src="https://st3.depositphotos.com/1583598/35751/v/450/depositphotos_357510594-stock-illustration-coronavirus-covid-19-quarantine-motivational.jpg" alt=""></a>
         </div>
         <!-- Navbar Toggler -->
         <div class="amado-navbar-toggler">
@@ -13,24 +13,42 @@
         <!-- Close Icon -->
         <!-- Logo -->
         <div class="logo">
-            <a href="index.html"><img src="assets/client/img/core-img/logo.png" alt=""></a>
+            <a routerLink=""><img src="https://st3.depositphotos.com/1583598/35751/v/450/depositphotos_357510594-stock-illustration-coronavirus-covid-19-quarantine-motivational.jpg" alt=""></a>
         </div>
         <!-- Amado Nav -->
         <nav class="amado-nav">
             <ul>
-                <li class="active"><a href="index.html">Trang chủ</a></li>
-                <li><a href="shop.html">Cửa hàng</a></li>
+                <li class="active"><a routerLink="">Trang chủ</a></li>
+                <li><a routerLink="shop">Cửa hàng</a></li>
             </ul>
         </nav>
         <!-- Button Group -->
-        <div class="amado-btn-group mt-30 mb-100">
-            <a href="#" class="btn amado-btn mb-15">Đăng ký</a>
-            <a href="#" class="btn amado-btn">Đăng nhập</a>
+        <div *ngIf="user_client$ | async as user; else guest" class="amado-btn-group mt-30 mb-100">
+            <h2 class="welcome-title">Welcome  {{user.lastName}}</h2>
+            <a routerLink="" (click)="$event.preventDefault();Logout();" class="btn amado-btn">Đăng xuất</a>
         </div>
+        
+         <ng-template #guest>
+            <a class="btn amado-btn mb-15" routerLink="Signup">Đăng ký</a>
+            <a class="btn amado-btn mb-15" routerLink="Login">Đăng nhập</a>
+          </ng-template>
+
         <!-- Cart Menu -->
         <div class="cart-fav-search mb-100">
-            <a href="cart.html" class="cart-nav"><img src="assets/client/img/core-img/cart.png" alt=""> Giỏ hàng <span>(0)</span></a>
-            <a href="#" class="fav-nav"><img src="assets/client/img/core-img/favorites.png" alt=""> Phổ biến</a>
+            <a routerLink="Cart" class="cart-nav"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;Giỏ hàng</a>
+
+            <a *ngIf="user_client$ | async as user" routerLink="Order" class="fav-nav"><i
+                 class="fa-solid fa-receipt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Hóa đơn</a>
+
+                 <div *ngIf="user_client$ | async as user">
+                    <a *ngIf="user.email?.toLowerCase() === 'admin@gmail.com'" routerLink="admin" class="fav-nav">
+                        <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;Trang quản trị
+                    </a>
+                    <a *ngIf="user.email?.toLowerCase() !== 'admin@gmail.com'" routerLink="Info" class="fav-nav">
+                        <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp; {{user.firstName}} {{user.lastName}}
+                    </a>
+                </div>
+            
         </div>
         <!-- Social Button -->
         <div class="social-info d-flex justify-content-between">
@@ -41,13 +59,57 @@
         </div>
     </header>
     <div class="products-catagories-area clearfix">
-        <div class="amado-pro-catagory clearfix">
-            <router-outlet></router-outlet>
+        <div style="height: 100%;" class="amado-pro-catagory clearfix">
+            <router-outlet [@routeAnimations]="prepareRoute(outlet)" #outlet="outlet"></router-outlet>
          </div>
     </div>
 </div>
 
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <!-- Logo & About Section -->
+            <div class="footer-section about">
+                <a href="index.html" class="footer-logo">
+                    <img src="https://st3.depositphotos.com/1583598/35751/v/450/depositphotos_357510594-stock-illustration-coronavirus-covid-19-quarantine-motivational.jpg" alt="Logo">
+                </a>
+                <p class="footer-description">
+                    Chào mừng bạn đến với cửa hàng của chúng tôi. Chúng tôi mang đến những sản phẩm chất lượng tốt nhất với giá cả hợp lý.
+                </p>
+            </div>
 
+            <!-- Navigation Links Section -->
+            <div class="footer-section links">
+                <h3 class="footer-title">Điều hướng</h3>
+                <ul class="footer-link-list">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="shop.html">Cửa hàng</a></li>
+                    <li><a href="product-details.html">Đăng ký</a></li>
+                    <li><a href="cart.html">Đăng nhập</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Social Section -->
+            <div class="footer-section contact">
+                <h3 class="footer-title">Liên hệ</h3>
+                <p><i class="fa fa-map-marker-alt"></i> 123 Phố ABC, Thành phố XYZ</p>
+                <p><i class="fa fa-phone"></i> (+84) 123 456 789</p>
+                
+                <div class="footer-socials">
+                    <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Company | All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
 
 

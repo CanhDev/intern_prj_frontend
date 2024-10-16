@@ -3,8 +3,7 @@ import { ItemCartGet } from 'src/shared/data-get/ItemCartGet';
 import { ItemCartSend } from 'src/shared/data-send/ItemCartSend';
 
 export const GetItemsCartByCartId = createAction(
-  '[ItemCart/API] get ItemCarts', 
-  props<{cartId : number}>()
+  '[ItemCart/API] get ItemCarts', props<{id : number}>()
 );
 export const GetItemsCartByCartIdSuccess = createAction(
   '[ItemCart/API] get ItemCarts success', 

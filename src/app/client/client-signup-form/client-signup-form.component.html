@@ -1,0 +1,67 @@
+<div  class="form-container">
+    <h2>Đăng ký</h2>
+    <form [formGroup]="SignupForm"
+      (ngSubmit)="$event.preventDefault(); submitForm()"
+    >
+      <div class="form-group">
+        <label >Họ</label>
+        <input formControlName="fname" type="text"   class="form-control" required>
+        <div *ngIf="fname?.invalid && (fname?.dirty || fname?.touched)">
+          <small *ngIf="fname?.hasError('required')" class="text-danger">
+              Không được bỏ trống trường này
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label >Tên</label>
+        <input formControlName="lname" type="text"  class="form-control" required>
+        <div *ngIf="fname?.invalid && (fname?.dirty || fname?.touched)">
+          <small *ngIf="fname?.hasError('required')" class="text-danger">
+              Không được bỏ trống trường này
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input formControlName="email" type="email" id="email"  class="form-control" required>
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+          <small *ngIf="email?.hasError('required')" class="text-danger">
+              Không được bỏ trống trường này
+          </small>
+          <small *ngIf="email?.hasError('email')" class="text-danger">
+            Email không hợp lệ!
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <input formControlName="password" type="password" id="password"  class="form-control" required>
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+          <small *ngIf="password?.hasError('required')" class="text-danger">
+              Không được bỏ trống trường này
+          </small>
+          <small *ngIf="password?.hasError('minlength')" class="text-danger">
+            Mật khẩu phải đủ 8 ký tự
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Xác nhận mật khẩu</label>
+        <input formControlName="confirmPassword" type="password" id="confirmPassword"  class="form-control" required>
+        <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)">
+          <small *ngIf="confirmPassword?.hasError('required')" class="text-danger">
+              Không được bỏ trống trường này
+          </small>
+          <small *ngIf="confirmPassword?.hasError('passwordMismatch')" class="text-danger">
+            Mật khẩu không trùng khớp
+          </small>
+        </div>
+      </div>
+      <button [disabled]="SignupForm.invalid"
+       type="submit" class="btn btn-primary">Đăng ký</button>
+    </form>
+  </div>
+
+  <div class="spinner-overlay" *ngIf="isLoadingSingUp$ | async">
+    <mat-spinner></mat-spinner>
+</div>

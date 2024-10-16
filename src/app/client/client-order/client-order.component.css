@@ -1,0 +1,96 @@
+body {
+    background-color: #f9f9f9; /* Màu nền sáng nhẹ hơn cho toàn bộ trang */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ hiện đại */
+    color: #333; /* Màu chữ tối */
+}
+
+.container {
+    max-width: 900px; /* Chiều rộng tối đa cho container */
+    margin: 40px auto; /* Căn giữa container */
+    padding: 30px; /* Khoảng cách bên trong */
+    background-color: #ffffff; /* Màu nền trắng cho container */
+    border-radius: 12px; /* Bo tròn các góc */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Thêm bóng cho container */
+}
+
+h1 {
+    color: #444; /* Màu chữ tiêu đề */
+    margin-bottom: 30px; /* Khoảng cách dưới tiêu đề */
+    text-align: center; /* Căn giữa tiêu đề */
+    font-size: 2.5em; /* Kích thước chữ tiêu đề */
+    font-weight: bold; /* Chữ in đậm */
+}
+
+.table {
+    margin-top: 20px; /* Khoảng cách trên bảng */
+    border-radius: 10px; /* Bo tròn các góc bảng */
+    overflow: hidden; /* Ẩn các góc bị tràn */
+    border: 1px solid #dee2e6; /* Thêm viền cho bảng */
+}
+
+.table th {
+    background-color: #FFCC00; /* Màu nền của tiêu đề bảng */
+    color: #333; /* Màu chữ tối cho tiêu đề bảng */
+    text-align: center; /* Căn giữa nội dung tiêu đề */
+    padding: 15px; /* Khoảng cách trong ô tiêu đề */
+}
+
+.table th, .table td {
+    vertical-align: middle; /* Căn giữa nội dung ô */
+    padding: 15px; /* Khoảng cách trong ô */
+    text-align: center; /* Căn giữa nội dung trong ô */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2; /* Màu nền của các hàng lẻ, nhẹ hơn */
+}
+.table-striped tbody tr {
+    transition: all 0.4s; /* Thời gian chuyển tiếp cho hiệu ứng */
+}
+
+.table-striped tbody tr:hover {
+    background-color: #e0e0e0; /* Màu nền khi hover */
+    transform: scale(1.02); /* Hiệu ứng phóng to khi hover */
+    transition: all 0.2s; /* Thời gian chuyển tiếp cho hiệu ứng */
+}
+
+.table td button {
+    min-width: 120px; /* Chiều rộng tối thiểu cho nút */
+}
+
+.btn {
+    color: #444;
+    background-color: #FFCC00;
+    border-color: #FFCC00;
+    padding: 10px 15px; /* Thêm khoảng cách cho nút */
+    font-size: 0.9em; /* Kích thước chữ cho nút */
+    border-radius: 5px; /* Bo tròn các góc nút */
+    transition:  all 0.2s; /* Hiệu ứng chuyển màu nền và phóng to */
+}
+.btn:hover{
+    opacity: 0.8;
+}
+
+.btn-info {
+    background-color: #007bff; /* Màu nền cho nút "Xem" */
+    color: white; /* Màu chữ cho nút */
+}
+
+.btn-info:hover {
+    background-color: #0056b3; /* Màu nền khi hover nút "Xem" */
+    transform: translateY(-2px); /* Di chuyển lên khi hover */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Màu nền cho nút "Hủy" */
+    color: white; /* Màu chữ cho nút */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Màu nền khi hover nút "Hủy" */
+    transform: translateY(-2px); /* Di chuyển lên khi hover */
+}
+
+.alert {
+    margin-top: 20px; /* Khoảng cách trên thông báo */
+}

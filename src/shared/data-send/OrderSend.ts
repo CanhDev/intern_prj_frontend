@@ -3,10 +3,14 @@ import { OrderDetailSend } from "./OrderDetailSend";
 export class OrderSend{
     userId : string = "";
     orderCode: string = "";
+    recipientName : string = "";
+    recipientPhone : string = "";
+    recipientEmail : string  = "";
+    shippingAddress : string  = "";
     orderDate? : Date | null;
     totalAmount : number = 0;
-    status : string = "";
+    statusPayment : string = "";
+    statusShipping : string = "";
     paymentMethod : string = "";
-    shippingAddress : string  = "";
     orderDetails : OrderDetailSend[] | any;
 }

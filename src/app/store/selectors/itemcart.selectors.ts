@@ -9,10 +9,20 @@ export const selectItemsCart = createSelector(
   selectItemcartState,
   (state : fromItemcart.State) => state.itemsCart);
 
+export const selectItemCartCount = createSelector(
+  selectItemcartState,
+  (state : fromItemcart.State) => state.itemCartCount
+)
+
+export const selectItemCartTotal = createSelector(
+  selectItemcartState,
+  (state : fromItemcart.State) => state.itemCartTotal
+)
+
 export const selectIsLoadingItemsCart = createSelector(
   selectItemcartState,
   (state : fromItemcart.State) =>  state.isLoadingItemsCart);
 
-  export const selectisLoadingUpdate = createSelector(
+export const selectisLoadingUpdate = createSelector(
     selectItemcartState,
     (state : fromItemcart.State) =>  state.isLoadingUpdate);

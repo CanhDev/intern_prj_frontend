@@ -1,0 +1,85 @@
+:host {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	background: linear-gradient(135deg, #fbb710 0%, #ffdd67 100%);
+	font-family: Arial, sans-serif;
+  }
+  
+  .form-container {
+	background-color: #ffffff;
+	border-radius: 10px;
+	padding: 40px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 400px;
+  }
+  
+  h2 {
+	color: #fbb710;
+	text-align: center;
+	margin-bottom: 30px;
+  }
+  
+  .form-group {
+	margin-bottom: 20px;
+  }
+  
+  label {
+	display: block;
+	margin-bottom: 5px;
+	color: #333;
+  }
+  
+  .form-control {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+  }
+  
+  .form-control:focus {
+	outline: none;
+	border-color: #fbb710;
+	box-shadow: 0 0 0 2px rgba(251, 183, 16, 0.2);
+  }
+  
+  .form-check {
+	display: flex;
+	align-items: center;
+  }
+  
+  .form-check-input {
+	margin-right: 10px;
+  }
+  
+  .btn-primary {
+	background-color: #fbb710;
+	border: none;
+	color: white;
+	padding: 12px 20px;
+	width: 100%;
+	font-size: 16px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+	background-color: #e5a60f;
+  }
+  .spinner-overlay {
+	position: fixed; /* Đặt vị trí cố định */
+	top: 0; /* Đỉnh màn hình */
+	left: 0; /* Bên trái màn hình */
+	width: 100%; /* Chiều rộng 100% */
+	height: 100%; /* Chiều cao 100% */
+	background-color: rgba(255, 255, 255, 0.8); /* Nền trắng với độ mờ */
+	display: flex; /* Sử dụng flexbox */
+	justify-content: center; /* Căn giữa theo chiều ngang */
+	align-items: center; /* Căn giữa theo chiều dọc */
+	z-index: 1000; /* Đặt z-index cao để hiển thị trên tất cả các phần tử khác */
+  }
+  

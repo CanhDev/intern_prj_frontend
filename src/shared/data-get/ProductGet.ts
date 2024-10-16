@@ -1,3 +1,4 @@
+import { CategoryGet } from "./CategoryGet";
 import { ImageGet } from "./ImageGet";
 
 export class ProductGet{
@@ -13,4 +14,5 @@ export class ProductGet{
     size?: string | null; 
     soldedCount?: number | null; 
     images: ImageGet[] | any;
+    category : CategoryGet | any;
 }

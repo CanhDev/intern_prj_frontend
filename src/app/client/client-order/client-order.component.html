@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <h1 class="text-center">Danh sách hóa đơn mua</h1>
+    <table class="table table-striped table-bordered mt-4">
+        <thead class="thead-dark">
+            <tr>
+                <th>Mã Hóa Đơn</th>
+                <th>Tên Khách Hàng</th>
+                <th>Ngày Mua</th>
+                <th>Tổng Tiền</th>
+                <th>Trạng Thái</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="invoiceList">
+            <tr *ngFor="let item of Orders$ | async">
+                <td>{{item.orderCode}}</td>
+                <td>{{item.recipientName}}</td>
+                <td>{{item.orderDate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.totalAmount | currency}}</td>
+                <td>{{item.statusShipping}}</td>
+                <td>
+                    <a [routerLink]="['/Order', item.id]" class="btn btn-outline-primary">Xem sản phẩm</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -435,18 +435,6 @@ img {
       line-height: 0.9;
       color: #131212;
       font-weight: normal; }
-      .main-content-wrapper .header-area .amado-nav li a::after {
-        -webkit-transition-duration: 500ms;
-        transition-duration: 500ms;
-        width: 30px;
-        height: 3px;
-        position: absolute;
-        top: 50%;
-        margin-top: -1.5px;
-        left: -150px;
-        background-color: #fbb710;
-        z-index: 10;
-        content: ''; }
       .main-content-wrapper .header-area .amado-nav li a:hover, .main-content-wrapper .header-area .amado-nav li a:focus {
         color: #fbb710; }
     .main-content-wrapper .header-area .amado-nav li:hover a::after, .main-content-wrapper .header-area .amado-nav li:focus a::after {
@@ -1421,4 +1409,16 @@ img {
 .newsletter-form button:hover {
     background-color: #e6b800;
 }
+
+.welcome-title {
+  font-size: 18px; /* Kích thước chữ */
+  font-weight: bold; /* Đậm chữ */
+  color: #e6b800; /* Màu sắc của chữ */
+  margin-bottom: 15px; /* Khoảng cách phía dưới tiêu đề */
+  white-space: nowrap; /* Không cho văn bản xuống dòng */
+  overflow: hidden; /* Ẩn phần văn bản bị tràn */
+  text-overflow: ellipsis; /* Hiển thị dấu ba chấm nếu văn bản bị cắt */
+  max-width: 300px; /* Giới hạn chiều rộng tối đa của tiêu đề */
+}
+
 
