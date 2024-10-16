@@ -12,7 +12,7 @@ export class ProductGet{
     updateDate?: Date | null; 
     categoryId?: number | null; 
     size?: string | null; 
-    soldedCount?: number | null; 
+    soldedCount?: number  = 0; 
     images: ImageGet[] | any;
     category : CategoryGet | any;
 }

@@ -47,9 +47,6 @@ export class AdminAddProductFormComponent implements OnInit {
               this.imgs.push(new FormControl(file)); // Thêm file vào FormArray
               this.previewImage(file); // Xem trước hình ảnh
           });
-
-          console.log('Selected files:', input.files);
-          console.log('FormArray imgs:', this.imgs.value);
       }
   }
   previewImage(file: File): void {
@@ -80,10 +77,6 @@ export class AdminAddProductFormComponent implements OnInit {
                 formData.append('imgs', file, file.name);
             }
         });
-        formData.forEach((value, key) => {
-            console.log(key, value);
-        });
-
         this.store.dispatch(addProduct({ product: formData }));
     } else {
         console.error('Form is invalid', this.productForm.errors);

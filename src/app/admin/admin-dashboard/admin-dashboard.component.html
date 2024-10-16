@@ -44,7 +44,7 @@
             </th>
             <td>{{item.name}}</td>
             <td>{{item.soldedCount}}</td>
-            <td>&dollar;{{ (item.soldedCount ?? 0) * (item.price ?? 0) }}</td>
+            <td>&dollar;{{ item.soldedCount != null ?  item.price * item.soldedCount : 0 }}</td>
           </tr>
         </tbody>
       </table>

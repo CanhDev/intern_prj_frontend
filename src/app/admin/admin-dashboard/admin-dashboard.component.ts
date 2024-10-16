@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Chart, registerables } from 'chart.js';
 import * as moment from 'moment';
-import { map, Observable, tap } from 'rxjs';
+import { first, map, Observable, tap } from 'rxjs';
 import { GetStatistic, GetTopSelling } from 'src/app/store/actions/dashboard.actions';
 import { selectisLoadingStatistics, selectisLoadingTopProducts, selectRevenueStatistics, selectTopProducts } from 'src/app/store/selectors/dashboard.selectors';
 import { ProductGet } from 'src/shared/data-get/ProductGet';
@@ -54,28 +54,22 @@ export class AdminDashboardComponent {
     const startDateValue = this.startDate?.value; 
     const endDateValue = this.endDate?.value;     
   
-    if (!startDateValue || !endDateValue) {
-      console.error('Vui lòng chọn cả ngày bắt đầu và ngày kết thúc.');
-      return; 
-    }
-  
     const formattedStartDate = startDateValue; 
     const formattedEndDate = endDateValue;
   
-    const endDateWithExtraDay = moment(formattedEndDate).add(1, 'days').format('YYYY-MM-DD');
   
     this.store.dispatch(GetStatistic({
       startDate: formattedStartDate,
-      endDate: endDateWithExtraDay
+      endDate: formattedEndDate
     }));
   }
   loadRevenueStatistics() {
-    this.arrDate = [];
-    this.arrDoanhThu = [];
-    this.arrLoiNhuan = [];
     this.RevenueStatistics$.pipe(
       map((data: any) => {
         if (Array.isArray(data)) {
+            this.arrDate = [];
+            this.arrDoanhThu = [];
+            this.arrLoiNhuan = [];
           data.forEach((item: any) => {
               let strDate = moment(item.date).format('DD/MM/YYYY'); 
               this.arrDate.push(strDate);
@@ -87,7 +81,7 @@ export class AdminDashboardComponent {
           console.error('Dữ liệu không phải là mảng:', data);
       }
       }),
-      tap(() => this.loadChart()) // Gọi loadChart sau khi dữ liệu đã được xử lý
+      tap(() => this.loadChart()) 
     ).subscribe();
   }
 ngOnDestroy() {
