@@ -81,18 +81,24 @@
             <!-- Navigation Links Section -->
             <div class="footer-section links">
                 <h3 class="footer-title">Điều hướng</h3>
-                <ul class="footer-link-list">
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li><a href="shop.html">Cửa hàng</a></li>
-                    <li><a href="product-details.html">Đăng ký</a></li>
-                    <li><a href="cart.html">Đăng nhập</a></li>
+                <ul *ngIf="(user_client$ | async) == null" class="footer-link-list">
+                    <li><a routerLink="">Trang chủ</a></li>
+                    <li><a routerLink="shop">Cửa hàng</a></li>
+                    <li><a routerLink="Signup">Đăng ký</a></li>
+                    <li><a routerLink="Login">Đăng nhập</a></li>
+                </ul>
+                <ul *ngIf="user_client$ | async" class="footer-link-list">
+                    <li><a routerLink="">Trang chủ</a></li>
+                    <li><a routerLink="shop">Cửa hàng</a></li>
+                    <li><a routerLink="Cart">Giỏ hàng</a></li>
+                    <li><a routerLink="Order">Hóa đơn</a></li>
                 </ul>
             </div>
 
             <!-- Contact & Social Section -->
             <div class="footer-section contact">
                 <h3 class="footer-title">Liên hệ</h3>
-                <p><i class="fa fa-map-marker-alt"></i> 123 Phố ABC, Thành phố XYZ</p>
+                <p><i class="fa fa-map-marker-alt"></i> 296 Cầu diễn</p>
                 <p><i class="fa fa-phone"></i> (+84) 123 456 789</p>
                 
                 <div class="footer-socials">

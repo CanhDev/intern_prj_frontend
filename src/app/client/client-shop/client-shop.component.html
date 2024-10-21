@@ -57,7 +57,7 @@
 
             <!-- Product List -->
             <div class="row">
-                <div *ngFor="let item of productList$ | async" class="col-12 col-md-8 col-lg-6 col-xl-4 mb-4">
+                <div *ngFor="let item of filterProduct" class="col-12 col-md-8 col-lg-6 col-xl-4 mb-4">
                     <div class="product-card">
                         <a [routerLink]="['/shop/products', item.id]" class="product-link">
                             <div class="image-container">

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiResponse } from 'src/shared/data-general/ApiResponse';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
 
 
 @Injectable()
@@ -16,7 +17,8 @@ export class ProductEffects {
   constructor(private actions$ : Actions,
     private productService : ProductServiceService,
     private router : Router,
-    private toastr : ToastrService
+    private toastr : ToastrService,
+    private store : Store
   ){}
   
   //load product list
@@ -51,7 +53,7 @@ export class ProductEffects {
     this.actions$.pipe(
       ofType(ProductActions.loadProductsFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+       console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}
@@ -87,7 +89,7 @@ export class ProductEffects {
     this.actions$.pipe(
       ofType(ProductActions.getSingleProductFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}
@@ -218,8 +220,9 @@ export class ProductEffects {
   deleteProductSuccess$ = createEffect(() => 
     this.actions$.pipe(
       ofType(ProductActions.deleteProductSuccess),
-      tap(()=>{
+      map(()=>{
         this.toastr.success("Xóa thành công", "Thông báo");
+        this.store.dispatch(ProductActions.loadProducts({}));
       })
     ),
     {dispatch : false}

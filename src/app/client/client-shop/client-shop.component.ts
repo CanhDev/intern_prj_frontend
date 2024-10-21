@@ -26,6 +26,8 @@ export class ClientShopComponent {
   isLoading$: Observable<boolean>;
   isLoadingCategories$: Observable<boolean>;
   //
+  filterProduct : ProductGet[] = [];
+  //
   Cart$ : Observable<CartGet | null>;
   cartId : number = 0;
   @ViewChild('scrollToTop') scrollToTop!: ElementRef;
@@ -77,6 +79,7 @@ export class ClientShopComponent {
       
     this.productList$.pipe(
       map((products : ProductGet[])=>{
+        this.filterProduct = products.filter(item => !item.outOfStockstatus);
         if(products.length < 9 && this.currentPage == 1){
           this.totalPages = 1;
         }

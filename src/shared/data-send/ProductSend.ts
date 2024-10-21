@@ -10,6 +10,7 @@ export class ProductSend{
     updateDate?: Date | null; 
     categoryId?: number | null; 
     size?: string | null; 
+    outOfStockstatus? : boolean = false;
     soldedCount?: number | null; 
     ImageUrls: string[] = [];
     imgs?: File[]; 

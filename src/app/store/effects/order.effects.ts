@@ -16,7 +16,44 @@ export class OrderEffects {
     private router : Router,
     private toastr : ToastrService
   ) {}
+//get all orders
+GetALlOrders$ = createEffect(() => {
+  return this.actions$.pipe(
+    ofType(OrderActions.getAllOrders),
+    switchMap(action => {
+      return this.orderService.GetAllOrder()
+        .pipe(
+          map((res : ApiResponse) => {
+            if(res.success){
+              console.log(res);
+              return OrderActions.getAllOrdersSuccess({orders : res.data})
+            }
+            else{
+              return OrderActions.getAllOrdersFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+            }
+          }),
+          catchError((error) => {
+            return of(OrderActions.getAllOrdersFailure({
+              error: error.errorMessage,
+              statusCode: error.statusCode
+            }));
+          })
+        )
+    })
+  )
+});
+getAllOrdersFailure$ = createEffect(()=>
+  this.actions$.pipe(
+    ofType(OrderActions.getAllOrdersFailure),
+    tap((error)=>{
+      console.error(error.error, "Thông báo");
+    })
+  ),
+  {dispatch: false}
+);
 
+
+  //get order list of user
   GetOrdersByUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrderActions.GetOrdersByUser),
@@ -46,7 +83,7 @@ export class OrderEffects {
     this.actions$.pipe(
       ofType(OrderActions.GetOrdersByUserFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}
@@ -185,7 +222,7 @@ export class OrderEffects {
     return this.actions$.pipe(
       ofType(OrderActions.UpdateOrderStatus),
       switchMap(action => {
-        return this.orderService.UpdateStatus(action.id, action.statusPayment,
+        return this.orderService.UpdateStatus(action.orderId, action.statusPayment,
           action.statusShipping
         )
           .pipe(

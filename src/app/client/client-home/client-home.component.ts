@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { getCategories } from 'src/app/store/actions/category.actions';
 import { loadProducts } from 'src/app/store/actions/product.actions';
 import { selectCategories, selectIsLoadingCategories } from 'src/app/store/selectors/category.selectors';
@@ -19,6 +19,8 @@ export class ClientHomeComponent {
   categories$ : Observable<CategoryGet[]>;
   isLoading$ : Observable<boolean>;
   isLoadingCategories$ : Observable<boolean>;
+  //
+  filterProduct : ProductGet[] = [];
 
   constructor(private store : Store, private Toastr : ToastrService){
     this.productList$ = this.store.select(selectProducts);
@@ -27,7 +29,13 @@ export class ClientHomeComponent {
     this.isLoadingCategories$ = this.store.select(selectIsLoadingCategories);
   }
   ngOnInit(){
-    this.store.dispatch(loadProducts({pageNumber : 1, pageSize : 6}));
-    this.store.dispatch(getCategories())
+    this.store.dispatch(loadProducts({pageNumber : 1, pageSize : 9}));
+    this.store.dispatch(getCategories());
+    this.productList$.pipe(
+      map((products : ProductGet[])=>{
+        const availableProducts = products.filter(item => !item.outOfStockstatus);
+        this.filterProduct = availableProducts.slice(0,6);
+      })
+    ).subscribe();
   }
 }

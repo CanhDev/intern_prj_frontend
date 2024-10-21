@@ -49,7 +49,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.GetUsers_AdminFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}
@@ -86,7 +86,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.GetUser_AdminFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}
@@ -266,7 +266,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.GetUserAsync_ClientFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}

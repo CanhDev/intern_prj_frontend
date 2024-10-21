@@ -23,6 +23,7 @@
           <th>Tên sản phẩm</th>
           <th>Loại sản phẩm</th>
           <th>Số lượng</th>
+          <th>Trạng thái</th>
           <th>Giá gốc</th>
           <th>Giá bán</th>
         </tr>
@@ -35,11 +36,11 @@
           <td>{{item.name}}</td>
           <td>{{item.category?.name}}</td>
           <td>{{item.quantity}}</td>
-          <td>{{item.originalPrice}}</td>
-          <td>{{item.price}}</td>
+          <td>{{item.outOfStockstatus ? "Hết hàng" : "Còn hàng"}}</td>
+          <td>&dollar;{{item.originalPrice}}</td>
+          <td>&dollar;{{item.price}}</td>
           <td>
             <button (click)="moveToEditForm(item.id)" class="btn btn-warning btn-sm">Sửa</button>
-            <button (click)="handleRemove(item.id)" class="btn btn-danger btn-sm">Xóa</button>
           </td>
         </tr>
       </tbody>

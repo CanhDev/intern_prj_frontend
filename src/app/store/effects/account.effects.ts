@@ -160,7 +160,7 @@ export class AccountEffects {
       ofType(AccountActions.RefreshTokenFailure),
       tap((error)=>{
         this.accountService.Logout();
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}

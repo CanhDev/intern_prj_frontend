@@ -33,11 +33,13 @@
             </h4>
             <h5 class="soldedCount">Đã bán:
                 {{product.soldedCount}}
-              </h5>
+            </h5>
+            <h5 class="soldedCount"><strong>Trạng thái:</strong>
+              {{product.outOfStockstatus ? "Hết hàng" : "Còn hàng"}}
+          </h5>
             <h5 class="sizes">Sizes:
               {{product.size}}
             </h5>
-            
             <!-- Quantity Section -->
             <div class="quantity mt-3">
               <label class="quantity" for="quantity">Quantity:</label>

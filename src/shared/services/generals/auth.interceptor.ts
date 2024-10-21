@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
           const tokenExpirationTime = this.getTokenExpirationTime(accessToken);
           const now = new Date().getTime();
           const timeToExpire = tokenExpirationTime - now;
-          const fiveMinutes = 5 * 60 * 1000; // 5 phút tính bằng mili giây
+          const fiveMinutes = 5 * 60 * 1000; 
 
           if (timeToExpire < fiveMinutes && !this.isRefreshing) {
             return this.handleTokenRefresh(request, next);
@@ -103,13 +103,14 @@ export class AuthInterceptor implements HttpInterceptor {
   private handleLogout(errorMessage: string, statusCode: number): void {
     this.store.dispatch(RefreshTokenFailure({ error: errorMessage, statusCode }));
     this.router.navigate(['']);
+    this.store.dispatch(GetUserAsync_Client());
   }
 
   private getTokenExpirationTime(token: string): number {
     try {
       const decodedToken: any = jwtDecode(token);
       if (decodedToken && decodedToken.exp) {
-        return decodedToken.exp * 1000; // Chuyển đổi từ giây sang mili giây
+        return decodedToken.exp * 1000; 
       }
     } catch (error) {
       console.error('Lỗi khi giải mã token:', error);

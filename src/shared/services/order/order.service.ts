@@ -16,6 +16,14 @@ export class OrderService {
     private http_options : HttpOptionsService
   ) { }
 
+
+  GetAllOrder() : Observable<ApiResponse>{
+    const urlGet = `${this.url}/GetAllOrder`;
+    return this.http.get<ApiResponse>(urlGet)
+        .pipe(
+          catchError(this.http_options.handleError)
+        )
+  }
   GetOrdersByUser(userId: string) : Observable<ApiResponse>{
     const urlGet = `${this.url}/${userId}`;
     return this.http.get<ApiResponse>(urlGet)
@@ -48,11 +56,11 @@ export class OrderService {
       catchError(this.http_options.handleError) 
     );
   }
-  UpdateStatus(id: number, statusPayment : string = "Chưa thanh toán",
+  UpdateStatus(orderId: number, statusPayment : string = "Chưa thanh toán",
     statusShipping : string = "Đang chuẩn bị"
   ) : Observable<ApiResponse>{
-    const urlPut = `${this.url}/${id}`;
-    const payload = { statusPayment, statusShipping };
+    const urlPut = `${this.url}/ChangeOrderStatus`;
+    const payload = {orderId, statusPayment, statusShipping };
     return this.http.put<ApiResponse>(urlPut, payload)
       .pipe(catchError(this.http_options.handleError));
   }

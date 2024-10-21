@@ -36,6 +36,7 @@ export class ClientUserInfoComponent {
         if (res) {
           this.user = res;
           this.initUserFormWithUserData();
+          this.imagePreview = this.user.avatarUrl;
         }
       })
     ).subscribe();
@@ -88,6 +89,7 @@ export class ClientUserInfoComponent {
 
       this.store.dispatch(UpdateUserAsync_Client({ user_client: userSend }));
       this.imagePreview = null;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
@@ -100,6 +102,7 @@ export class ClientUserInfoComponent {
   
       this.store.dispatch(ChangePassword_Client({changePasswordSend : payload}));
       this.PasswordForm.reset();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
   

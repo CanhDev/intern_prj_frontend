@@ -78,9 +78,10 @@ export class AdminAddProductFormComponent implements OnInit {
             }
         });
         this.store.dispatch(addProduct({ product: formData }));
+        this.productForm.reset();
+        this.imagePreviews.splice(0);
     } else {
         console.error('Form is invalid', this.productForm.errors);
     }
 }
-
 }

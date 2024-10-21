@@ -13,6 +13,7 @@ export class ProductGet{
     categoryId?: number | null; 
     size?: string | null; 
     soldedCount?: number  = 0; 
+    outOfStockstatus? : boolean = false;
     images: ImageGet[] | any;
     category : CategoryGet | any;
 }

@@ -48,6 +48,7 @@ export class AdminEditProductFormComponent {
       quantity: [0, [Validators.required, Validators.min(0)]],
       originalPrice: [0, [Validators.required, Validators.min(0)]],
       price: [0, [Validators.required, Validators.min(0)]],
+      outOfStockstatus : [false, Validators.required],
       categoryId: ['', Validators.required],
       size: [''],
       imgs: this.fb.array([])
@@ -61,6 +62,7 @@ export class AdminEditProductFormComponent {
       quantity: this.product.quantity,
       originalPrice: this.product.originalPrice,
       price: this.product.price,
+      outOfStockstatus: this.product.outOfStockstatus,
       categoryId: this.product.categoryId,
       size: this.product.size,
     });

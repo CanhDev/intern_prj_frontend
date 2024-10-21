@@ -47,7 +47,7 @@ export class CategoryEffects {
     this.actions$.pipe(
       ofType(CategoryActions.getCategoriesFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}
@@ -82,7 +82,7 @@ export class CategoryEffects {
     this.actions$.pipe(
       ofType(CategoryActions.getCategoryFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}

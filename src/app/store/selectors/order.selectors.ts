@@ -5,6 +5,15 @@ export const selectOrderState = createFeatureSelector<fromOrder.State>(
   fromOrder.orderFeatureKey
 );
 
+
+export const selectAllOrders = createSelector(
+  selectOrderState,
+  (state: fromOrder.State) => state.allOrders
+);
+export const selectIsloadingAllOrders = createSelector(
+  selectOrderState,
+  (state: fromOrder.State) => state.isLoadingAllOrders
+);
 export const selectOrders = createSelector(
   selectOrderState,
   (state : fromOrder.State) => state.orders);

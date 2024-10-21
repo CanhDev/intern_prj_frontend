@@ -48,7 +48,7 @@ export class DashboardEffects {
     this.actions$.pipe(
       ofType(DashboardActions.GetStatisticFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}
@@ -83,7 +83,7 @@ export class DashboardEffects {
     this.actions$.pipe(
       ofType(DashboardActions.GetTopSellingFailure),
       tap((error)=>{
-        this.toastr.error(error.error, "Thông báo");
+        console.error(error.error, "Thông báo");
       })
     ),
     {dispatch: false}

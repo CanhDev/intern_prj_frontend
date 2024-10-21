@@ -57,6 +57,14 @@
                 </div>
             </div>
             <div class="col-12">
+                <label for="size" class="form-label">Trạng thái</label>
+                <select *ngIf="product$ | async" formControlName="outOfStockstatus" class="form-select"  required>
+                    <option value="" disabled selected>Chọn danh mục...</option>
+                    <option  [value]="false">Còn hàng</option>
+                    <option  [value]="true">Hết hàng</option>
+                </select>
+            </div>
+            <div class="col-12">
                 <label for="category" class="form-label">Danh mục</label>
                 <select formControlName="categoryId" class="form-select" id="category" required>
                     <option value="" disabled selected>Chọn danh mục...</option>

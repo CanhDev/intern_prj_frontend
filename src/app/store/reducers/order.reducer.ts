@@ -7,18 +7,22 @@ import { OrderDetailGet } from 'src/shared/data-get/OderDetailGet';
 export const orderFeatureKey = 'order';
 
 export interface State {
+  allOrders : OrderGet[];
   orders : OrderGet[];
   order : OrderGet | null;
   ordersDetail : OrderDetailGet[];
+  isLoadingAllOrders: boolean;
   isLoadingOrders : boolean;
   isLoadingOrder : boolean;
   isLoadingOrdersDetail : boolean;
 }
 
 export const initialState: State = {
+  allOrders : [],
   orders : [],
   order : null,
   ordersDetail : [],
+  isLoadingAllOrders : false,
   isLoadingOrders : false,
   isLoadingOrder : false,
   isLoadingOrdersDetail : false
@@ -26,6 +30,19 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
+  on(OrderActions.getAllOrders, (state) =>({
+    ...state,
+    isLoadingAllOrders: true
+  })),
+  on(OrderActions.getAllOrdersSuccess, (state, {orders}) =>({
+    ...state,
+    allOrders : orders,
+    isLoadingAllOrders: false
+  })),
+  on(OrderActions.getAllOrdersFailure, (state) =>({
+    ...state,
+    isLoadingAllOrders: false
+  })),
   on(OrderActions.GetOrdersByUser, (state) =>({
     ...state,
     isLoadingOrders: true

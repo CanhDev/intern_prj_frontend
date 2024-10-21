@@ -105,8 +105,6 @@ export class AdminInfoMgComponent {
     }
   }
   
-  
-  
   initPasswordForm() {
     this.PasswordForm = new FormGroup({
       oldPassword: new FormControl('', Validators.required),

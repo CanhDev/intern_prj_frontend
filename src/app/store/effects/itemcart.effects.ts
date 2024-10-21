@@ -137,7 +137,7 @@ export class ItemcartEffects {
     this.actions$.pipe(
       ofType(ItemcartActions.EditItemCartSuccess),
       tap(()=>{
-        this.toastr.success("Sửa thành công", "Thông báo");
+        console.log("Sửa thành công", "Thông báo");
       })
     ),
     {dispatch : false}

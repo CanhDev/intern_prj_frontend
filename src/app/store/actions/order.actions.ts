@@ -3,6 +3,12 @@ import { OrderDetailGet } from 'src/shared/data-get/OderDetailGet';
 import { OrderGet } from 'src/shared/data-get/OrderGet';
 import { OrderSend } from 'src/shared/data-send/OrderSend';
 
+
+
+export const getAllOrders = createAction('[Order/API] get all Orders');
+export const getAllOrdersSuccess = createAction('[Order/API] get all Orders success', props<{orders : OrderGet[]}>());
+export const getAllOrdersFailure = createAction('[Order/API] get all Orders Failure', props<{error : string, statusCode : number}>());
+
 //
 export const GetOrdersByUser =
  createAction('[Order/API] get Orders',
@@ -67,10 +73,11 @@ export const GetOrdersByUser =
   props<{error : string, statusCode : number}>()
  );
  //
+ //Update order Status
 
  export const UpdateOrderStatus =
  createAction('[Order/API] UpdateOrderStatus',
-  props<{id : number, statusPayment : string, statusShipping : string}>()
+  props<{orderId : number, statusPayment : string, statusShipping : string}>()
  );
 
  export const UpdateOrderStatusSuccess =
