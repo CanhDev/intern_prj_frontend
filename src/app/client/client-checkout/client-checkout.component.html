@@ -29,9 +29,9 @@
                         </div>
                         <div class="col-12">
                             <label for="address" class="form-label">Địa chỉ</label>
-                            <input formControlName="shippingAddress" type="text" class="form-control" id="address" placeholder="123 Đường ABC" required>
-                            <div *ngIf="shippingAddress?.invalid && (shippingAddress?.dirty || shippingAddress?.touched)">
-                                <small *ngIf="shippingAddress?.hasError('required')" class="text-danger">
+                            <input formControlName="recipientAddress" type="text" class="form-control" id="address" placeholder="123 Đường ABC" required>
+                            <div *ngIf="recipientAddress?.invalid && (recipientAddress?.dirty || recipientAddress?.touched)">
+                                <small *ngIf="recipientAddress?.hasError('required')" class="text-danger">
                                     Không được bỏ trống trường này!
                                 </small>
                             </div>

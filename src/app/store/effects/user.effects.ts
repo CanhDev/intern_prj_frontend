@@ -217,7 +217,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.DeleteUserAsync_AdminSuccess),
       tap(()=>{
-        this.toastr.success("Cập nhật thành công", "Thông báo");
+        this.toastr.success("Xóa thành công", "Thông báo");
       })
     ),
     {dispatch: false}

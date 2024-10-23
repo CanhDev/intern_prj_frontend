@@ -14,6 +14,9 @@ export const selectIsloadingAllOrders = createSelector(
   selectOrderState,
   (state: fromOrder.State) => state.isLoadingAllOrders
 );
+export const selectOrdersLength = createSelector(
+  selectOrderState, (state : fromOrder.State) => state.ordersLength
+)
 export const selectOrders = createSelector(
   selectOrderState,
   (state : fromOrder.State) => state.orders);

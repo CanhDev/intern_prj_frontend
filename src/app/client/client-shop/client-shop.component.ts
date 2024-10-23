@@ -39,7 +39,7 @@ export class ClientShopComponent {
 
   // Paging
   currentPage: number = 1;
-  pageSize: number = 9; 
+  pageSize: number = 12; 
   totalPages: number = 0;
   totalProducts: number = 0; 
   pages: number[] = [];
@@ -80,7 +80,7 @@ export class ClientShopComponent {
     this.productList$.pipe(
       map((products : ProductGet[])=>{
         this.filterProduct = products.filter(item => !item.outOfStockstatus);
-        if(products.length < 9 && this.currentPage == 1){
+        if(products.length < this.pageSize && this.currentPage == 1){
           this.totalPages = 1;
         }
         else{

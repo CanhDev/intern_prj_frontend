@@ -78,13 +78,13 @@ export class ClientCheckoutComponent {
       recipientName : new FormControl('', Validators.required),
       recipientPhone : new FormControl('', [Validators.required, Validators.pattern('^(0?)([3|5|7|8|9])[0-9]{8}$')]),
       recipientEmail : new FormControl('', [Validators.required, Validators.email]),
-      shippingAddress : new FormControl('', Validators.required)
+      recipientAddress : new FormControl('', Validators.required)
     })
   }
   get recipientName(){return this.CheckOutForm.get('recipientName')}
   get recipientPhone(){return this.CheckOutForm.get('recipientPhone')}
   get recipientEmail(){return this.CheckOutForm.get('recipientEmail')}
-  get shippingAddress(){return this.CheckOutForm.get('shippingAddress')}
+  get recipientAddress(){return this.CheckOutForm.get('recipientAddress')}
 
   generateOrderCode(): string {
     const currentDate = new Date();
@@ -119,11 +119,11 @@ export class ClientCheckoutComponent {
             recipientName : this.recipientName?.value.trim(),
             recipientPhone : this.recipientPhone?.value.trim(),
             recipientEmail: this.recipientEmail?.value.trim(),
-            shippingAddress: this.shippingAddress?.value.trim(),
+            recipientAddress: this.recipientAddress?.value.trim(),
             orderDate : new Date(),
             totalAmount: this.TotalAmount,
             statusPayment : "Chưa thanh toán",
-            statusShipping : "Đang giao",
+            statusShipping : "Đang chờ xử lý",
             paymentMethod : "Thanh toán khi nhận hàng",
             orderDetails : this.OrderDetails_client
           };

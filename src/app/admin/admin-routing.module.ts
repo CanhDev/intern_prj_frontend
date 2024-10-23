@@ -11,6 +11,8 @@ import { AdminAddCategoryFormComponent } from './admin-category/admin-add-catego
 import { AdminEditCategoryFormComponent } from './admin-category/admin-edit-category-form/admin-edit-category-form.component';
 import { AdminAddUserFormComponent } from './admin-user/admin-add-user-form/admin-add-user-form.component';
 import { AdminEditUserFormComponent } from './admin-user/admin-edit-user-form/admin-edit-user-form.component';
+import { AdminGetOrdersComponent } from './admin-order-mg/admin-get-orders/admin-get-orders.component';
+import { AdminChangeStatusOrderComponent } from './admin-order-mg/admin-change-status-order/admin-change-status-order.component';
 
 const routes: Routes = [
   {path : '', component: AdminDashboardComponent},
@@ -24,6 +26,8 @@ const routes: Routes = [
   {path : 'editCategoryForm/:id', component: AdminEditCategoryFormComponent},
   {path : 'addUserForm', component: AdminAddUserFormComponent},
   {path : 'editUserForm/:id', component: AdminEditUserFormComponent},
+  {path : 'orderManagement', component: AdminGetOrdersComponent},
+  {path : 'orderManagement/:id', component: AdminChangeStatusOrderComponent},
 ];
 
 @NgModule({

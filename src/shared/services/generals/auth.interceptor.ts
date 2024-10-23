@@ -102,7 +102,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private handleLogout(errorMessage: string, statusCode: number): void {
     this.store.dispatch(RefreshTokenFailure({ error: errorMessage, statusCode }));
-    this.router.navigate(['']);
+    this.router.navigate(['/Login']);
     this.store.dispatch(GetUserAsync_Client());
   }
 

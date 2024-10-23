@@ -7,6 +7,7 @@ import { OrderService } from 'src/shared/services/order/order.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiResponse } from 'src/shared/data-general/ApiResponse';
+import { Store } from '@ngrx/store';
 
 
 @Injectable()
@@ -14,19 +15,20 @@ export class OrderEffects {
   constructor(private actions$: Actions,
     private  orderService: OrderService,
     private router : Router,
-    private toastr : ToastrService
+    private toastr : ToastrService,
+    private store : Store
   ) {}
 //get all orders
-GetALlOrders$ = createEffect(() => {
+GetAllOrders$ = createEffect(() => {
   return this.actions$.pipe(
     ofType(OrderActions.getAllOrders),
     switchMap(action => {
-      return this.orderService.GetAllOrder()
+      return this.orderService.GetAllOrder(action.filterString, action.pageNumber, action.pageSize)
         .pipe(
           map((res : ApiResponse) => {
             if(res.success){
               console.log(res);
-              return OrderActions.getAllOrdersSuccess({orders : res.data})
+              return OrderActions.getAllOrdersSuccess({orders : res.data.ordersList, ordersLength : res.data.ordersLength})
             }
             else{
               return OrderActions.getAllOrdersFailure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
@@ -201,8 +203,9 @@ getAllOrdersFailure$ = createEffect(()=>
   DeleteOrderSuccess$ = createEffect(()=>
     this.actions$.pipe(
       ofType(OrderActions.DeleteOrderSuccess),
-      tap(()=>{
+      map(()=>{
         this.toastr.success("Xóa thành công", "Thông báo");
+        this.router.navigate(['admin/orderManagement']);
       })
     ),
     {dispatch: false}
@@ -222,9 +225,7 @@ getAllOrdersFailure$ = createEffect(()=>
     return this.actions$.pipe(
       ofType(OrderActions.UpdateOrderStatus),
       switchMap(action => {
-        return this.orderService.UpdateStatus(action.orderId, action.statusPayment,
-          action.statusShipping
-        )
+        return this.orderService.UpdateStatus(action.OrderStatusModel)
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){

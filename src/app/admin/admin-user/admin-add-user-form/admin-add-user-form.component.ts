@@ -61,7 +61,7 @@ export class AdminAddUserFormComponent {
       userSend.append('firstName', this.firstName?.value.trim());
       userSend.append('lastName', this.lastName?.value.trim());
       userSend.append('email', this.email?.value.trim());
-      userSend.append('password', "123"); 
+      userSend.append('password', this.password?.value.trim()); 
       userSend.append('phoneNum', this.phoneNum?.value.trim());
       userSend.append('address', this.address?.value.trim());
       if (this.selectedFile) {

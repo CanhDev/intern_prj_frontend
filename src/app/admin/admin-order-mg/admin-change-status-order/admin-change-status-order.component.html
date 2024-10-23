@@ -1,1 +1,49 @@
-<p>admin-change-status-order works!</p>
+<ng-container *ngIf="Order$ | async">
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Cập nhật trạng thái đơn hàng</h2>
+        <form (ngSubmit)="submitForm()" [formGroup]="OrderForm">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label">Mã đơn hàng : {{Order.orderCode}}</label>
+                    <input formControlName="orderId" hidden>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Trạng thái thanh toán: </label>
+                    <select formControlName="statusPayment" class="form-select"  required>
+                        <option value="" disabled selected>Chọn trạng thái...</option>
+                        <option value="Đã thanh toán">Đã thanh toán</option>
+                        <option value="Chưa thanh toán">Chưa thanh toán</option>
+                    </select>
+                    <div *ngIf="OrderForm.get('statusPayment')?.invalid &&
+                     (OrderForm.get('statusPayment')?.dirty || OrderForm.get('statusPayment')?.touched)">
+                        <small *ngIf="OrderForm.get('statusPayment')?.hasError('required')" class="text-danger">
+                            Không được bỏ trống trường này
+                        </small>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Trạng thái giao hàng: </label>
+                    <select formControlName="statusShipping" class="form-select"  required>
+                        <option value="" disabled selected>Chọn trạng thái...</option>
+                        <option value="Đã giao">Đã giao</option>
+                        <option value="Đang giao">Đang giao</option>
+                        <option value="Đang chờ xử lý">Đang chờ xử lý</option>
+                    </select>
+                    <div *ngIf="OrderForm.get('statusShipping')?.invalid &&
+                     (OrderForm.get('statusShipping')?.dirty || OrderForm.get('statusShipping')?.touched)">
+                        <small *ngIf="OrderForm.get('statusShipping')?.hasError('required')" class="text-danger">
+                            Không được bỏ trống trường này
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <button [disabled]="OrderForm.invalid" class="w-100 btn btn-primary btn-lg" type="submit">Sửa</button>
+            <a href="" (click)="$event.preventDefault(); handleBack()" class="btn btn-outline-primary mt-4" >Quay lại</a>
+        </form>
+    </div>
+    
+</ng-container>
+<div class="spinner-overlay" *ngIf="isLoading$ | async">
+    <mat-spinner></mat-spinner>
+</div>

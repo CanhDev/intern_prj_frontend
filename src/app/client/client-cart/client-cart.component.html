@@ -74,3 +74,6 @@
     <h2>Bạn chưa có sản phẩm nào</h2>
   </div>
 </ng-template>
+<div class="spinner-overlay" *ngIf="IsLoadingItemsCart$ | async">
+  <mat-spinner></mat-spinner>
+</div>

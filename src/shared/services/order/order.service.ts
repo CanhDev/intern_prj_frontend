@@ -1,10 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { HttpOptionsService } from '../generals/http-options.service';
 import { catchError, Observable } from 'rxjs';
 import { ApiResponse } from 'src/shared/data-general/ApiResponse';
 import { OrderSend } from 'src/shared/data-send/OrderSend';
+import { Form } from '@angular/forms';
+import { OrderStatusSend } from 'src/shared/data-send/OrderStatusSend';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,15 @@ export class OrderService {
   ) { }
 
 
-  GetAllOrder() : Observable<ApiResponse>{
+  GetAllOrder(filterString? : string, pageNumber? : number, pageSize? : number) : Observable<ApiResponse>{
     const urlGet = `${this.url}/GetAllOrder`;
-    return this.http.get<ApiResponse>(urlGet)
+    let params = new HttpParams();
+    //
+    if(filterString) params = params.set('filterString', filterString);
+    if(pageNumber) params = params.set('pageNumber', pageNumber);
+    if(pageSize) params = params.set('pageSIze', pageSize);
+    //
+    return this.http.get<ApiResponse>(urlGet, {params})
         .pipe(
           catchError(this.http_options.handleError)
         )
@@ -56,12 +64,9 @@ export class OrderService {
       catchError(this.http_options.handleError) 
     );
   }
-  UpdateStatus(orderId: number, statusPayment : string = "Chưa thanh toán",
-    statusShipping : string = "Đang chuẩn bị"
-  ) : Observable<ApiResponse>{
+  UpdateStatus(OrderStatusModel : OrderStatusSend) : Observable<ApiResponse>{
     const urlPut = `${this.url}/ChangeOrderStatus`;
-    const payload = {orderId, statusPayment, statusShipping };
-    return this.http.put<ApiResponse>(urlPut, payload)
+    return this.http.put<ApiResponse>(urlPut, OrderStatusModel)
       .pipe(catchError(this.http_options.handleError));
   }
 }

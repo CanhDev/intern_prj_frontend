@@ -2,12 +2,18 @@ import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store'
 import { OrderDetailGet } from 'src/shared/data-get/OderDetailGet';
 import { OrderGet } from 'src/shared/data-get/OrderGet';
 import { OrderSend } from 'src/shared/data-send/OrderSend';
+import { OrderStatusSend } from 'src/shared/data-send/OrderStatusSend';
 
 
 
-export const getAllOrders = createAction('[Order/API] get all Orders');
-export const getAllOrdersSuccess = createAction('[Order/API] get all Orders success', props<{orders : OrderGet[]}>());
-export const getAllOrdersFailure = createAction('[Order/API] get all Orders Failure', props<{error : string, statusCode : number}>());
+export const getAllOrders = createAction('[Order/API] get all Orders',
+     props<{filterString?: string, pageNumber? : number, pageSize? : number }>());
+export const getAllOrdersSuccess = createAction('[Order/API] get all Orders success'
+     , props<{orders : OrderGet[], ordersLength : number}>());
+export const getAllOrdersFailure = createAction('[Order/API] get all Orders Failure'
+     , props<{error : string, statusCode : number}>());
+
+//
 
 //
 export const GetOrdersByUser =
@@ -77,7 +83,7 @@ export const GetOrdersByUser =
 
  export const UpdateOrderStatus =
  createAction('[Order/API] UpdateOrderStatus',
-  props<{orderId : number, statusPayment : string, statusShipping : string}>()
+  props<{OrderStatusModel : OrderStatusSend}>()
  );
 
  export const UpdateOrderStatusSuccess =

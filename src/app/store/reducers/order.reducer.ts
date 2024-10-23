@@ -8,6 +8,7 @@ export const orderFeatureKey = 'order';
 
 export interface State {
   allOrders : OrderGet[];
+  ordersLength : number;
   orders : OrderGet[];
   order : OrderGet | null;
   ordersDetail : OrderDetailGet[];
@@ -19,6 +20,7 @@ export interface State {
 
 export const initialState: State = {
   allOrders : [],
+  ordersLength : 0,
   orders : [],
   order : null,
   ordersDetail : [],
@@ -34,13 +36,16 @@ export const reducer = createReducer(
     ...state,
     isLoadingAllOrders: true
   })),
-  on(OrderActions.getAllOrdersSuccess, (state, {orders}) =>({
+  on(OrderActions.getAllOrdersSuccess, (state, {orders, ordersLength}) =>({
     ...state,
     allOrders : orders,
+    ordersLength : ordersLength,
     isLoadingAllOrders: false
   })),
   on(OrderActions.getAllOrdersFailure, (state) =>({
     ...state,
+    allOrders : [],
+    ordersLength : 0,
     isLoadingAllOrders: false
   })),
   on(OrderActions.GetOrdersByUser, (state) =>({
@@ -96,8 +101,8 @@ export const reducer = createReducer(
   })),
   on(OrderActions.DeleteOrderSuccess, (state, {id}) =>({
     ...state,
-    orders: state.orders
-     ? state.orders.filter((o) => o?.id !== id) : [],
+    allOrders: state.allOrders
+     ? state.allOrders.filter((o) => o?.id !== id) : [],
     isLoadingOrder: false
   })),
   on(OrderActions.DeleteOrderFailure, (state) =>({
@@ -120,6 +125,8 @@ export const reducer = createReducer(
     ...state,
     isLoadingOrder: false
   })),
+
+  //get orderDetail
   on(OrderActions.GetOrdersDetail_client, (state) =>({
     ...state,
     isLoadingOrdersDetail: true

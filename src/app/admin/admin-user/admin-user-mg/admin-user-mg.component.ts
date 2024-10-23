@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { GetUsers_Admin } from 'src/app/store/actions/user.actions';
+import { DeleteUserAsync_Admin, GetUsers_Admin } from 'src/app/store/actions/user.actions';
 import { selectisLoadingUserList, selectUserList } from 'src/app/store/selectors/user.selectors';
 import { UserGet } from 'src/shared/data-get/UserGet';
 
@@ -31,5 +31,9 @@ export class AdminUserMgComponent {
     this.router.navigate(['/admin/editUserForm', id]);
   }
   handleRemove(id : string){
+    var confirm = window.confirm("Bạn có chắc chắn xóa người dùng này?");
+    if(confirm) {
+      this.store.dispatch(DeleteUserAsync_Admin({userId : id}));
+    }
   }
 }

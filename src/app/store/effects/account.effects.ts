@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiResponse } from 'src/shared/data-general/ApiResponse';
 import * as UserActions from '../actions/user.actions';
 import { Store } from '@ngrx/store';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Injectable()
@@ -102,7 +103,14 @@ export class AccountEffects {
     this.actions$.pipe(
       ofType(AccountActions.LoginSuccess),
       tap(()=>{
-        this.router.navigate(['']);
+        const token = localStorage.getItem('accessToken') ?? "";
+          const decodedToken = jwtDecode<any>(token);
+          if(decodedToken.role === "Administrator"){
+            this.router.navigate(['/admin']); 
+          }
+          else{
+            this.router.navigate(['']);
+          }
         this.toastr.success("Đăng nhập thành công", "Thông báo");
       })
     ),

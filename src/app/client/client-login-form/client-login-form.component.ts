@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable } from 'rxjs';
 import { Login } from 'src/app/store/actions/account.actions';

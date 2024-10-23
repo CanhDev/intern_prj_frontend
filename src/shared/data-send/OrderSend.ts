@@ -6,7 +6,7 @@ export class OrderSend{
     recipientName : string = "";
     recipientPhone : string = "";
     recipientEmail : string  = "";
-    shippingAddress : string  = "";
+    recipientAddress : string  = "";
     orderDate? : Date | null;
     totalAmount : number = 0;
     statusPayment : string = "";
