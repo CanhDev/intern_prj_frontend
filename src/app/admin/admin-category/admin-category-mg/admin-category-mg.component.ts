@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Observer } from 'rxjs';
 import { deleteCategory, getCategories } from 'src/app/store/actions/category.actions';
-import { selectCategories, selectIsLoadingCategories } from 'src/app/store/selectors/category.selectors';
+import { selectCategories, selectIsLoadingCategories, selectIsLoadingCategory } from 'src/app/store/selectors/category.selectors';
 import { CategoryGet } from 'src/shared/data-get/CategoryGet';
 
 @Component({
@@ -15,10 +15,12 @@ export class AdminCategoryMgComponent {
 
   Categories$ : Observable<CategoryGet[]>
   isloading$ : Observable<boolean>;
+  isLoadingCategory$ : Observable<boolean>;
   
   constructor(private store : Store, private router : Router){
     this.Categories$ = this.store.select(selectCategories);
     this.isloading$ = this.store.select(selectIsLoadingCategories)
+    this.isLoadingCategory$ = this.store.select(selectIsLoadingCategory);
   }
 
   ngOnInit(){

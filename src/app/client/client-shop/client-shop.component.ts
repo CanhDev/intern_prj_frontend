@@ -8,6 +8,7 @@ import { AddItemCart } from 'src/app/store/actions/itemcart.actions';
 import { loadProducts } from 'src/app/store/actions/product.actions';
 import { selectCart } from 'src/app/store/selectors/cart.selectors';
 import { selectCategories, selectIsLoadingCategories } from 'src/app/store/selectors/category.selectors';
+import { selectisLoadingUpdate } from 'src/app/store/selectors/itemcart.selectors';
 import { selectIsloadingProducts, selectProducts, selectTotalProduct } from 'src/app/store/selectors/product.selectors';
 import { CartGet } from 'src/shared/data-get/CartGet';
 import { CategoryGet } from 'src/shared/data-get/CategoryGet';
@@ -25,6 +26,7 @@ export class ClientShopComponent {
   categories$: Observable<CategoryGet[]>;
   isLoading$: Observable<boolean>;
   isLoadingCategories$: Observable<boolean>;
+  isLoadingUpdate$ : Observable<boolean> // add item cart
   //
   filterProduct : ProductGet[] = [];
   //
@@ -36,6 +38,7 @@ export class ClientShopComponent {
   filterString: string = '';
   typeId: number | null = null;
   sortString: string = 'date_desc';
+
 
   // Paging
   currentPage: number = 1;
@@ -50,6 +53,7 @@ export class ClientShopComponent {
     this.isLoading$ = this.store.select(selectIsloadingProducts);
     this.isLoadingCategories$ = this.store.select(selectIsLoadingCategories);
     this.Cart$ = this.store.select(selectCart);
+    this.isLoadingUpdate$ = this.store.select(selectisLoadingUpdate);
   }
 
   ngOnInit() {
@@ -140,6 +144,7 @@ export class ClientShopComponent {
     }
   }
   addItemCart(productId: number, cartId: number, quantity: number, price: number) {
+    //
     const item: ItemCartSend = {
       productId: productId,
       cartId: cartId,

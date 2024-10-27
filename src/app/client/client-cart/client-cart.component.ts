@@ -5,7 +5,7 @@ import { map, Observable } from 'rxjs';
 import { getCart } from 'src/app/store/actions/cart.actions';
 import { DeleteItemCart, EditItemCart, GetItemsCartByCartId } from 'src/app/store/actions/itemcart.actions';
 import { selectCart } from 'src/app/store/selectors/cart.selectors';
-import { selectIsLoadingItemsCart, selectItemCartCount, selectItemCartTotal, selectItemsCart } from 'src/app/store/selectors/itemcart.selectors';
+import { selectIsLoadingItemsCart, selectisLoadingUpdate, selectItemCartCount, selectItemCartTotal, selectItemsCart } from 'src/app/store/selectors/itemcart.selectors';
 import { CartGet } from 'src/shared/data-get/CartGet';
 import { ItemCartGet } from 'src/shared/data-get/ItemCartGet';
 import { ItemCartSend } from 'src/shared/data-send/ItemCartSend';
@@ -19,6 +19,7 @@ export class ClientCartComponent {
   Cart$: Observable<CartGet | null>;
   ItemsCart$: Observable<ItemCartGet[]>;
   IsLoadingItemsCart$: Observable<boolean>;
+  isLoadingUpdate$ : Observable<boolean>;
   //
   itemCartCount$ : Observable<number>;
   itemCartTotal$ : Observable<number>;
@@ -29,6 +30,7 @@ export class ClientCartComponent {
   constructor(private store: Store, private router : Router) {
     this.ItemsCart$ = this.store.select(selectItemsCart);
     this.IsLoadingItemsCart$ = this.store.select(selectIsLoadingItemsCart);
+    this.isLoadingUpdate$ = this.store.select(selectisLoadingUpdate);
     this.Cart$ = this.store.select(selectCart);
     this.itemCartCount$ = this.store.select(selectItemCartCount);
     this.itemCartTotal$ = this.store.select(selectItemCartTotal);

@@ -94,3 +94,15 @@ h1 {
 .alert {
     margin-top: 20px; /* Khoảng cách trên thông báo */
 }
+.spinner-overlay {
+	position: fixed; /* Đặt vị trí cố định */
+	top: 0; /* Đỉnh màn hình */
+	left: 0; /* Bên trái màn hình */
+	width: 100%; /* Chiều rộng 100% */
+	height: 100%; /* Chiều cao 100% */
+	background-color: rgba(255, 255, 255, 0.8); /* Nền trắng với độ mờ */
+	display: flex; /* Sử dụng flexbox */
+	justify-content: center; /* Căn giữa theo chiều ngang */
+	align-items: center; /* Căn giữa theo chiều dọc */
+	z-index: 1000; /* Đặt z-index cao để hiển thị trên tất cả các phần tử khác */
+  }

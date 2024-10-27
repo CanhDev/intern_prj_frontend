@@ -10,6 +10,7 @@ import { CreateOrder } from 'src/app/store/actions/order.actions';
 import { GetUserAsync_Client } from 'src/app/store/actions/user.actions';
 import { selectCart, selectIsLoadingCart } from 'src/app/store/selectors/cart.selectors';
 import { selectItemCartTotal, selectItemsCart } from 'src/app/store/selectors/itemcart.selectors';
+import { selectisLoadingOrder } from 'src/app/store/selectors/order.selectors';
 import { selectUser_client } from 'src/app/store/selectors/user.selectors';
 import { CartGet } from 'src/shared/data-get/CartGet';
 import { ItemCartGet } from 'src/shared/data-get/ItemCartGet';
@@ -29,6 +30,7 @@ export class ClientCheckoutComponent {
   CartItems$ : Observable<ItemCartGet[]>;
   TotalAmount$ : Observable<number>;
   isLoadingCart$ : Observable<boolean>
+  isLoadingOrder$ : Observable<boolean>;
   User$ : Observable<UserGet | null>;
 
   //
@@ -45,6 +47,7 @@ export class ClientCheckoutComponent {
     this.isLoadingCart$ = this.store.select(selectIsLoadingCart);
     this.TotalAmount$ = this.store.select(selectItemCartTotal);
     this.User$ = this.store.select(selectUser_client);
+    this.isLoadingOrder$ = this.store.select(selectisLoadingOrder);
   }
   ngOnInit(){
     this.store.dispatch(getCart());

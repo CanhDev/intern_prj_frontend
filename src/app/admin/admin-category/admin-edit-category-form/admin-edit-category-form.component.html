@@ -36,4 +36,6 @@
     </form>
 </div>
 
-
+<div class="spinner-overlay" *ngIf="isLoadingCategory$ | async">
+    <mat-spinner></mat-spinner>
+</div>

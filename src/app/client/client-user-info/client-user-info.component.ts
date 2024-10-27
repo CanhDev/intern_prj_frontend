@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { ChangePassword_Client, GetUserAsync_Client, UpdateUserAsync_Client } from 'src/app/store/actions/user.actions';
-import { selectUser_client } from 'src/app/store/selectors/user.selectors';
+import { selectisLoadingUser_client, selectisLoadingUser_item, selectUser_client } from 'src/app/store/selectors/user.selectors';
 import { UserGet } from 'src/shared/data-get/UserGet';
 import { UserSend } from 'src/shared/data-send/UserSend';
 import { createpasswordMatchValidatorv2 } from './checkMatchPassv2';
@@ -21,9 +21,12 @@ export class ClientUserInfoComponent {
   imagePreview: string | ArrayBuffer | null = null;
   user!: UserGet;
   selectedFile: File | null = null;
+  //
+  isLoadingUser$ : Observable<boolean>;
 
   constructor(private store: Store) {
     this.user$ = this.store.select(selectUser_client);
+    this.isLoadingUser$ = this.store.select(selectisLoadingUser_client);
   }
 
   ngOnInit() {

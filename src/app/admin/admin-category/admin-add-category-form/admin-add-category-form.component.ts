@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { addCategory } from 'src/app/store/actions/category.actions';
 import { reducer } from 'src/app/store/reducers/user.reducer';
+import { selectIsLoadingCategory } from 'src/app/store/selectors/category.selectors';
 
 @Component({
   selector: 'app-admin-add-category-form',
@@ -13,9 +15,10 @@ export class AdminAddCategoryFormComponent {
   CategoryForm! : FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
+  isLoadingCategory$ : Observable<boolean>;
 
   constructor(private fb : FormBuilder, private store : Store){
-    
+    this.isLoadingCategory$ = this.store.select(selectIsLoadingCategory);
   }
   ngOnInit(){
     this.initForm();

@@ -1,6 +1,9 @@
 <div class="spinner-overlay" *ngIf="isLoading$ | async">
     <mat-spinner></mat-spinner>
 </div>
+<div class="spinner-overlay" *ngIf="isLoadingUpdate$ | async">
+    <mat-spinner></mat-spinner>
+</div>
 <div #scrollToTop></div>
 <div class="container-fluid mt-5">
     <div class="row">

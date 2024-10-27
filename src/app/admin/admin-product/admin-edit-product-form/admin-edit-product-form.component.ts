@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { getCategories } from 'src/app/store/actions/category.actions';
 import { addProduct, editProduct, getSingleProduct } from 'src/app/store/actions/product.actions';
 import { selectCategories } from 'src/app/store/selectors/category.selectors';
-import { selectProduct } from 'src/app/store/selectors/product.selectors';
+import { selectIsloadingProduct, selectProduct } from 'src/app/store/selectors/product.selectors';
 import { CategoryGet } from 'src/shared/data-get/CategoryGet';
 import { ImageGet } from 'src/shared/data-get/ImageGet';
 import { ProductGet } from 'src/shared/data-get/ProductGet';
@@ -24,6 +24,7 @@ export class AdminEditProductFormComponent {
   oldImage: string[] = [];
   product$!: Observable<ProductGet | null>;
   product!: ProductGet;
+  isLoadingProduct$ : Observable<boolean>;
 
   constructor(
     private fb: FormBuilder, 
@@ -33,6 +34,7 @@ export class AdminEditProductFormComponent {
   ) {
     this.Categories$ = this.store.select(selectCategories);
     this.product$ = this.store.select(selectProduct);
+    this.isLoadingProduct$ = this.store.select(selectIsloadingProduct);
   }
 
   ngOnInit(): void {

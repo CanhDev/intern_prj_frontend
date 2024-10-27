@@ -68,6 +68,8 @@
         <button [disabled]="userForm.invalid" class="w-100 btn btn-primary btn-lg" type="submit">Lưu</button>
     </form>
 </div>
-
+<div class="spinner-overlay" *ngIf="isLoadingUser_item$ | async">
+    <mat-spinner></mat-spinner>
+</div>
 
 

@@ -78,4 +78,6 @@
     </form>
 </div>
 
-
+<div class="spinner-overlay" *ngIf="isLoadingUser_item$ | async">
+    <mat-spinner></mat-spinner>
+</div>

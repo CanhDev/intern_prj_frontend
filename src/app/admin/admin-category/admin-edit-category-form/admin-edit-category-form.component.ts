@@ -5,7 +5,7 @@ import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { addCategory, editCategory, getCategory } from 'src/app/store/actions/category.actions';
-import { selectCategory } from 'src/app/store/selectors/category.selectors';
+import { selectCategory, selectIsLoadingCategory } from 'src/app/store/selectors/category.selectors';
 import { CategoryGet } from 'src/shared/data-get/CategoryGet';
 
 @Component({
@@ -15,14 +15,15 @@ import { CategoryGet } from 'src/shared/data-get/CategoryGet';
 })
 export class AdminEditCategoryFormComponent {
   Category$ : Observable<CategoryGet | null>;
-
   CategoryForm! : FormGroup;
   Category! : CategoryGet;
   imagePreview : string | ArrayBuffer| null = null;
   selectedFile : File | null = null;
+  isLoadingCategory$ : Observable<boolean>;
 
   constructor(private store : Store, private route : ActivatedRoute, private router : Router){
     this.Category$ = this.store.select(selectCategory);
+    this.isLoadingCategory$ = this.store.select(selectIsLoadingCategory);
   }
   ngOnInit(){
     this.route.paramMap.subscribe((params : ParamMap)=>{

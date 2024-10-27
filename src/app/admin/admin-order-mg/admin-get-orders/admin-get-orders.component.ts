@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { DeleteOrder, getAllOrders } from 'src/app/store/actions/order.actions';
-import { selectAllOrders, selectIsloadingAllOrders, selectOrdersLength } from 'src/app/store/selectors/order.selectors';
+import { selectAllOrders, selectIsloadingAllOrders, selectisLoadingOrder, selectOrdersLength } from 'src/app/store/selectors/order.selectors';
 import { OrderGet } from 'src/shared/data-get/OrderGet';
 
 @Component({
@@ -17,6 +17,7 @@ export class AdminGetOrdersComponent {
 
   ordersList$ : Observable<OrderGet[]>;
   isLoading$ : Observable<boolean>;
+  isLoadingOrder$ : Observable<boolean>;
   //
   filterString : string = "";
   currentPage : number = 1;
@@ -28,6 +29,7 @@ export class AdminGetOrdersComponent {
   constructor(private store : Store, private router : Router){
     this.ordersList$ = this.store.select(selectAllOrders);
     this.isLoading$ = this.store.select(selectIsloadingAllOrders);
+    this.isLoadingOrder$ = this.store.select(selectisLoadingOrder);
   }
   ngOnInit(){
     this.loadOrders();

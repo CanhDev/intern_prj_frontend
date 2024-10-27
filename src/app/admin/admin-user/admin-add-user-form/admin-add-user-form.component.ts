@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { CreateUserAsync_Admin } from 'src/app/store/actions/user.actions';
+import { selectisLoadingUser_item } from 'src/app/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-admin-add-user-form',
@@ -14,7 +16,9 @@ export class AdminAddUserFormComponent {
   UserForm! : FormGroup;
   imagePreview : string | ArrayBuffer | null = null;
   selectedFile : File | null = null;
+  isLoadingUser_item$ : Observable<boolean>;
   constructor(private store : Store, private router : Router){
+    this.isLoadingUser_item$ = this.store.select(selectisLoadingUser_item);
     this.initForm();
   }
   ngOnInit(){

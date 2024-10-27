@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { GetUser_Admin, UpdateUserAsync_Admin } from 'src/app/store/actions/user.actions';
-import { selectUserItem } from 'src/app/store/selectors/user.selectors';
+import { selectisLoadingUser_item, selectUserItem } from 'src/app/store/selectors/user.selectors';
 import { UserGet } from 'src/shared/data-get/UserGet';
 
 @Component({
@@ -19,8 +19,11 @@ export class AdminEditUserFormComponent {
   user!: UserGet;
   selectedFile: File | null = null;
 
+  isLoadingUser_item$ : Observable<boolean>;
+
   constructor(private store: Store, private route : ActivatedRoute, private router : Router) {
     this.user$ = this.store.select(selectUserItem);
+    this.isLoadingUser_item$ = this.store.select(selectisLoadingUser_item);
   }
 
   ngOnInit() {

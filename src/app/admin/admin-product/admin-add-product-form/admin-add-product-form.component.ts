@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { getCategories } from 'src/app/store/actions/category.actions';
 import { addProduct } from 'src/app/store/actions/product.actions';
 import { selectCategories } from 'src/app/store/selectors/category.selectors';
+import { selectIsloadingProduct } from 'src/app/store/selectors/product.selectors';
 import { CategoryGet } from 'src/shared/data-get/CategoryGet';
 
 @Component({
@@ -16,9 +17,11 @@ export class AdminAddProductFormComponent implements OnInit {
   productForm: FormGroup;
   Categories$: Observable<CategoryGet[] | null>;
   imagePreviews: string[] = [];
+  isLoadingAdd$ : Observable<boolean>;
 
   constructor(private fb: FormBuilder, private store: Store) {
     this.Categories$ = this.store.select(selectCategories);
+    this.isLoadingAdd$ = this.store.select(selectIsloadingProduct)
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],

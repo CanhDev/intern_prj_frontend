@@ -25,3 +25,6 @@
         </tbody>
     </table>
 </div>
+<div class="spinner-overlay" *ngIf="isLoadingOrders$ | async">
+    <mat-spinner></mat-spinner>
+</div>
