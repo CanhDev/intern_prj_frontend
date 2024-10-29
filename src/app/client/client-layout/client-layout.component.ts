@@ -28,6 +28,8 @@ import { AccountService } from 'src/shared/services/account/account.service';
 export class ClientLayoutComponent {
   user_client$ : Observable<UserGet | null>;
   isAuthenticated$ : Observable<boolean>;
+  //
+  myUser! : UserGet;
   
   constructor(private store : Store, private accountService : AccountService, private router : Router){
     this.user_client$ = this.store.select(selectUser_client);
@@ -38,6 +40,13 @@ export class ClientLayoutComponent {
       map((res : boolean) => {
         if(res) {
           this.store.dispatch(GetUserAsync_Client());
+          this.user_client$.pipe(
+            map((user : UserGet | any)=>{
+              if(user){
+                this.myUser = user;
+              }
+            })
+          ).subscribe();
         }
       })
     ).subscribe();
@@ -48,4 +57,14 @@ export class ClientLayoutComponent {
   prepareRoute(outlet: RouterOutlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
   }
+  //
+  isMobileNavOpen = false;
+
+    toggleMobileNav() {
+        this.isMobileNavOpen = !this.isMobileNavOpen;
+    }
+    navigateAndToggle(route: string) {
+      this.router.navigate([route]);
+      this.toggleMobileNav(); // Đóng menu sau khi điều hướng
+    }
 }

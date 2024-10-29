@@ -30,7 +30,7 @@
     <h2 style="color: #444;" class="title">Đa dạng các Loại Sản Phẩm</h2>
     <div class="product-type-container">
         <div *ngFor="let item of categories$ | async" class="product-type">
-            <a href="#" (click)="$event.preventDefault()" style="cursor: default;" class="product-type-card">
+            <a href="#" (click)="$event.preventDefault(); handleGetProductByType(item.id)" style="cursor: default;" class="product-type-card">
                 <img [src]="item.imageUrl" alt="{{item.description}}" class="product-type-icon">
                 <p class="product-type-name">{{item.name}}</p>
             </a>

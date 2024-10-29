@@ -49,7 +49,7 @@ export class CartEffects {
     this.actions$.pipe(
       ofType(CartActions.getCartFailure),
       tap((res)=>{
-        console.error(res.error, "Thông báo");
+        //console.error(res.error, "Thông báo");
       })
     ),
     {dispatch: false}

@@ -29,7 +29,6 @@ export class HttpOptionsService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
-    console.error(errorMessage); 
     return throwError(() => ({ statusCode, errorMessage }));
   }
 }

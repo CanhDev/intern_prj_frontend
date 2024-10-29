@@ -5,7 +5,7 @@
             <a routerLink=""><img src="https://st3.depositphotos.com/1583598/35751/v/450/depositphotos_357510594-stock-illustration-coronavirus-covid-19-quarantine-motivational.jpg" alt=""></a>
         </div>
         <!-- Navbar Toggler -->
-        <div class="amado-navbar-toggler">
+        <div class="amado-navbar-toggler" (click)="toggleMobileNav()">
             <span></span><span></span><span></span>
         </div>
     </div>
@@ -22,6 +22,28 @@
                 <li><a routerLink="shop">Cửa hàng</a></li>
             </ul>
         </nav>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav-menu" [ngClass]="{'active': isMobileNavOpen}">
+    <ul>
+        <li (click)="navigateAndToggle('')" class="active">Trang chủ</li>
+        <li (click)="navigateAndToggle('shop')">Cửa hàng</li>
+        
+        <li *ngIf="!(user_client$ | async)" (click)="navigateAndToggle('Signup')">Đăng ký</li>
+        <li *ngIf="!(user_client$ | async)" (click)="navigateAndToggle('Login')">Đăng nhập</li>
+        
+        <li *ngIf="user_client$ | async as user" (click)="navigateAndToggle('Cart')">Giỏ hàng</li>
+        <li *ngIf="user_client$ | async as user" (click)="navigateAndToggle('Order')">Hóa đơn</li>
+        
+        <li *ngIf="(user_client$ | async) && myUser!= null && myUser.email?.toLowerCase() === 'admin@gmail.com'" (click)="navigateAndToggle('admin')">
+            Trang quản trị
+        </li>
+        
+        <li *ngIf="user_client$ | async as user" (click)="Logout(); toggleMobileNav();">
+            Đăng xuất
+        </li>
+    </ul>
+</nav>
+
         <!-- Button Group -->
         <div *ngIf="user_client$ | async as user; else guest" class="amado-btn-group mt-30 mb-100">
             <h2 class="welcome-title">Welcome  {{user.lastName}}</h2>

@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable } from 'rxjs';
 import { getCart } from 'src/app/store/actions/cart.actions';
-import { getCategories } from 'src/app/store/actions/category.actions';
+import { getCategories, getCategoryFailure } from 'src/app/store/actions/category.actions';
 import { AddItemCart } from 'src/app/store/actions/itemcart.actions';
 import { loadProducts } from 'src/app/store/actions/product.actions';
 import { selectCart } from 'src/app/store/selectors/cart.selectors';
-import { selectCategories, selectIsLoadingCategories } from 'src/app/store/selectors/category.selectors';
+import { selectCategories, selectCategory, selectIsLoadingCategories } from 'src/app/store/selectors/category.selectors';
 import { selectisLoadingUpdate } from 'src/app/store/selectors/itemcart.selectors';
 import { selectIsloadingProducts, selectProducts, selectTotalProduct } from 'src/app/store/selectors/product.selectors';
 import { CartGet } from 'src/shared/data-get/CartGet';
@@ -24,6 +24,7 @@ import { ItemCartSend } from 'src/shared/data-send/ItemCartSend';
 export class ClientShopComponent {
   productList$: Observable<ProductGet[]>;
   categories$: Observable<CategoryGet[]>;
+  category$ : Observable<CategoryGet | null>;
   isLoading$: Observable<boolean>;
   isLoadingCategories$: Observable<boolean>;
   isLoadingUpdate$ : Observable<boolean> // add item cart
@@ -50,6 +51,7 @@ export class ClientShopComponent {
   constructor(private store: Store, private toastr: ToastrService) {
     this.productList$ = this.store.select(selectProducts);
     this.categories$ = this.store.select(selectCategories);
+    this.category$ = this.store.select(selectCategory);
     this.isLoading$ = this.store.select(selectIsloadingProducts);
     this.isLoadingCategories$ = this.store.select(selectIsLoadingCategories);
     this.Cart$ = this.store.select(selectCart);
@@ -74,9 +76,24 @@ export class ClientShopComponent {
     ).subscribe()
   }
 
+  loadProductByHomePage(){
+    this.category$.pipe((
+      map((item : CategoryGet | any)=>{
+        if(item != null){
+          this.store.dispatch(loadProducts({typeId : item.id}));
+          this.activeFilter = item.name;
+        }
+        else{
+          this.store.dispatch(loadProducts({ pageNumber: this.currentPage, pageSize: this.pageSize,
+            typeId: this.typeId, filterString: this.filterString, sortString: this.sortString }));
+        }
+      })
+    )).subscribe();
+    this.store.dispatch(getCategoryFailure({error : "", statusCode : 0}));
+  }
+
   loadProducts() {
-    this.store.dispatch(loadProducts({ pageNumber: this.currentPage, pageSize: this.pageSize,
-       typeId: this.typeId, filterString: this.filterString, sortString: this.sortString }));
+    this.loadProductByHomePage();
        if (this.scrollToTop) {
         this.scrollToTop.nativeElement.scrollIntoView({ behavior: 'smooth' });
       }
