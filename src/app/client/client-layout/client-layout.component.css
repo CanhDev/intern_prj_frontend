@@ -259,21 +259,19 @@ img {
         margin-bottom: 0; }
 
         .mobile-nav-menu {
-          display: none; /* Ẩn menu di động mặc định */
           position: fixed;
           top: 70px; /* Đặt dưới navbar */
           left: 0;
           width: 100%;
-          max-height: 0; /* Chiều cao tối đa ban đầu */
-          overflow: hidden; /* Ẩn nội dung tràn */
+          max-height: 0; /* Ban đầu menu sẽ ẩn với chiều cao là 0 */
+          overflow: hidden;
           background-color: white;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-          transition: max-height 0.5s ease-out; /* Hiệu ứng chiều cao */
+          transition: max-height 0.5s ease-out;
       }
       
       .mobile-nav-menu.active {
-          display: block; /* Hiển thị menu khi active */
-          max-height: 400px; /* Chiều cao tối đa khi hiển thị */
+          max-height: 400px; /* Menu mở rộng khi active */
       }
       
       .mobile-nav-menu ul {
@@ -285,38 +283,33 @@ img {
       .mobile-nav-menu li {
           padding: 1em;
           text-align: center;
-          transition: background-color 0.3s ease; /* Hiệu ứng màu nền cho từng mục */
+          transition: background-color 0.3s ease;
       }
       
       .mobile-nav-menu li:hover {
-          background-color: #f2f2f2; /* Màu nền khi hover */
+          background-color: #f2f2f2;
       }
       
       .mobile-nav-menu li a {
-          color: #333; /* Màu chữ */
+          color: #333;
           text-decoration: none;
-          transition: color 0.3s ease; /* Hiệu ứng màu chữ */
+          transition: color 0.3s ease;
       }
       
       .mobile-nav-menu li a:hover {
-          color: #fbb710; /* Đổi màu chữ khi hover */
+          color: #fbb710;
       }
       
-      /* Đảm bảo điều hướng chính ẩn đi trên thiết bị di động */
-      .amado-nav {
-          display: none; /* Ẩn menu desktop trên di động */
-      }
-      
-      /* Hiển thị menu desktop trên thiết bị lớn */
+      /* Điều chỉnh cho màn hình lớn */
       @media (min-width: 768px) {
           .amado-nav {
-              display: block; /* Hiển thị menu desktop trên màn hình lớn */
+              display: block;
           }
-          
           .mobile-nav-menu {
               display: none; /* Ẩn menu di động trên màn hình lớn */
           }
       }
+      
 /* ScrollUp */
 #scrollUp {
   background-color: #fbb710;

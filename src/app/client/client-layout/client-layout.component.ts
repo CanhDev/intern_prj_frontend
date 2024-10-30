@@ -30,6 +30,7 @@ export class ClientLayoutComponent {
   isAuthenticated$ : Observable<boolean>;
   //
   myUser! : UserGet;
+  isMobileNavOpen : boolean = false;
   
   constructor(private store : Store, private accountService : AccountService, private router : Router){
     this.user_client$ = this.store.select(selectUser_client);
@@ -58,13 +59,13 @@ export class ClientLayoutComponent {
     return outlet.isActivated ? outlet.activatedRoute : '';
   }
   //
-  isMobileNavOpen = false;
+  
 
     toggleMobileNav() {
         this.isMobileNavOpen = !this.isMobileNavOpen;
     }
     navigateAndToggle(route: string) {
       this.router.navigate([route]);
-      this.toggleMobileNav(); // Đóng menu sau khi điều hướng
+      this.toggleMobileNav(); 
     }
 }

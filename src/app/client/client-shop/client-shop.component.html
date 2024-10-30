@@ -16,11 +16,11 @@
                     <div class="filter-links">
                         <a routerLink="/shop" class="filter-link"
                          [ngClass]="{'active': activeFilter === 'all'}"
-                         (click)="onFilterClick('all', null, $event)"
+                         (click) = "onFilterClick('all', null, $event)"
                          >Tất cả</a>
                         <a *ngFor="let item of categories$ | async" href="#" class="filter-link"
                         [ngClass]="{'active': activeFilter === item.name}" 
-                         (click) = "$event.preventDefault(); filterByType(item.id); onFilterClick(item.name, item.id, $event)" >{{item.name}}</a>
+                         (click) = "onFilterClick(item.name, item.id, $event)" >{{item.name}}</a>
                     </div>
                 </div>
                 <!-- Sort Section -->

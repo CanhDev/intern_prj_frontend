@@ -118,14 +118,9 @@ export class ClientShopComponent {
   onFilterClick(filter: string, CategoryId: number | null, event: MouseEvent): void {
     event.preventDefault();
     this.typeId = CategoryId;
+    this.loadProducts();
     this.activeFilter = filter;
     this.currentPage = 1; 
-    this.loadProducts();
-  }
-
-  filterByType(categoryId: number) {
-    this.currentPage = 1; 
-    this.loadProducts();
   }
 
   onSortChange(event: Event): void {
