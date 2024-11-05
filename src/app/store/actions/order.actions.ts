@@ -109,3 +109,8 @@ export const GetOrdersByUser =
  createAction('[Order/API] GetOrdersDetail_clientFailure',
   props<{error : string, statusCode : number}>()
  );
+
+ //OrderByVnPay
+ export const GetOrderVnPayUrl = createAction('[Order/API] GetOrderVnPayUrl', props<{order : OrderSend}>());
+ export const GetOrderVnPayUrl_Success = createAction('[Order/API] GetOrderVnPayUrl success', props<{vnp_url : string}>());
+ export const GetOrderVnPayUrl_Failure = createAction('[Order/API] GetOrderVnPayUrl failure', props<{error : string, statusCode : number}>());

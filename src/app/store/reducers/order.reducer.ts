@@ -2,6 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import * as OrderActions from '../actions/order.actions';
 import { OrderGet } from 'src/shared/data-get/OrderGet';
 import { OrderDetailGet } from 'src/shared/data-get/OderDetailGet';
+import { OrderSend } from 'src/shared/data-send/OrderSend';
 
 
 export const orderFeatureKey = 'order';
@@ -16,6 +17,9 @@ export interface State {
   isLoadingOrders : boolean;
   isLoadingOrder : boolean;
   isLoadingOrdersDetail : boolean;
+  //
+  vnp_url : string | null;
+  isLoadingUrlVnp : boolean;
 }
 
 export const initialState: State = {
@@ -27,7 +31,10 @@ export const initialState: State = {
   isLoadingAllOrders : false,
   isLoadingOrders : false,
   isLoadingOrder : false,
-  isLoadingOrdersDetail : false
+  isLoadingOrdersDetail : false,
+  //
+  vnp_url : null,
+  isLoadingUrlVnp : false
 };
 
 export const reducer = createReducer(
@@ -140,5 +147,20 @@ export const reducer = createReducer(
     ...state,
     ordersDetail : [],
     isLoadingOrdersDetail: false
+  })),
+  //vnp_url
+  on(OrderActions.GetOrderVnPayUrl, (state) =>({
+    ...state,
+    isLoadingUrlVnp: true
+  })),
+  on(OrderActions.GetOrderVnPayUrl_Success, (state, {vnp_url}) =>({
+    ...state,
+    vnp_url : vnp_url, 
+    isLoadingUrlVnp: false
+  })),
+  on(OrderActions.GetOrderVnPayUrl_Failure, (state) =>({
+    ...state,
+    vnp_url : "", 
+    isLoadingUrlVnp: false
   })),
 );

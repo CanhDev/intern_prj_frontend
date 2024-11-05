@@ -12,18 +12,20 @@ import { ClientOrderComponent } from './client-order/client-order.component';
 import { ClientOrderDetailComponent } from './client-order-detail/client-order-detail.component';
 import { ClientUserInfoComponent } from './client-user-info/client-user-info.component';
 import { AuthGuard } from 'src/shared/guards/auth.guard';
+import { ClientPaymentResultComponent } from './client-paymentResult/client-paymentResult.component';
 
 const routes: Routes = [
   {path: '', component: ClientHomeComponent, data: { animation: 'ClienHomePage' }},
   {path: 'shop', component: ClientShopComponent, data: { animation: 'ClienShopPage' }},
   {path: 'shop/products/:id', component: ClientProductDetailComponent, data: { animation: 'ClienProductDetailPage' }}, 
-  {path: 'Login', component: ClientLoginFormComponent, data: { animation: 'LoginPage' }},
+  {path: 'Login', component: ClientLoginFormComponent, data: { animation: 'ClienLoginPage' }},
   {path: 'Signup', component: ClientSignupFormComponent, data: { animation: 'SignUpPage' }},
   {path: 'Cart', component: ClientCartComponent, canActivate : [AuthGuard], data: { animation: 'ClientCartPage' }},
   {path: 'Checkout', component: ClientCheckoutComponent,  canActivate : [AuthGuard], data: { animation: 'ClientCheckoutPage' }},
   {path: 'Order', component: ClientOrderComponent,  canActivate : [AuthGuard], data: { animation: 'ClientOrderPage' }},
   {path: 'Order/:orderId', component: ClientOrderDetailComponent,  canActivate : [AuthGuard], data: { animation: 'ClientOrderDetailPage' }},
   {path: 'Info', component: ClientUserInfoComponent,  canActivate : [AuthGuard], data: { animation: 'ClientInfoPage' }},
+  {path: 'Checkout/CheckoutResult', component: ClientPaymentResultComponent,  canActivate : [AuthGuard], data: { animation: 'ClientPaymentResultPage' }},
 ];
 
 @NgModule({

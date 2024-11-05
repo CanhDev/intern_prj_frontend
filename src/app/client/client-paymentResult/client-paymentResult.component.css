@@ -1,0 +1,71 @@
+.container {
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+}
+
+.result-card {
+    background-color: #fff; /* Màu nền cho card */
+    border-radius: 20px; /* Bo góc cho card */
+    padding: 40px; /* Đệm cho card */
+    text-align: center; /* Canh giữa nội dung */
+}
+
+.result-header {
+    background-color: #f7d043; /* Màu nền cho tiêu đề */
+    border-radius: 20px 20px 0 0; /* Bo góc trên */
+    padding: 20px; /* Đệm cho tiêu đề */
+}
+
+.result-message {
+    margin-top: 30px; /* Khoảng cách trên cho thông báo */
+    padding: 20px; /* Đệm cho thông báo */
+    border-radius: 10px; /* Bo góc cho thông báo */
+}
+
+.success {
+    background-color: #d4edda; /* Màu nền cho thông báo thành công */
+    border: 2px solid #c3e6cb; /* Viền cho thông báo thành công */
+    color: #155724; /* Màu chữ cho thông báo thành công */
+}
+
+.error {
+    background-color: #f8d7da; /* Màu nền cho thông báo thất bại */
+    border: 2px solid #f5c6cb; /* Viền cho thông báo thất bại */
+    color: #721c24; /* Màu chữ cho thông báo thất bại */
+}
+
+.btn {
+    padding: 15px 30px; /* Đệm cho nút */
+    font-size: 1.2rem; /* Kích thước font cho nút */
+    margin: 10px; /* Khoảng cách giữa các nút */
+}
+
+.btn-primary {
+    background-color: #f7d043; /* Màu nền cho nút chính */
+    border-color: #f7d043; /* Màu viền cho nút chính */
+}
+
+.btn-primary:hover {
+    background-color: #e6c035; /* Màu nền khi hover nút chính */
+    border-color: #e6c035; /* Màu viền khi hover nút chính */
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Màu nền cho nút phụ */
+    border-color: #6c757d; /* Màu viền cho nút phụ */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Màu nền khi hover nút phụ */
+    border-color: #545b62; /* Màu viền khi hover nút phụ */
+}
+
+/* Thêm bóng cho card */
+.result-card.shadow-lg {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px; /* Đệm cho container trên màn hình nhỏ */
+    }
+}

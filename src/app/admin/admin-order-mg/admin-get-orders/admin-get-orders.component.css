@@ -1,12 +1,147 @@
+
+
+
+/* Thiết lập chung */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-header {
+  color: #3a3a3a;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Input group */
+.input-group {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-control {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.btn-primary {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-color: #007bff;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Bảng */
+.table-responsive {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table-striped tbody tr {
+  background: #f9f9f9;
+  transition: transform 0.2s;
+}
+
+.table-striped tbody tr:hover {
+  background: #f1f1f1;
+  transform: scale(1.01);
+}
+
+.table-bordered td, .table-bordered th {
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Nút trong bảng */
+.table .btn {
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
+
+.btn-warning {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-warning:hover {
+  background-color: #ec971f;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
+.btn-primary {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #31b0d5;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.pagination .page-item {
+  margin: 0 3px;
+}
+
+.pagination .page-link {
+  border-radius: 20px;
+  color: #007bff;
+  border-color: #ddd;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-link.active,
+.pagination .page-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
 .spinner-overlay {
-	position: fixed; /* Đặt vị trí cố định */
-	top: 0; /* Đỉnh màn hình */
-	left: 0; /* Bên trái màn hình */
-	width: 100%; /* Chiều rộng 100% */
-	height: 100%; /* Chiều cao 100% */
-	background-color: rgba(255, 255, 255, 0.8); /* Nền trắng với độ mờ */
-	display: flex; /* Sử dụng flexbox */
-	justify-content: center; /* Căn giữa theo chiều ngang */
-	align-items: center; /* Căn giữa theo chiều dọc */
-	z-index: 1000; /* Đặt z-index cao để hiển thị trên tất cả các phần tử khác */
+    position: absolute; /* Đặt spinner ở vị trí tuyệt đối */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center; /* Canh giữa spinner theo chiều ngang */
+    background-color: rgba(255, 255, 255, 0.8); /* Nền mờ nếu cần */
+    z-index: 999; /* Đặt z-index cao hơn để nó nằm trên các thành phần khác */
   }

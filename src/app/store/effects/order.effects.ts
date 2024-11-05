@@ -27,7 +27,6 @@ GetAllOrders$ = createEffect(() => {
         .pipe(
           map((res : ApiResponse) => {
             if(res.success){
-              console.log(res);
               return OrderActions.getAllOrdersSuccess({orders : res.data.ordersList, ordersLength : res.data.ordersLength})
             }
             else{
@@ -64,7 +63,6 @@ getAllOrdersFailure$ = createEffect(()=>
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return OrderActions.GetOrdersByUserSuccess({orders : res.data})
               }
               else{
@@ -101,7 +99,6 @@ getAllOrdersFailure$ = createEffect(()=>
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return OrderActions.GetOrderSuccess({item : res.data})
               }
               else{
@@ -137,7 +134,6 @@ getAllOrdersFailure$ = createEffect(()=>
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return OrderActions.CreateOrderSuccess({item : res.data})
               }
               else{
@@ -159,7 +155,7 @@ getAllOrdersFailure$ = createEffect(()=>
       ofType(OrderActions.CreateOrderSuccess),
       tap(()=>{
         this.toastr.success("Đặt hàng thành công", "Thông báo");
-        this.router.navigate(['/Order']);
+        this.router.navigate(['/Checkout/CheckoutResult'], { queryParams: { status: 'True' } });
       })
     ),
     {dispatch: false}
@@ -169,6 +165,7 @@ getAllOrdersFailure$ = createEffect(()=>
       ofType(OrderActions.CreateOrderFailure),
       tap((error)=>{
         this.toastr.error(error.error, "Thông báo");
+        this.router.navigate(['/Checkout/CheckoutResult'], { queryParams: { status: 'False' } });
       })
     ),
     {dispatch: false}
@@ -183,7 +180,6 @@ getAllOrdersFailure$ = createEffect(()=>
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return OrderActions.DeleteOrderSuccess({id : res.data})
               }
               else{
@@ -229,7 +225,6 @@ getAllOrdersFailure$ = createEffect(()=>
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return OrderActions.UpdateOrderStatusSuccess({item : res.data})
               }
               else{
@@ -274,7 +269,6 @@ getAllOrdersFailure$ = createEffect(()=>
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return OrderActions.GetOrdersDetail_clientSuccess({ordersDetail : res.data})
               }
               else{
@@ -301,4 +295,49 @@ getAllOrdersFailure$ = createEffect(()=>
     {dispatch: false}
   );
 
+  //vnpay_url
+
+  GetOrderVnPayUrl$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrderActions.GetOrderVnPayUrl),
+      switchMap(action => {
+        return this.orderService.CreateVnPayUrl(action.order)
+          .pipe(
+            map((res : ApiResponse) => {
+              if(res.success){
+                return OrderActions.GetOrderVnPayUrl_Success({vnp_url : res.data})
+              }
+              else{
+                return OrderActions.GetOrderVnPayUrl_Failure({error : res.message || "Có lỗi xảy ra", statusCode : 500});
+              }
+            }),
+            catchError((error) => {
+              return of(OrderActions.GetOrderVnPayUrl_Failure({
+                error: error.errorMessage,
+                statusCode: error.statusCode
+              }));
+            })
+          )
+      })
+    )
+  });
+  GetOrderVnPayUrl_Success$ = createEffect(()=>
+    this.actions$.pipe(
+      ofType(OrderActions.GetOrderVnPayUrl_Success),
+      tap((res)=>{
+        window.location.href = res.vnp_url
+      })
+    ),
+    {dispatch: false}
+  );
+  GetOrderVnPayUrl_Failure$ = createEffect(()=>
+    this.actions$.pipe(
+      ofType(OrderActions.GetOrderVnPayUrl_Failure),
+      tap((error)=>{
+        this.toastr.error(error.error, "Thông báo");
+        this.router.navigate(['/Checkout/CheckoutResult'], { queryParams: { status: 'False' } });
+      })
+    ),
+    {dispatch: false}
+  );
 }

@@ -13,21 +13,23 @@ import { AdminAddUserFormComponent } from './admin-user/admin-add-user-form/admi
 import { AdminEditUserFormComponent } from './admin-user/admin-edit-user-form/admin-edit-user-form.component';
 import { AdminGetOrdersComponent } from './admin-order-mg/admin-get-orders/admin-get-orders.component';
 import { AdminChangeStatusOrderComponent } from './admin-order-mg/admin-change-status-order/admin-change-status-order.component';
+import { AdminGetOrderComponent } from './admin-order-mg/admin-get-order/admin-get-order.component';
 
 const routes: Routes = [
-  {path : '', component: AdminDashboardComponent},
-  {path : 'categoryManagement', component: AdminCategoryMgComponent},
-  {path : 'productManagement', component: AdminProductMgComponent},
-  {path : 'userManagement', component: AdminUserMgComponent},
-  {path : 'infoManagement', component: AdminInfoMgComponent},
-  {path : 'addProductForm', component: AdminAddProductFormComponent},
-  {path : 'editProductForm/:id', component: AdminEditProductFormComponent},
-  {path : 'addCategoryForm', component: AdminAddCategoryFormComponent},
-  {path : 'editCategoryForm/:id', component: AdminEditCategoryFormComponent},
-  {path : 'addUserForm', component: AdminAddUserFormComponent},
-  {path : 'editUserForm/:id', component: AdminEditUserFormComponent},
-  {path : 'orderManagement', component: AdminGetOrdersComponent},
-  {path : 'orderManagement/:id', component: AdminChangeStatusOrderComponent},
+  {path : '', component: AdminDashboardComponent, data: { animation: 'AdminDashboardPage' }},
+  {path : 'categoryManagement', component: AdminCategoryMgComponent, data: { animation: 'AdmincategoryManagementPage' }},
+  {path : 'productManagement', component: AdminProductMgComponent, data: { animation: 'AdminproductManagementPage' }},
+  {path : 'userManagement', component: AdminUserMgComponent, data: { animation: 'AdminuserManagementPage' }},
+  {path : 'infoManagement', component: AdminInfoMgComponent, data: { animation: 'AdmininfoManagementPage' }},
+  {path : 'addProductForm', component: AdminAddProductFormComponent, data: { animation: 'AdminaddProductFormPage' }},
+  {path : 'editProductForm/:id', component: AdminEditProductFormComponent, data: { animation: 'AdmineditProductFormPage' }},
+  {path : 'addCategoryForm', component: AdminAddCategoryFormComponent, data: { animation: 'AdminaddCategoryFormPage' }},
+  {path : 'editCategoryForm/:id', component: AdminEditCategoryFormComponent, data: { animation: 'AdmineditCategoryFormPage' }},
+  {path : 'addUserForm', component: AdminAddUserFormComponent, data: { animation: 'AdminaddUserFormPage' }},
+  {path : 'editUserForm/:id', component: AdminEditUserFormComponent, data: { animation: 'AdmineditUserFormPage' }},
+  {path : 'orderManagement', component: AdminGetOrdersComponent, data: { animation: 'AdminorderManagementPage' }},
+  {path : 'orderManagement/:id', component: AdminChangeStatusOrderComponent, data: { animation: 'AdminorderManagementEditPage' }},
+  {path : 'orderManagement/viewdetail/:id', component: AdminGetOrderComponent, data: { animation: 'AdminorderManagementDetailPage' }},
 ];
 
 @NgModule({

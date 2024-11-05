@@ -1,67 +1,139 @@
-.container {
-  max-width: 1200px; /* Đặt chiều rộng tối đa cho container */
-  margin: 0 auto; /* Giữa container */
+/* Container tổng quát */
+.category-container {
+  max-width: 1200px;
+  margin: auto;
+  background: #f7f9fc;
+  border-radius: 10px;
+  padding: 20px 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Header */
 .main-header {
-  text-align: center; /* Căn giữa tiêu đề */
-  font-size: 2rem; /* Tăng kích thước phông chữ */
-  margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
-  color: #343a40; /* Màu sắc tiêu đề */
+  font-size: 26px;
+  font-weight: 600;
+  color: #0056b3;
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e6ed;
+  padding-bottom: 10px;
 }
 
-.table {
-  width: 100%; /* Chiều rộng 100% */
-  margin: 20px 0; /* Khoảng cách trên và dưới bảng */
-  border-radius: 0.5rem; /* Bo góc cho bảng */
-  overflow: hidden; /* Ẩn phần thừa */
+/* Button tạo danh mục mới */
+.btn-create {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 20px;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
-.table thead {
-  background-color: #007bff; /* Màu nền cho phần tiêu đề */
-  color: white; /* Màu chữ cho phần tiêu đề */
+.btn-create:hover {
+  background-color: #43a047;
 }
 
-.table tbody tr:hover {
-  background-color: #f1f1f1; /* Màu nền khi di chuột vào hàng */
+/* Table */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
 }
 
-.table td th{
-  vertical-align: middle; /* Căn giữa nội dung ô */
-  text-align: center; /* Căn giữa nội dung ô */
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.table img {
-  border-radius: 0.25rem; /* Bo góc cho ảnh */
+.category-table thead {
+  background-color: #0056b3;
+  color: #ffffff;
 }
 
-.btn {
-  margin: 0 5px; /* Khoảng cách giữa các nút */
+.category-table th, .category-table td {
+  padding: 15px;
+  text-align: left;
+  font-size: 16px;
+  border-bottom: 1px solid #e0e6ed;
 }
 
-.btn-warning {
-  background-color: #ffc107; /* Màu nền cho nút sửa */
-  border: none; /* Bỏ viền */
+.category-table th {
+  font-weight: 500;
+  text-align: center;
 }
 
-.btn-danger {
-  background-color: #dc3545; /* Màu nền cho nút xóa */
-  border: none; /* Bỏ viền */
+.category-table tbody tr:hover {
+  background-color: #f1f6fc;
 }
 
-.btn-warning:hover,
-.btn-danger:hover {
-  opacity: 0.8; /* Tăng độ trong suốt khi di chuột */
+/* Ảnh danh mục */
+.category-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Hành động */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-action {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #ffffff;
+}
+
+.btn-action.edit {
+  background-color: #ffc107;
+}
+
+.btn-action.edit:hover {
+  background-color: #e0a800;
+  transform: scale(1.05);
+}
+
+.btn-action.delete {
+  background-color: #dc3545;
+}
+
+.btn-action.delete:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* Overlay Spinner */
 .spinner-overlay {
-	position: fixed; /* Đặt vị trí cố định */
-	top: 0; /* Đỉnh màn hình */
-	left: 0; /* Bên trái màn hình */
-	width: 100%; /* Chiều rộng 100% */
-	height: 100%; /* Chiều cao 100% */
-	background-color: rgba(255, 255, 255, 0.8); /* Nền trắng với độ mờ */
-	display: flex; /* Sử dụng flexbox */
-	justify-content: center; /* Căn giữa theo chiều ngang */
-	align-items: center; /* Căn giữa theo chiều dọc */
-	z-index: 1000; /* Đặt z-index cao để hiển thị trên tất cả các phần tử khác */
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+.mat-spinner {
+  color: #0056b3;
+}

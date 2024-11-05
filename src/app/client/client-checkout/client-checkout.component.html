@@ -36,6 +36,19 @@
                                 </small>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <label for="address" class="form-label">Phương thức thanh toán</label>
+                            <select class="form-select" formControlName="paymentMethod" id="paymentMethod">
+                                <option value="" disabled selected>--Chọn phương thức thanh toán--</option>
+                                <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
+                                <option value="Thanh toán qua VnPay">Thanh toán qua VnPay</option>
+                            </select>
+                            <div *ngIf="paymentMethod?.invalid && (paymentMethod?.dirty || paymentMethod?.touched)">
+                                <small *ngIf="paymentMethod?.hasError('required')" class="text-danger">
+                                    Không được bỏ trống trường này!
+                                </small>
+                            </div>
+                        </div>
                         <div class="col-md-5">
                             <label for="phone" class="form-label">Số điện thoại</label>
                             <input formControlName="recipientPhone" placeholder="(+84)" class="form-control" type="text" id="phone" required>

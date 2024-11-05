@@ -26,7 +26,6 @@ export class CategoryEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return CategoryActions.getCategoriesSuccess({categories : res.data});
               }
               else{
@@ -60,7 +59,6 @@ export class CategoryEffects {
         return this.categoryService.getCategory(action.id).pipe(
           map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return CategoryActions.getCategorySuccess({item : res.data});
               }
               else{

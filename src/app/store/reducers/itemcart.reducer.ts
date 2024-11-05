@@ -98,4 +98,20 @@ export const reducer = createReducer(
     ...state,
     isLoadingUpdate: false
   })),
+  //
+  on(ItemcartActions.DeleteAllItemCart, (state) =>({
+    ...state,
+    isLoadingUpdate: true
+  })),
+  on(ItemcartActions.DeleteAllItemCartSuccess, (state) => ({
+    ...state,
+    itemsCart : [],
+    itemCartCount : 0,
+    itemCartTotal : 0,
+    isLoadingUpdate : false
+  })),
+  on(ItemcartActions.DeleteAllItemCartFailure, (state) =>({
+    ...state,
+    isLoadingUpdate: false
+  })),
 )

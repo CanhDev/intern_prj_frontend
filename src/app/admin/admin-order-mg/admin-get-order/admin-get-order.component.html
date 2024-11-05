@@ -1,0 +1,54 @@
+<ng-container *ngIf="Order$ | async as item">
+  <div class="container">
+    <div class="card detail-card">
+        <div class="card-header detail-card-header">
+            <h2>Chi Tiết Hóa Đơn</h2>
+        </div>
+        <div class="card-body detail-card-body">
+            <div class="detail-row">
+              <span class="detail-label">Mã Hóa Đơn:</span>
+              <span class="detail-value">{{ item.orderCode }}</span>
+            </div>
+            <div class="detail-row">
+                <div class=" detail-label">Tên Khách Hàng:</div>
+                <div class=" detail-value">{{ item.recipientName }}</div>
+            </div>
+            <div class="detail-row">
+                <div class=" detail-label">Ngày Mua:</div>
+                <div class=" detail-value">{{ item.orderDate | date: 'dd/MM/yyyy' }}</div>
+            </div>
+            <div class="detail-row">
+              <div class=" detail-label">Địa chỉ nhận:</div>
+              <div class=" detail-value">{{ item.recipientAddress }}</div>
+            </div>
+            <div class="detail-row">
+              <div class=" detail-label">Số điện thoại:</div>
+              <div class=" detail-value">{{ item.recipientPhone }}</div>
+            </div>
+            <div class="detail-row">
+              <div class=" detail-label">Phương thức thanh toán:</div>
+              <div class=" detail-value">{{ item.paymentMethod }}</div>
+            </div>
+            <div class="detail-row">
+              <div class=" detail-label">Trạng thái thanh toán:</div>
+              <div class=" detail-value">{{ item.statusPayment }}</div>
+            </div>
+            <div class="detail-row">
+                <div class=" detail-label">Tổng Tiền:</div>
+                <div class=" detail-value">{{ item.totalAmount | currency }}</div>
+            </div>
+            <div class="detail-row">
+                <div class=" detail-label">Trạng Thái:</div>
+                <div class=" detail-value">{{ item.statusShipping }}</div>
+            </div>
+            <div class="text-center">
+                <a [routerLink]="['/admin/orderManagement']" class="btn btn-back">Quay Lại</a>
+            </div>
+        </div>
+    </div>
+</div>
+  
+</ng-container>
+<div class="spinner-overlay" *ngIf="Isloading$ | async">
+  <mat-spinner></mat-spinner>
+</div>

@@ -5,37 +5,37 @@
       <div class="position-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin" routerLinkActive="active" aria-current="page">
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" aria-current="page">
               <i class="fa fa-home"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="productManagement" routerLinkActive="active" >
+            <a class="nav-link" routerLink="/admin/productManagement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <i class="fa fa-box"></i> Quản lý sản phẩm
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="categoryManagement" routerLinkActive="active" >
+            <a class="nav-link" routerLink="/admin/categoryManagement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <i class="fa fa-tags"></i> Quản lý danh mục
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="userManagement" routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/userManagement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <i class="fa fa-users"></i> Quản lý tài khoản khách hàng
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="orderManagement" routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/orderManagement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <i class="fa-solid fa-file-invoice-dollar"></i> Quản lý đơn hàng
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="infoManagement" routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/infoManagement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <i class="fa fa-user"></i> Thông tin admin
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/" >
+            <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <i class="fa-solid fa-house-circle-check"></i> Trang chủ
             </a>
           </li>
@@ -44,8 +44,8 @@
     </nav>
 
     <!-- Main Content -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-      <router-outlet></router-outlet>
+    <main role="main" [@routeAnimations]="prepareRoute(outlet)" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <router-outlet #outlet="outlet"></router-outlet>
     </main>
   </div>
 </div>

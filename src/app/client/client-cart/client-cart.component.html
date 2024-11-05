@@ -4,7 +4,10 @@
     <p class="text-center">
       <i class="text-info font-weight-bold">{{itemCartCount$ | async}}</i> sản phẩm
     </p>
-    <div class="table-responsive">
+    <div class="table-responsive position-relative"> <!-- Thêm position-relative -->
+      <div class="spinner-overlay" *ngIf="(IsLoadingItemsCart$ | async) || (isLoadingUpdate$ | async)">
+        <mat-spinner ></mat-spinner>
+    </div>
       <table class="table">
         <thead>
           <tr>
@@ -25,7 +28,11 @@
                    [src]="item.product?.images[0].imageUrl" alt="Product Image" class="img-fluid rounded shadow-sm" style="width: 100px;">
                 </div>
                 <div>
-                  <h5>{{item.product?.name}}</h5>
+                  <h4>
+                    <a class="link-offset-2 link-underline-opacity-10 smooth-underline" [routerLink]="['/shop/products', item.productId]">
+                      {{item.product?.name}}
+                    </a>
+                  </h4>
                 </div>
               </div>
             </td>
@@ -74,9 +81,3 @@
     <h2>Bạn chưa có sản phẩm nào</h2>
   </div>
 </ng-template>
-<div class="spinner-overlay" *ngIf="IsLoadingItemsCart$ | async">
-  <mat-spinner></mat-spinner>
-</div>
-<div class="spinner-overlay" *ngIf="isLoadingUpdate$ | async">
-  <mat-spinner></mat-spinner>
-</div>

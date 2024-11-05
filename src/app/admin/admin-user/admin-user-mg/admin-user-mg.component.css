@@ -10,3 +10,130 @@
 	align-items: center; /* Căn giữa theo chiều dọc */
 	z-index: 1000; /* Đặt z-index cao để hiển thị trên tất cả các phần tử khác */
   }
+  /* Tổng thể container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Tiêu đề chính */
+.main-header {
+    font-size: 28px;
+    font-weight: bold;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #d3d3d3;
+    padding-bottom: 10px;
+}
+
+/* Nút tạo tài khoản mới */
+.btn.btn-primary.mb-3 {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 20px;
+    background-color: #0066cc;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn.btn-primary.mb-3:hover {
+    background-color: #005bb5;
+}
+
+/* Bảng dữ liệu */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.table thead {
+    background-color: #003366;
+    color: #ffffff;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 1px solid #e0e6ed;
+}
+
+.table th {
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f6fc;
+}
+
+/* Ảnh khách hàng */
+.img-thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Nút hành động */
+.btn-warning, .btn-danger {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-warning {
+    background-color: #ff9800;
+}
+
+.btn-warning:hover {
+    background-color: #e68900;
+}
+
+.btn-danger {
+    background-color: #e53935;
+}
+
+.btn-danger:hover {
+    background-color: #c62828;
+}
+
+/* Spinner overlay */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+}
+
+.mat-spinner {
+    color: #003366;
+}
+

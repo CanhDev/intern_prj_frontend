@@ -32,7 +32,6 @@ export class AccountEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return AccountActions.SignUpSuccess();
               }
               else{
@@ -78,7 +77,6 @@ export class AccountEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 this.store.dispatch(UserActions.GetUserAsync_ClientSuccess
                 ({user_client: res.data.userInfo}));
                 this.accountService.saveToken(res.data.token);
@@ -145,7 +143,6 @@ export class AccountEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return AccountActions.RefreshTokenSuccess({token : res.data})
               }
               else{

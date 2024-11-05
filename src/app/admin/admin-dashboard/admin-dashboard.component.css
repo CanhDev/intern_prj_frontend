@@ -1,3 +1,5 @@
+
+
 canvas {
     max-width: 100%;
     height: auto;
@@ -14,4 +16,42 @@ canvas {
     align-items: center; /* Căn giữa theo chiều dọc */
     z-index: 1000; /* Đặt z-index cao để hiển thị trên tất cả các phần tử khác */
     }
-  
+  /* Bảng */
+.table {
+  margin-top: 1rem;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-bordered {
+  border: none;
+}
+
+.table-bordered th, .table-bordered td {
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr {
+  background: #f9f9f9;
+  transition: transform 0.2s;
+}
+
+.table tbody tr:hover {
+  background: #f1f1f1;
+  transform: scale(1.01);
+}
+
+.table img {
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.table img:hover {
+  transform: scale(1.1);
+}

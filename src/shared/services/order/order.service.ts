@@ -54,6 +54,7 @@ export class OrderService {
         )
   }
   CreateOrder(item : OrderSend) : Observable<ApiResponse>{
+    sessionStorage.setItem('isOrder_create', 'true'); 
     return this.http.post<ApiResponse>(this.url, item).pipe(
       catchError(this.http_options.handleError)
     );
@@ -69,4 +70,23 @@ export class OrderService {
     return this.http.put<ApiResponse>(urlPut, OrderStatusModel)
       .pipe(catchError(this.http_options.handleError));
   }
+  
+
+  //tích hợp vnpay
+  CreateVnPayUrl(order: OrderSend): Observable<ApiResponse> {
+    // Lưu tạm thời orderitem
+    sessionStorage.setItem("order_vnp", JSON.stringify(order));
+    // Call API
+    const urlGet = `${environment.apiBaseUrl}VnPay/VnPay_checkout/`;
+    let params = new HttpParams();
+    if (order.totalAmount) {
+        params = params.set('amount', order.totalAmount.toString());
+    }
+    if (order.orderCode) {
+        params = params.set('orderCode', order.orderCode.toString());
+    }
+    return this.http.get<ApiResponse>(urlGet, { params })
+        .pipe(catchError(this.http_options.handleError));
+}
+
 }

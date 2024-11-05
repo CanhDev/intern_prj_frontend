@@ -13,8 +13,11 @@
         <div class="col-md-6">
           <div class="p-4">
             <div class="main-img mb-3">
-              <img [src]="selectedImage" alt="Main Product Image" class="img-fluid main-image">
+              <img [src]="selectedImage" alt="Main Product Image" 
+                   class="img-fluid main-image" 
+                   [ngClass]="{ 'fade-out': isFading }">
             </div>
+            
             <div class="thumb-img d-flex flex-wrap">
               <img *ngFor="let img of product.images" 
                    [src]="img.imageUrl" 

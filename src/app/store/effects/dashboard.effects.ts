@@ -27,7 +27,6 @@ export class DashboardEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return DashboardActions.GetStatisticSuccess({RevenueStatistics : res.data});
               }
               else{
@@ -62,7 +61,6 @@ export class DashboardEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return DashboardActions.GetTopSellingSuccess({products : res.data})
               }
               else{

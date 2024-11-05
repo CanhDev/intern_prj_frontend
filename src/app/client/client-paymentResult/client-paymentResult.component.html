@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="result-card shadow-lg">
+        <div class="result-header text-center">
+          <h2>Kết quả Đặt hàng</h2>
+        </div>
+        <div class="result-body">
+          <div *ngIf="success === true" class="result-message success">
+            <h4>✅ Đặt hàng thành công!</h4>
+            <p>Cảm ơn bạn đã Đặt hàng. Đơn hàng của bạn đã được xử lý thành công.</p>
+            <p>Bạn có thể kiểm tra trạng thái đơn hàng trong tài khoản của mình.</p>
+          </div>
+          <div *ngIf="success === false" class="result-message error">
+            <h4>❌ Đặt hàng thất bại!</h4>
+            <p>Đã xảy ra lỗi trong quá trình Đặt hàng. Vui lòng thử lại sau.</p>
+            <p>Nếu vấn đề vẫn tiếp diễn, vui lòng liên hệ với hỗ trợ khách hàng.</p>
+          </div>
+          <div class="text-center mt-4">
+            <a routerLink="/" class="btn btn-primary btn-lg">Quay lại Trang chính</a>
+            <a routerLink="/Order" class="btn btn-secondary btn-lg">Xem danh sách đơn hàng</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

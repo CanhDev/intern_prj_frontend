@@ -43,11 +43,8 @@
                 <li><a routerLink="shop">Cửa hàng</a></li>
             </ul>
         </nav>
-
-        
-
         <!-- Button Group -->
-        <div *ngIf="user_client$ | async as user; else guest" class="amado-btn-group mt-30 mb-100">
+        <div *ngIf="user_client$ | async as user; else guest" class="amado-btn-group mt-30 mb-50">
             <h2 class="welcome-title">Welcome  {{user.lastName}}</h2>
             <a routerLink="" (click)="$event.preventDefault();Logout();" class="btn amado-btn">Đăng xuất</a>
         </div>
@@ -83,9 +80,9 @@
         </div>
     </header>
     <div class="products-catagories-area clearfix">
-        <div style="height: 100%;" class="amado-pro-catagory clearfix">
-            <router-outlet></router-outlet>
-         </div>
+        <div role="main" [@routeAnimations]="prepareRoute(outlet)" style="height: 100%;" class="amado-pro-catagory clearfix">
+            <router-outlet #outlet="outlet"></router-outlet>
+          </div>
     </div>
 </div>
 

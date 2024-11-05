@@ -200,6 +200,55 @@ export class ItemcartEffects {
     {dispatch : false}
   );
 
+  //
+  //delete item cart
+  DeleteAllItemCart$ = createEffect(()=>
+    this.actions$.pipe(
+      ofType(ItemcartActions.DeleteAllItemCart),
+      switchMap(action =>
+        {
+          return this.itemcartService.DeleteAllItemCart
+          (action.id).pipe(
+            map((res : ApiResponse) => {
+                if(res.success){
+                  return ItemcartActions.DeleteAllItemCartSuccess();
+                }
+                else{
+                  return ItemcartActions.DeleteAllItemCartFailure({error: res.message || "Có lỗi xảy ra", statusCode : 500});
+                }
+            }),
+            catchError((error) => {
+              return of(ItemcartActions.DeleteAllItemCartFailure({ 
+                error: error.errorMessage, 
+                statusCode: error.statusCode 
+              })); 
+            })
+          )
+        }
+      )
+    )
+  );
+
+  DeleteAllItemCartSuccess$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(ItemcartActions.DeleteAllItemCartSuccess),
+      tap(()=>{
+        // this.toastr.success("Xóa thành công", "Thông báo");
+      })
+    ),
+    {dispatch : false}
+  );
+
+  DeleteAllItemCartFailure$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(ItemcartActions.DeleteAllItemCartFailure),
+      tap((error)=>{
+        this.toastr.error(error.error, "Thông báo");
+      })
+    ),
+    {dispatch : false}
+  );
+
 
 }
 

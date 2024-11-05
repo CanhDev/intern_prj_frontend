@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { first, map, switchMap, takeUntil } from 'rxjs/operators';
 import { getCart } from 'src/app/store/actions/cart.actions';
-import { DeleteItemCart, EditItemCart, GetItemsCartByCartId } from 'src/app/store/actions/itemcart.actions';
+import { DeleteAllItemCart, DeleteItemCart, EditItemCart, GetItemsCartByCartId } from 'src/app/store/actions/itemcart.actions';
 import { selectCart } from 'src/app/store/selectors/cart.selectors';
 import { selectIsLoadingItemsCart, selectisLoadingUpdate, selectItemCartCount, selectItemCartTotal, selectItemsCart } from 'src/app/store/selectors/itemcart.selectors';
 import { CartGet } from 'src/shared/data-get/CartGet';
@@ -15,19 +16,19 @@ import { ItemCartSend } from 'src/shared/data-send/ItemCartSend';
   templateUrl: './client-cart.component.html',
   styleUrls: ['./client-cart.component.css']
 })
-export class ClientCartComponent {
+export class ClientCartComponent implements OnInit, OnDestroy {
   Cart$: Observable<CartGet | null>;
   ItemsCart$: Observable<ItemCartGet[]>;
   IsLoadingItemsCart$: Observable<boolean>;
-  isLoadingUpdate$ : Observable<boolean>;
-  //
-  itemCartCount$ : Observable<number>;
-  itemCartTotal$ : Observable<number>;
+  isLoadingUpdate$: Observable<boolean>;
+  itemCartCount$: Observable<number>;
+  itemCartTotal$: Observable<number>;
+  isOrder_createString: string = sessionStorage.getItem('isOrder_create') ?? "";
+  isOrder_create: boolean = this.isOrder_createString === "true";
 
-  //
+  private destroy$ = new Subject<void>();
 
-
-  constructor(private store: Store, private router : Router) {
+  constructor(private store: Store, private router: Router) {
     this.ItemsCart$ = this.store.select(selectItemsCart);
     this.IsLoadingItemsCart$ = this.store.select(selectIsLoadingItemsCart);
     this.isLoadingUpdate$ = this.store.select(selectisLoadingUpdate);
@@ -38,31 +39,50 @@ export class ClientCartComponent {
 
   ngOnInit() {
     this.store.dispatch(getCart());
-    this.Cart$.subscribe(
-      (res : any)=>{
-        if(res){
-          this.store.dispatch(GetItemsCartByCartId({id: res.id}));
+
+    this.Cart$.pipe(
+      first(),
+      map((cart : CartGet | null)=>{
+        if(cart){
+          if(this.isOrder_create){
+            this.store.dispatch(DeleteAllItemCart({ id: cart.id }));
+            sessionStorage.removeItem('isOrder_create');
+          }
+          else{
+            this.store.dispatch(GetItemsCartByCartId({ id: cart.id }));
+          }
         }
       })
+    ).subscribe();
   }
 
-  updateQuantity(newQuantity : number, item: ItemCartGet) {
-    const updateItem : ItemCartSend = {
-      productId : item.productId,
-      cartId : item.cartId,
-      quantity : newQuantity,
-      price : item.product?.price ?  item.product.price * newQuantity : item.price
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  updateQuantity(newQuantity: number, item: ItemCartGet) {
+    if (newQuantity <= 0) {
+      alert("Số lượng phải lớn hơn 0");
+      return;
+    }
+
+    const updateItem: ItemCartSend = {
+      productId: item.productId,
+      cartId: item.cartId,
+      quantity: newQuantity,
+      price: item.product?.price ? item.product.price * newQuantity : item.price
     };
-    this.store.dispatch(EditItemCart({item : updateItem, id: item.id}));
+    this.store.dispatch(EditItemCart({ item: updateItem, id: item.id }));
   }
 
   removeItem(id: number) {
-    let confirm = window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
-    if (confirm) {
-      this.store.dispatch(DeleteItemCart({ id: id }));
+    if (window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+      this.store.dispatch(DeleteItemCart({ id }));
     }
   }
-  moveCheckout(){
+
+  moveCheckout() {
     this.router.navigate(['/Checkout']);
   }
 }

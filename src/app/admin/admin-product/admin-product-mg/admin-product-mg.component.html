@@ -5,46 +5,53 @@
     <button (click)="moveToAddForm()" class="btn btn-primary mb-3">Thêm Sản phẩm</button>
     <div class="input-group mb-3">
         <input 
-                    type="text" 
-                    class="form-control" 
-                    placeholder="Tìm kiếm sản phẩm..." 
-                    [(ngModel)]="filterString" 
-                    (input)="onSearch()"
-                />
-                <button class="btn btn-primary" type="button" (click)="onSearch()">
-                    <i class="fa fa-search"></i>
-                </button>
+            type="text" 
+            class="form-control" 
+            placeholder="Tìm kiếm sản phẩm..." 
+            [(ngModel)]="filterString" 
+            (input)="onSearch()"
+        />
+        <button class="btn btn-primary" type="button" (click)="onSearch()">
+            <i class="fa fa-search"></i>
+        </button>
     </div>
   
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Sản phẩm</th>
-          <th>Tên sản phẩm</th>
-          <th>Loại sản phẩm</th>
-          <th>Số lượng</th>
-          <th>Trạng thái</th>
-          <th>Giá gốc</th>
-          <th>Giá bán</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of productList$ | async">
-          <td>
-            <img [src]="item.images[0]?.imageUrl" alt="{{item.description}}" width="100px" class=".img-thumbnail" />
-          </td>
-          <td>{{item.name}}</td>
-          <td>{{item.category?.name}}</td>
-          <td>{{item.quantity}}</td>
-          <td>{{item.outOfStockstatus ? "Hết hàng" : "Còn hàng"}}</td>
-          <td>&dollar;{{item.originalPrice}}</td>
-          <td>&dollar;{{item.price}}</td>
-          <td>
-            <button (click)="moveToEditForm(item.id)" class="btn btn-warning btn-sm">Sửa</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive position-relative "> <!-- Thêm position-relative cho table -->
+        <div class="spinner-overlay" *ngIf="isLoadingProductList$ | async">
+            <mat-spinner style="margin-top: 10%;" ></mat-spinner>
+        </div>
+
+        <table class="table table-striped table-bordered">
+            <thead >
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Loại sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Trạng thái</th>
+                    <th>Giá gốc</th>
+                    <th>Giá bán</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of productList$ | async">
+                    <td>
+                        <img [src]="item.images[0]?.imageUrl" alt="{{item.description}}" style="object-fit: cover;" width="150px" height="100px" class="img-thumbnail" />
+                    </td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.category?.name}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.outOfStockstatus ? "Hết hàng" : "Còn hàng"}}</td>
+                    <td>&dollar;{{item.originalPrice}}</td>
+                    <td>&dollar;{{item.price}}</td>
+                    <td>
+                        <button (click)="moveToEditForm(item.id)" class="btn btn-warning btn-sm">Sửa</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <!-- Pagination -->
     <nav aria-label="Page navigation" class="mt-4 my-4">
         <ul class="pagination justify-content-end">
@@ -59,7 +66,4 @@
             </li>
         </ul>
     </nav>
-  </div>
-  <div class="spinner-overlay" *ngIf="isLoadingProductList$ | async">
-    <mat-spinner></mat-spinner>
 </div>

@@ -27,7 +27,6 @@ export class CartEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res.data);
                 return CartActions.getCartSuccess({cart : res.data});
               }
               else{

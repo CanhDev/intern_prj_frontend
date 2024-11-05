@@ -11,6 +11,7 @@ import { AdminProductModule } from './admin-product/admin-product.module';
 import { AdminCategoryModule } from './admin-category/admin-category.module';
 import { AdminUserModule } from './admin-user/admin-user.module';
 import { AdminOrderMgModule } from './admin-order-mg/admin-order-mg.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({

@@ -1,0 +1,59 @@
+.detail-card {
+    max-width: 90%;
+    margin: 2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.detail-card-header {
+    background-color: #4e73df;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.detail-card-body {
+    padding: 1.5rem;
+    background-color: #f9fafb;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #5a5c69;
+}
+
+.detail-value {
+    color: #343a40;
+    font-weight: 500;
+}
+
+.btn-back {
+    background-color: #4e73df;
+    color: #fff;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    display: block;
+    width: fit-content;
+    margin: 1.5rem auto 0;
+}
+
+.btn-back:hover {
+    background-color: #2e59d9;
+}

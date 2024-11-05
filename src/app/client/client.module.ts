@@ -20,6 +20,7 @@ import { ClientOrderDetailComponent } from './client-order-detail/client-order-d
 import { ClientUserInfoComponent } from './client-user-info/client-user-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ClientPaymentResultComponent } from './client-paymentResult/client-paymentResult.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ClientCheckoutComponent,
     ClientOrderComponent,
     ClientOrderDetailComponent,
-    ClientUserInfoComponent
+    ClientUserInfoComponent,
+    ClientPaymentResultComponent
   ],
   imports: [
     MatProgressSpinnerModule,

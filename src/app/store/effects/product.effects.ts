@@ -31,7 +31,6 @@ export class ProductEffects {
         ).pipe(
           map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return ProductActions.loadProductsSuccess({products : res.data.products,  totalProduct : res.data.totalProduct});
               }
               else{
@@ -67,7 +66,6 @@ export class ProductEffects {
         return this.productService.getProduct(action.id).pipe(
           map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return ProductActions.getSingleProductSuccess({product : res.data})
               }
               else{

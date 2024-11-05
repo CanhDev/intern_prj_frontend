@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromOrder from '../reducers/order.reducer';
+import { state } from '@angular/animations';
 
 export const selectOrderState = createFeatureSelector<fromOrder.State>(
   fromOrder.orderFeatureKey
@@ -39,3 +40,9 @@ export const selectisLoadingOrders = createSelector(
 export const selectisLoadingOrder = createSelector(
   selectOrderState,
   (state : fromOrder.State) => state.isLoadingOrder);
+
+export const selectUrlVnp = createSelector(
+  selectOrderState,
+  (state : fromOrder.State) => state.vnp_url
+);
+export const selectIsLoadingUrlVnp = createSelector(selectOrderState, (state : fromOrder.State) => state.isLoadingUrlVnp);

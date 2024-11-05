@@ -52,3 +52,15 @@ export const  DeleteItemCartFailure = createAction(
   '[ItemCart/API] delete ItemCart failure',
   props<{error : string, statusCode : number}>()
 );
+//
+export const  DeleteAllItemCart = createAction(
+  '[ItemCart/API] deleteAll ItemCart',
+  props<{id : number}>()
+);
+export const  DeleteAllItemCartSuccess = createAction(
+  '[ItemCart/API] deleteAll ItemCart success'
+);
+export const  DeleteAllItemCartFailure = createAction(
+  '[ItemCart/API] deleteAll ItemCart failure',
+  props<{error : string, statusCode : number}>()
+);

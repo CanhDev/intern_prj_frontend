@@ -27,7 +27,6 @@ export class UserEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return UserActions.GetUsers_AdminSuccess
                 ({userList : res.data})
               }
@@ -64,7 +63,6 @@ export class UserEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return UserActions.GetUser_AdminSuccess
                 ({user_item : res.data});
               }
@@ -101,7 +99,6 @@ export class UserEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return UserActions.CreateUserAsync_AdminSuccess
                 ({user_item : res.data})
               }
@@ -148,7 +145,6 @@ export class UserEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return UserActions.UpdateUserAsync_AdminSuccess
                 ({user_item : res.data})
               }
@@ -195,7 +191,6 @@ export class UserEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return UserActions.DeleteUserAsync_AdminSuccess
                 ({userId : res.data})
               }
@@ -244,7 +239,6 @@ export class UserEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return UserActions.GetUserAsync_ClientSuccess
                 ({user_client : res.data})
               }
@@ -283,7 +277,6 @@ export class UserEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return UserActions.UpdateUserAsync_ClientSuccess
                 ({user_client : res.data})
               }
@@ -331,7 +324,6 @@ export class UserEffects {
           .pipe(
             map((res : ApiResponse) => {
               if(res.success){
-                console.log(res);
                 return UserActions.ChangePassword_ClientSuccess
                 ({user_client : res.data})
               }

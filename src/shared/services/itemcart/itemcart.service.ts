@@ -40,5 +40,11 @@ export class ItemcartService {
         catchError(this.http_options.handleError) 
       );
     }
+    DeleteAllItemCart(id : number) : Observable<ApiResponse>{
+      const deleteUrl = `${this.url}/DeleteAll/${id}`;
+      return this.http.delete<ApiResponse>(deleteUrl).pipe(
+        catchError(this.http_options.handleError) 
+      );
+    }
 }
 

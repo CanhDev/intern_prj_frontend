@@ -89,4 +89,7 @@ export class AdminGetOrdersComponent {
       this.store.dispatch(DeleteOrder({id: orderId}));
     }
   }
+  handleViewDetail(orderId : number){
+    this.router.navigate(['admin/orderManagement/viewdetail', orderId]);
+  }
 }

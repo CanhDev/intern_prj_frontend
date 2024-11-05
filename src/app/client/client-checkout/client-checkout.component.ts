@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { map, Observable } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
 import { getCart } from 'src/app/store/actions/cart.actions';
 import { GetItemsCartByCartId } from 'src/app/store/actions/itemcart.actions';
-import { CreateOrder } from 'src/app/store/actions/order.actions';
+import { CreateOrder, GetOrderVnPayUrl } from 'src/app/store/actions/order.actions';
 import { GetUserAsync_Client } from 'src/app/store/actions/user.actions';
 import { selectCart, selectIsLoadingCart } from 'src/app/store/selectors/cart.selectors';
 import { selectItemCartTotal, selectItemsCart } from 'src/app/store/selectors/itemcart.selectors';
@@ -81,13 +81,15 @@ export class ClientCheckoutComponent {
       recipientName : new FormControl('', Validators.required),
       recipientPhone : new FormControl('', [Validators.required, Validators.pattern('^(0?)([3|5|7|8|9])[0-9]{8}$')]),
       recipientEmail : new FormControl('', [Validators.required, Validators.email]),
-      recipientAddress : new FormControl('', Validators.required)
+      recipientAddress : new FormControl('', Validators.required),
+      paymentMethod : new FormControl('', Validators.required)
     })
   }
   get recipientName(){return this.CheckOutForm.get('recipientName')}
   get recipientPhone(){return this.CheckOutForm.get('recipientPhone')}
   get recipientEmail(){return this.CheckOutForm.get('recipientEmail')}
   get recipientAddress(){return this.CheckOutForm.get('recipientAddress')}
+  get paymentMethod(){return this.CheckOutForm.get('paymentMethod')}
 
   generateOrderCode(): string {
     const currentDate = new Date();
@@ -103,6 +105,7 @@ export class ClientCheckoutComponent {
   submitForm() {
     if (this.CheckOutForm.valid) {
       this.CartItems$.pipe(
+        first(), 
         map((items: ItemCartGet[] | any) => {
           if (items) {
             items.forEach((item: ItemCartGet) => {
@@ -116,29 +119,41 @@ export class ClientCheckoutComponent {
         })
       ).subscribe({
         next: () => {
-          this.Order_client = {
-            userId : this.UserId,
-            orderCode : this.generateOrderCode(),
-            recipientName : this.recipientName?.value.trim(),
-            recipientPhone : this.recipientPhone?.value.trim(),
-            recipientEmail: this.recipientEmail?.value.trim(),
-            recipientAddress: this.recipientAddress?.value.trim(),
-            orderDate : new Date(),
-            totalAmount: this.TotalAmount,
-            statusPayment : "Chưa thanh toán",
-            statusShipping : "Đang chờ xử lý",
-            paymentMethod : "Thanh toán khi nhận hàng",
-            orderDetails : this.OrderDetails_client
-          };
-          console.log(this.Order_client);
-          this.store.dispatch(CreateOrder({item : this.Order_client }));
+          this.prepareOrder();
         },
         error: (err) => {
-          console.error('Error while processing cart items', err);
+          console.error('Lỗi khi xử lý giỏ hàng', err);
         }
       });
     } else {
       this.toastr.error("Form không hợp lệ", "Thông báo");
     }
+  }
+  
+  prepareOrder() {
+    this.Order_client = {
+      userId : this.UserId,
+      orderCode : this.generateOrderCode(),
+      recipientName : this.recipientName?.value.trim(),
+      recipientPhone : this.recipientPhone?.value.trim(),
+      recipientEmail: this.recipientEmail?.value.trim(),
+      recipientAddress: this.recipientAddress?.value.trim(),
+      orderDate : new Date(),
+      totalAmount: this.TotalAmount,
+      statusPayment : "Chưa thanh toán",
+      statusShipping : "Đang chờ xử lý",
+      paymentMethod : this.paymentMethod?.value.trim(),
+      orderDetails : this.OrderDetails_client
+    };
+    console.log(this.Order_client);
+    //
+    if(this.Order_client.paymentMethod.includes('VnPay')){
+      this.Order_client.statusPayment = "Đã thanh toán"
+      this.store.dispatch(GetOrderVnPayUrl({order : this.Order_client}))
+    }
+    else{
+      this.store.dispatch(CreateOrder({item : this.Order_client }));
+    }
+    this.Order_client = null;
   }
 }
