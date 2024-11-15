@@ -146,6 +146,7 @@ export class ClientCheckoutComponent {
       orderDetails : this.OrderDetails_client
     };
     console.log(this.Order_client);
+    sessionStorage.setItem('isOrder_create', 'true'); 
     //
     if(this.Order_client.paymentMethod.includes('VnPay')){
       this.Order_client.statusPayment = "Đã thanh toán"

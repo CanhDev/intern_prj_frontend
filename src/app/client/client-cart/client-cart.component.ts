@@ -39,16 +39,16 @@ export class ClientCartComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(getCart());
-
+  
     this.Cart$.pipe(
-      first(),
-      map((cart : CartGet | null)=>{
-        if(cart){
-          if(this.isOrder_create){
+      takeUntil(this.destroy$),
+      first(cart => cart !== null), // Đợi đến khi có dữ liệu trong Cart$
+      map((cart: CartGet | null) => {
+        if (cart) {
+          if (this.isOrder_create) {
             this.store.dispatch(DeleteAllItemCart({ id: cart.id }));
             sessionStorage.removeItem('isOrder_create');
-          }
-          else{
+          } else {
             this.store.dispatch(GetItemsCartByCartId({ id: cart.id }));
           }
         }

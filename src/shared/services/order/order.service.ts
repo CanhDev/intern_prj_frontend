@@ -54,7 +54,6 @@ export class OrderService {
         )
   }
   CreateOrder(item : OrderSend) : Observable<ApiResponse>{
-    sessionStorage.setItem('isOrder_create', 'true'); 
     return this.http.post<ApiResponse>(this.url, item).pipe(
       catchError(this.http_options.handleError)
     );

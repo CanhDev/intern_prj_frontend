@@ -1,3 +1,3 @@
 export const environment = {
-    apiBaseUrl : 'https://canhdev.runasp.net/api/',
+    apiBaseUrl : 'https://localhost:44332/api/',
 };
